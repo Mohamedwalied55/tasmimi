@@ -3,84 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة تحكم الأدمن — تصميمي</title>
+  <title>لوحة التحكم — تصميمي</title>
   <style>
-    :root {
-      --color-cream-paper: #fdfbf9;
-      --color-charcoal: #171717;
-      --color-cocoa-ink: #2b1a07;
-      --color-dew-drop: #f7efe9;
-      --color-marker-orange: #ff6f1e;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--color-cream-paper); color: var(--color-cocoa-ink); font-family: var(--font-main); }
-    .admin-header { background: var(--color-charcoal); color: white; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
-    .admin-header a { color: var(--color-marker-orange); text-decoration: none; font-weight: bold; }
-    .layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 64px); }
-    .sidebar { background: var(--color-dew-drop); border-left: 2px solid var(--color-charcoal); padding: 24px; }
-    .main-content { padding: 32px; }
-    .section-title { font-size: 24px; margin-bottom: 24px; border-bottom: 2px solid var(--color-marker-orange); padding-bottom: 8px; }
-    .control-group { margin-bottom: 20px; }
-    .control-group label { display: block; font-weight: bold; margin-bottom: 8px; }
-    .control-group input, .control-group select { width: 100%; padding: 10px; border: 1.5px solid var(--color-charcoal); border-radius: 8px; background: white; }
-    .preview-box { border: 2px dashed var(--color-charcoal); border-radius: 12px; padding: 32px; margin-top: 24px; background: white; }
-    .btn-save { background: var(--color-marker-orange); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
-    .btn-save:hover { opacity: 0.9; }
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #fdfbf9; }
+    .admin-card { max-width: 600px; margin: 40px auto; background: white; border: 2px solid #171717; border-radius: 12px; padding: 24px; }
+    h2 { margin-bottom: 20px; border-bottom: 2px solid #ff6f1e; padding-bottom: 8px; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-weight: bold; margin-bottom: 8px; }
+    input, select { width: 100%; padding: 10px; border: 1.5px solid #171717; border-radius: 8px; }
+    .btn-save { background: #ff6f1e; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 12px; }
   </style>
 </head>
 <body>
-  <header class="admin-header">
-    <h2>⚙️ لوحة تحكم الأدمن — تصميمي</h2>
-    <a href="/">الرجوع للموقع الرئيسي ↗</a>
-  </header>
-  <div class="layout">
-    <div class="sidebar">
-      <h3 style="margin-bottom: 16px;">تخصيص المظهر والخطوط</h3>
-      <div class="control-group">
-        <label>اللون الرئيسي (Accent):</label>
-        <input type="color" id="primaryColor" value="#ff6f1e" onchange="updatePreview()">
-      </div>
-      <div class="control-group">
-        <label>خلفية الصفحات:</label>
-        <input type="color" id="bgColor" value="#fdfbf9" onchange="updatePreview()">
-      </div>
-      <div class="control-group">
-        <label>نوع الخط الرئيسية:</label>
-        <select id="fontFamily" onchange="updatePreview()">
-          <option value="system-ui">افتراضي النظام (System UI)</option>
-          <option value="'Cairo', sans-serif">Cairo (عربي)</option>
-          <option value="'Tajawal', sans-serif">Tajawal (عربي)</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>حجم العنوان (px):</label>
-        <input type="number" id="titleSize" value="32" onchange="updatePreview()">
-      </div>
-      <button class="btn-save" onclick="saveSettings()">حفظ التغييرات 💾</button>
+  <div class="admin-card">
+    <h2>⚙️ لوحة تحكم المظهر والتخصيص</h2>
+    <div class="form-group">
+      <label>اللون الرئيسي للموقع:</label>
+      <input type="color" id="accentColor" value="#ff6f1e">
     </div>
-    <div class="main-content">
-      <h2 class="section-title">المعاينة الحية والتعديل المباشر</h2>
-      <div class="preview-box" id="previewContainer">
-        <h1 id="previewTitle" style="color: var(--color-marker-orange); margin-bottom: 12px;">معاينة العنوان الرئيسي</h1>
-        <p id="previewText">هذا النص يعبر عن كيفية ظهور المذكرات والنصوص داخل الموقع بعد تعديل الألوان والخطوط من اللوحة الجانبية.</p>
-      </div>
+    <div class="form-group">
+      <label>نوع الخط للعنوان الرئيسي:</label>
+      <select id="fontSelect">
+        <option value="system-ui">افتراضي النظام</option>
+        <option value="Cairo">Cairo</option>
+        <option value="Tajawal">Tajawal</option>
+      </select>
     </div>
+    <button class="btn-save" onclick="alert('تم حفظ الإعدادات بنجاح!')">حفظ التغييرات 💾</button>
+    <p style="margin-top: 16px; text-align: center;"><a href="/">العودة للموقع الرئيسي</a></p>
   </div>
-  <script>
-    function updatePreview() {
-      const primaryColor = document.getElementById('primaryColor').value;
-      const bgColor = document.getElementById('bgColor').value;
-      const fontFamily = document.getElementById('fontFamily').value;
-      const titleSize = document.getElementById('titleSize').value + 'px';
-      const previewContainer = document.getElementById('previewContainer');
-      const previewTitle = document.getElementById('previewTitle');
-      previewContainer.style.backgroundColor = bgColor;
-      previewContainer.style.fontFamily = fontFamily;
-      previewTitle.style.color = primaryColor;
-      previewTitle.style.fontSize = titleSize;
-    }
-    function saveSettings() { alert('تم حفظ التغييرات بنجاح!'); }
-  </script>
 </body>
 </html>
