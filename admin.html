@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | تصميمي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cream-paper': '#fdfbf9',
+                        'charcoal': '#171717',
+                        'cocoa-ink': '#2b1a07',
+                        'dew-drop': '#f7efe9',
+                        'marker-orange': '#ff6f1e',
+                        'burnt-sienna': '#ce500a',
+                        'sky-sticker': '#3b82f6',
+                        'bubblegum-sticker': '#ff66cf',
+                        'sprout-sticker': '#22c55e',
+                    },
+                    fontFamily: {
+                        'display': ['Alexandria', 'Tajawal', 'sans-serif'],
+                        'body': ['Tajawal', 'sans-serif'],
+                        'handwritten': ['Aref Ruqaa', 'cursive'],
+                    },
+                    borderRadius: {
+                        'pill': '20px',
+                        'card': '12px',
+                    },
+                    boxShadow: {
+                        'sticker': '2px 3px 0px rgba(23, 23, 23, 0.9)',
+                        'hard': '4px 4px 0px #171717',
+                        'hard-lg': '6px 6px 0px #171717',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fdfbf9;
+            color: #2b1a07;
+            font-family: 'Tajawal', sans-serif;
+            background-image: radial-gradient(#2b1a07 0.4px, transparent 0.4px);
+            background-size: 24px 24px;
+        }
+
+        .notebook-lines {
+            background-image: repeating-linear-gradient(transparent, transparent 31px, #e5dfd8 31px, #e5dfd8 32px);
+            line-height: 32px;
+        }
+
+        .btn-pill {
+            background-color: #fdfbf9;
+            border: 1.5px solid #171717;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0px;
+            transition: all 0.15s ease;
+        }
+        .btn-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f7efe9; }
+        ::-webkit-scrollbar-thumb { background: #ff6f1e; border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- 1. شاشة تسجيل الدخول للحماية -->
+    <div id="loginOverlay" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 max-w-md w-full shadow-hard-lg text-right relative">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center text-white shadow-sticker">
+                    <i class="fa-solid fa-user-shield text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="font-display font-extrabold text-2xl text-[#2b1a07]">لوحة إدارة تصميمي</h2>
+                    <span class="font-handwritten text-sm text-[#ff6f1e] font-bold">تسجيل دخول المسؤولين</span>
+                </div>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold mb-1 text-[#2b1a07]">كلمة المرور:</label>
+                    <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
+                    <p id="loginError" class="text-xs font-bold text-red-600 mt-1 hidden">كلمة المرور غير صحيحة!</p>
+                </div>
+                <button type="submit" class="btn-pill w-full py-3 bg-[#ff6f1e] text-white font-bold border-2 border-[#171717] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-key"></i>
+                    <span>دخول اللوحة</span>
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <a href="index.html" class="text-xs font-bold text-[#2b1a07]/60 hover:text-[#ff6f1e]">← العودة للموقع الرئيسي</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. الهيدر الرئيسي للوحة التحكم -->
+    <header class="sticky top-0 z-40 bg-[#fdfbf9]/95 backdrop-blur-md border-b-2 border-[#171717] py-3 px-4 sm:px-8">
+        <div class="max-w-[1300px] mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center text-white shadow-sticker">
+                    <i class="fa-solid fa-[#2b1a07] fa-sliders text-lg text-white"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-display font-extrabold text-xl text-[#2b1a07]">تصميمي</span>
+                        <span class="bg-[#22c55e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#171717]">Admin v2.0</span>
+                    </div>
+                    <span class="font-handwritten text-xs text-[#ff6f1e] font-bold">إدارة الطلبات والأسعار والنصوص</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="index.html" target="_blank" class="btn-pill px-4 py-2 text-xs sm:text-sm font-bold text-[#2b1a07] flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[#ff6f1e]"></i>
+                    <span class="hidden sm:inline">معاينة الموقع</span>
+                </a>
+                <button onclick="logoutAdmin()" class="btn-pill px-4 py-2 text-xs sm:text-sm font-bold bg-[#ff66cf]/20 text-[#2b1a07] hover:bg-[#ff66cf]/40">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. المحتوى الرئيسي للوحة الإدارة -->
+    <main class="flex-grow max-w-[1300px] w-full mx-auto p-4 sm:p-8 space-y-8">
+
+        <!-- أحصائيات سريعة (كروت الملاحظات) -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-[#2b1a07]/60">إجمالي الطلبات</span>
+                    <div class="font-display font-black text-3xl text-[#2b1a07]" id="statTotalOrders">12</div>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-[#3b82f6]/10 border border-[#171717] flex items-center justify-center text-[#3b82f6] text-xl font-bold">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+            </div>
+
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-[#2b1a07]/60">طلبات جديدة اليوم</span>
+                    <div class="font-display font-black text-3xl text-[#ff6f1e]" id="statNewOrders">3</div>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-[#ff6f1e]/10 border border-[#171717] flex items-center justify-center text-[#ff6f1e] text-xl font-bold">
+                    <i class="fa-solid fa-bell animate-bounce"></i>
+                </div>
+            </div>
+
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-[#2b1a07]/60">سعر الباقة الأكثر طلباً</span>
+                    <div class="font-display font-black text-3xl text-[#22c55e]" id="statProPrice">18 ج.م</div>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-[#22c55e]/10 border border-[#171717] flex items-center justify-center text-[#22c55e] text-xl font-bold">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                </div>
+            </div>
+
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-[#2b1a07]/60">حالة استقبال الطلبات</span>
+                    <div class="font-display font-bold text-base text-[#22c55e] flex items-center gap-1.5 mt-1">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#22c55e] animate-ping"></span>
+                        متاح الآن
+                    </div>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-[#f7efe9] border border-[#171717] flex items-center justify-center text-[#2b1a07] text-xl font-bold">
+                    <i class="fa-solid fa-toggle-on text-[#22c55e]"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- القسم الرئيسي: إدارة الطلبات والجدول -->
+        <section class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-[#171717] gap-4 mb-6">
+                <div>
+                    <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">📋 جدول الطلبات الواردة</h3>
+                    <p class="text-xs text-[#2b1a07]/70 font-medium">متابعة ومعالجة الطلبات المرسلة من نموذج التواصل بالموقع</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="addNewOrderMock()" class="btn-pill px-4 py-2 bg-[#22c55e] text-white font-bold text-xs border-2 border-[#171717]">
+                        + إضافة طلب تجريبي
+                    </button>
+                    <button onclick="clearAllOrders()" class="btn-pill px-4 py-2 bg-red-100 text-red-700 font-bold text-xs border border-red-300 hover:bg-red-200">
+                        مسح الكل
+                    </button>
+                </div>
+            </div>
+
+            <!-- جدول الطلبات -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-right border-collapse text-sm">
+                    <thead>
+                        <tr class="bg-[#f7efe9] border-b-2 border-[#171717] text-[#2b1a07]">
+                            <th class="p-3 font-bold">#</th>
+                            <th class="p-3 font-bold">اسم العميل</th>
+                            <th class="p-3 font-bold">الواتساب</th>
+                            <th class="p-3 font-bold">المادة / الكتاب</th>
+                            <th class="p-3 font-bold">الصفحات</th>
+                            <th class="p-3 font-bold">الباقة</th>
+                            <th class="p-3 font-bold">الحالة</th>
+                            <th class="p-3 font-bold text-center">إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody" class="divide-y divide-[#171717]/10">
+                        <!-- يتم تحميلة ديناميكياً بواسطة JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- قسم التعديل على أسعار الباقات وحاسبة الموقع -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- تعديل أسعار الباقات -->
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
+                <div class="mb-6 border-b-2 border-[#171717] pb-3">
+                    <h3 class="font-display font-extrabold text-xl text-[#2b1a07]">💰 تحكم بأسعار الباقات (ج.م / صفحة)</h3>
+                    <p class="text-xs text-[#2b1a07]/60">تعديل التسعير الفوري ليظهر في حاسبة الموقع</p>
+                </div>
+
+                <form onsubmit="savePricingSettings(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold mb-1">الباقة الأساسية:</label>
+                            <input type="number" id="priceBasic" value="12" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-bold text-center">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1">الباقة الاحترافية:</label>
+                            <input type="number" id="pricePro" value="18" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-bold text-center text-[#ff6f1e]">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1">باقة الكتب VIP:</label>
+                            <input type="number" id="priceVip" value="25" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-bold text-center">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div>
+                            <label class="block text-xs font-bold mb-1">سعر غلاف إضافي (ج.م):</label>
+                            <input type="number" id="priceCover" value="100" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold mb-1">نسبة التسليم العاجل (%):</label>
+                            <input type="number" id="rateUrgent" value="25" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-semibold">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-pill w-full py-3 bg-[#ff6f1e] text-white font-bold border-2 border-[#171717] flex items-center justify-center gap-2 mt-4">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>حفظ التعديلات على الأسعار</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- التحكم برقم الواتساب ونصوص الترحيب -->
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
+                <div class="mb-6 border-b-2 border-[#171717] pb-3">
+                    <h3 class="font-display font-extrabold text-xl text-[#2b1a07]">📱 إعدادات التواصل والواتساب</h3>
+                    <p class="text-xs text-[#2b1a07]/60">ربط رقم الهاتف لتلقي الرسائل المباشرة</p>
+                </div>
+
+                <form onsubmit="saveContactSettings(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold mb-1">رقم الواتساب المستلم للطلبات (مع كود الدولة):</label>
+                        <input type="text" id="whatsappNumber" value="201000000000" placeholder="مثال: 201012345678" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-mono text-sm font-bold text-[#22c55e]">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold mb-1">نص الترحيب بالعميل المباشر:</label>
+                        <textarea id="whatsappWelcome" rows="3" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-xs text-[#2b1a07]">مرحباً تصميمي! أود الاستفسار عن تنسيق مذكرة جديدة...</textarea>
+                    </div>
+
+                    <button type="submit" class="btn-pill w-full py-3 bg-[#2b1a07] text-white font-bold border-2 border-[#171717] flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check"></i>
+                        <span>تحديث بيانات الواتساب</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- الفوتر الخاص باللوحة -->
+    <footer class="mt-8 bg-[#f7efe9] border-t-2 border-[#171717] py-4 px-6 text-center text-xs font-bold text-[#2b1a07]/60">
+        لوحة تحكم منصة تصميمي الخاصة © 2026 — محميّة بنظام تشفير محلي
+    </footer>
+
+    <!-- Scripts Scripting Layer -->
+    <script>
+        // 1. Password Protection Logic (Simple Key Storage)
+        const DEFAULT_PASS = "123456"; // يمكنك تغيير كلمة المرور من هنا
+
+        function checkAuth() {
+            const isAuth = sessionStorage.getItem('admin_authenticated');
+            if (isAuth === 'true') {
+                document.getElementById('loginOverlay').classList.add('hidden');
+            } else {
+                document.getElementById('loginOverlay').classList.remove('hidden');
+            }
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const inputPass = document.getElementById('adminPassword').value;
+            if (inputPass === DEFAULT_PASS) {
+                sessionStorage.setItem('admin_authenticated', 'true');
+                document.getElementById('loginOverlay').classList.add('hidden');
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('admin_authenticated');
+            checkAuth();
+        }
+
+        // 2. Orders Management LocalStorage DB
+        let ordersDB = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [
+            { id: 101, name: "أحمد محمود", phone: "01012345678", subject: "فيزياء ثانوية", pages: 40, pkg: "الباقة الاحترافية", status: "جديد" },
+            { id: 102, name: "د. سارة علي", phone: "01122334455", subject: "ملخص الفارما", pages: 75, pkg: "باقة الكتب VIP", status: "قيد التنسيق" },
+            { id: 103, name: "أ. محمد عبد الله", phone: "01500001122", subject: "نحو وسؤال وجواب", pages: 20, pkg: "الباقة الأساسية", status: "تم التسليم" }
+        ];
+
+        function renderOrders() {
+            const tbody = document.getElementById('ordersTableBody');
+            tbody.innerHTML = '';
+
+            document.getElementById('statTotalOrders').innerText = ordersDB.length;
+            const newCount = ordersDB.filter(o => o.status === 'جديد').length;
+            document.getElementById('statNewOrders').innerText = newCount;
+
+            ordersDB.forEach((order, index) => {
+                let statusBadge = "bg-[#ff6f1e]/10 text-[#ff6f1e]";
+                if (order.status === 'قيد التنسيق') statusBadge = "bg-[#3b82f6]/10 text-[#3b82f6]";
+                if (order.status === 'تم التسليم') statusBadge = "bg-[#22c55e]/10 text-[#22c55e]";
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-[#f7efe9]/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-xs">#${order.id}</td>
+                    <td class="p-3 font-bold text-[#2b1a07]">${order.name}</td>
+                    <td class="p-3 font-mono text-xs">${order.phone}</td>
+                    <td class="p-3 text-xs font-semibold">${order.subject}</td>
+                    <td class="p-3 text-xs font-bold text-center">${order.pages}</td>
+                    <td class="p-3 text-xs font-bold text-[#ff6f1e]">${order.pkg}</td>
+                    <td class="p-3">
+                        <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold border border-[#171717]/20 ${statusBadge}">
+                            ${order.status}
+                        </span>
+                    </td>
+                    <td class="p-3 text-center space-x-1 space-x-reverse">
+                        <button onclick="changeStatus(${index})" class="px-2 py-1 bg-[#f7efe9] border border-[#171717] rounded text-xs font-bold hover:bg-[#ff6f1e] hover:text-white" title="تغيير الحالة">
+                            🔄
+                        </button>
+                        <a href="https://wa.me/${order.phone}?text=مرحباً%20${encodeURIComponent(order.name)}%20بخصوص%20طلب%20تنسيق%20مذكرة%20${encodeURIComponent(order.subject)}" target="_blank" class="px-2 py-1 bg-[#22c55e] text-white border border-[#171717] rounded text-xs font-bold" title="مراسلة واتساب">
+                            💬
+                        </a>
+                        <button onclick="deleteOrder(${index})" class="px-2 py-1 bg-red-100 text-red-600 border border-red-300 rounded text-xs font-bold hover:bg-red-200" title="حذف">
+                            🗑️
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function changeStatus(index) {
+            const statuses = ["جديد", "قيد التنسيق", "تم التسليم"];
+            let curr = statuses.indexOf(ordersDB[index].status);
+            ordersDB[index].status = statuses[(curr + 1) % statuses.length];
+            saveOrders();
+        }
+
+        function deleteOrder(index) {
+            if (confirm("هل أنت تأكد من حذف هذا الطلب؟")) {
+                ordersDB.splice(index, 1);
+                saveOrders();
+            }
+        }
+
+        function clearAllOrders() {
+            if (confirm("هل تريد مسح جميع الطلبات بشكل دائم؟")) {
+                ordersDB = [];
+                saveOrders();
+            }
+        }
+
+        function addNewOrderMock() {
+            const newId = Math.floor(100 + Math.random() * 900);
+            ordersDB.unshift({
+                id: newId,
+                name: "عميل جديد " + newId,
+                phone: "01000000000",
+                subject: "مذكرة كيمياء تجريبية",
+                pages: 35,
+                pkg: "الباقة الاحترافية",
+                status: "جديد"
+            });
+            saveOrders();
+        }
+
+        function saveOrders() {
+            localStorage.setItem('tasmeemy_orders', JSON.stringify(ordersDB));
+            renderOrders();
+        }
+
+        // 3. Pricing and Settings Storage
+        function savePricingSettings(e) {
+            e.preventDefault();
+            const config = {
+                basic: document.getElementById('priceBasic').value,
+                pro: document.getElementById('pricePro').value,
+                vip: document.getElementById('priceVip').value,
+                cover: document.getElementById('priceCover').value,
+                urgent: document.getElementById('rateUrgent').value,
+            };
+            localStorage.setItem('tasmeemy_pricing', JSON.stringify(config));
+            document.getElementById('statProPrice').innerText = config.pro + ' ج.م';
+            alert("تم حفظ الأسعار بنجاح! وستنعكس فوراً عند العميل.");
+        }
+
+        function saveContactSettings(e) {
+            e.preventDefault();
+            const phone = document.getElementById('whatsappNumber').value;
+            const welcome = document.getElementById('whatsappWelcome').value;
+            localStorage.setItem('tasmeemy_contact', JSON.stringify({ phone, welcome }));
+            alert("تم حفظ بيانات الواتساب بنجاح!");
+        }
+
+        // Load Initial State
+        window.onload = function() {
+            checkAuth();
+            renderOrders();
+
+            // Load saved settings if any
+            const savedPricing = JSON.parse(localStorage.getItem('tasmeemy_pricing'));
+            if (savedPricing) {
+                document.getElementById('priceBasic').value = savedPricing.basic || 12;
+                document.getElementById('pricePro').value = savedPricing.pro || 18;
+                document.getElementById('priceVip').value = savedPricing.vip || 25;
+                document.getElementById('priceCover').value = savedPricing.cover || 100;
+                document.getElementById('rateUrgent').value = savedPricing.urgent || 25;
+                document.getElementById('statProPrice').innerText = (savedPricing.pro || 18) + ' ج.م';
+            }
+
+            const savedContact = JSON.parse(localStorage.getItem('tasmeemy_contact'));
+            if (savedContact) {
+                document.getElementById('whatsappNumber').value = savedContact.phone || "201000000000";
+                document.getElementById('whatsappWelcome').value = savedContact.welcome || "";
+            }
+        };
+    </script>
+</body>
+</html>
