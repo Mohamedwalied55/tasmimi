@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الشاملة - تصميمي | Tasmeemy Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style id="dynamic-theme-styles">
+        :root {
+            --color-cream: #fdfbf9;
+            --color-dew: #f7efe9;
+            --color-cocoa: #2b1a07;
+            --color-charcoal: #171717;
+            --color-orange: #ff6f1e;
+        }
+        body {
+            background-color: #f1ebd9;
+            color: var(--color-cocoa);
+            font-family: 'Tajawal', sans-serif;
+        }
+        .superr-border { border: 2px solid var(--color-charcoal); }
+        .superr-btn {
+            border: 2px solid var(--color-charcoal);
+            border-radius: 9999px;
+            box-shadow: 3px 3px 0px var(--color-charcoal);
+            transition: all 0.15s ease-in-out;
+            font-weight: 700;
+        }
+        .superr-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--color-charcoal);
+        }
+        .tab-btn.active {
+            background-color: var(--color-orange);
+            color: #ffffff;
+            box-shadow: 3px 3px 0px var(--color-charcoal);
+            border-color: var(--color-charcoal);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden select-none">
+
+    <!-- Header Control Bar -->
+    <header class="bg-[#fdfbf9] border-b-2 border-[#171717] px-6 py-3 flex items-center justify-between z-30 shrink-0">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#ff6f1e] superr-border flex items-center justify-center text-white font-black text-xl shadow-sm">
+                ت
+            </div>
+            <div>
+                <h1 class="font-extrabold text-lg leading-tight flex items-center gap-2">
+                    لوحة تحكم إدارة تصميمي
+                    <span class="text-xs bg-[#fce7f3] border border-[#171717] px-2 py-0.5 rounded-full text-[#d9531e]">v2.5 Admin</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button onclick="resetDefaults()" class="superr-btn bg-stone-200 text-[#171717] px-4 py-2 text-xs flex items-center gap-2">
+                <i class="fa-solid fa-rotate-left"></i> افتراضي
+            </button>
+            <button onclick="saveSettings()" class="superr-btn bg-[#ff6f1e] text-white px-5 py-2 text-xs flex items-center gap-2">
+                <i class="fa-solid fa-floppy-disk"></i> حفظ التغييرات
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Admin Workspace -->
+    <div class="flex-1 flex overflow-hidden">
+        
+        <!-- Controls Panel -->
+        <div class="w-full md:w-1/2 flex flex-col bg-[#fdfbf9] border-l-2 border-[#171717] overflow-hidden">
+            
+            <!-- Navigation Tabs -->
+            <div class="bg-[#f7efe9] border-b-2 border-[#171717] p-2 flex gap-2 overflow-x-auto shrink-0">
+                <button onclick="switchTab('tab-colors')" id="btn-tab-colors" class="tab-btn active superr-btn px-4 py-2 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-palette text-amber-600"></i> الألوان والسمات
+                </button>
+                <button onclick="switchTab('tab-pricing')" id="btn-tab-pricing" class="tab-btn superr-btn px-4 py-2 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-tags text-purple-600"></i> الأسعار الباقات
+                </button>
+                <button onclick="switchTab('tab-orders')" id="btn-tab-orders" class="tab-btn superr-btn px-4 py-2 text-xs flex items-center gap-2">
+                    <i class="fa-solid fa-box-archive text-rose-600"></i> جدول الطلبات
+                </button>
+            </div>
+
+            <!-- Tab Content Screens -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                
+                <!-- Tab 1: Colors -->
+                <div id="tab-colors" class="tab-content block space-y-4">
+                    <h2 class="font-bold text-base mb-2">تعديل الألوان الرئيسية</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-3 bg-[#f7efe9] superr-border rounded-xl flex items-center justify-between">
+                            <span class="text-xs font-bold">اللون الرئيسي:</span>
+                            <input type="color" id="primaryColorInput" value="#ff6f1e" onchange="updateThemeColor(this.value)" class="w-8 h-8 rounded border cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Pricing -->
+                <div id="tab-pricing" class="tab-content hidden space-y-4">
+                    <h2 class="font-bold text-base mb-2">تعديل أسعار الصفحات</h2>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-white superr-border rounded-xl flex items-center justify-between">
+                            <span class="text-xs font-bold">سعر الباقة الأساسية (/صفحة):</span>
+                            <input type="number" id="basicRate" value="12" class="w-20 p-1 border-2 border-[#171717] rounded text-center text-xs font-bold">
+                        </div>
+                        <div class="p-3 bg-white superr-border rounded-xl flex items-center justify-between">
+                            <span class="text-xs font-bold">سعر الباقة الاحترافية (/صفحة):</span>
+                            <input type="number" id="proRate" value="18" class="w-20 p-1 border-2 border-[#171717] rounded text-center text-xs font-bold">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Orders List -->
+                <div id="tab-orders" class="tab-content hidden space-y-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="font-bold text-base">الطلبات الواردة مؤخراً</h2>
+                        <span class="text-xs bg-[#22c55e] text-white px-2 py-0.5 rounded-full font-bold">3 طلبات جديدة</span>
+                    </div>
+                    <div class="overflow-x-auto border-2 border-[#171717] rounded-xl">
+                        <table class="w-full text-right text-xs">
+                            <thead class="bg-[#f7efe9] border-b-2 border-[#171717]">
+                                <tr>
+                                    <th class="p-2.5">الرقم</th>
+                                    <th class="p-2.5">العميل</th>
+                                    <th class="p-2.5">المادة</th>
+                                    <th class="p-2.5">الصفحات</th>
+                                    <th class="p-2.5">الإجمالي</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#171717]/20 bg-white">
+                                <tr>
+                                    <td class="p-2.5 font-bold">#101</td>
+                                    <td class="p-2.5">د. أحمد علي</td>
+                                    <td class="p-2.5">الأحياء</td>
+                                    <td class="p-2.5">45</td>
+                                    <td class="p-2.5 text-[#ff6f1e] font-bold">810 ج.م</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">#102</td>
+                                    <td class="p-2.5">أ. سارة محمود</td>
+                                    <td class="p-2.5">الكيمياء العضوية</td>
+                                    <td class="p-2.5">30</td>
+                                    <td class="p-2.5 text-[#ff6f1e] font-bold">540 ج.م</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-bold">#103</td>
+                                    <td class="p-2.5">م. محمد حسن</td>
+                                    <td class="p-2.5">الفيزياء الكهربية</td>
+                                    <td class="p-2.5">60</td>
+                                    <td class="p-2.5 text-[#ff6f1e] font-bold">1080 ج.م</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Side Live Preview Screen (Desktop View) -->
+        <div class="hidden md:flex md:w-1/2 bg-[#ede3d8] p-4 items-center justify-center">
+            <div class="w-full h-full bg-white border-4 border-[#171717] rounded-2xl shadow-xl p-4 overflow-y-auto">
+                <div class="text-center text-xs font-bold text-gray-400 border-b pb-2 mb-4">شاشة المعاينة الفورية المباشرة</div>
+                <div class="p-4 bg-[#f7efe9] rounded-xl border-2 border-[#171717] space-y-2">
+                    <h3 class="font-bold text-sm text-[#ff6f1e]">معاينة العنوان المنسق</h3>
+                    <p class="text-xs text-gray-700">هنا تظهر شكل التغييرات والألوان فوراً عند تعديلها من اللوحة الجانبية.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        function updateThemeColor(val) {
+            document.documentElement.style.setProperty('--color-orange', val);
+        }
+
+        function saveSettings() {
+            alert('تم حفظ الإعدادات والتغييرات بنجاح!');
+        }
+
+        function resetDefaults() {
+            if(confirm('هل تريد إعادة الضبط للوضع الافتراضي؟')) {
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
