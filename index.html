@@ -1,56 +1,19 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تصميمي | منصة تنسيق المذكرات ولوحة التحكم</title>
-    
-    <!-- Tailwind CSS & Google Fonts -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>تصميمي | تنسيق وإعداد المذكرات والملخصات الدراسية</title>
+    <!-- خطوط عربية متناسقة مع الهوية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Aref+Ruqaa:wght@400;700&family=Caveat:wght@600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'cream-paper': 'var(--color-cream-paper, #fdfbf9)',
-                        'charcoal': 'var(--color-charcoal, #171717)',
-                        'cocoa-ink': 'var(--color-cocoa-ink, #2b1a07)',
-                        'dew-drop': 'var(--color-dew-drop, #f7efe9)',
-                        'marker-orange': 'var(--color-marker-orange, #ff6f1e)',
-                        'burnt-sienna': 'var(--color-burnt-sienna, #ce500a)',
-                        'sky-sticker': 'var(--color-sky-sticker, #3b82f6)',
-                        'bubblegum-sticker': 'var(--color-bubblegum-sticker, #ff66cf)',
-                        'sprout-sticker': 'var(--color-sprout-sticker, #22c55e)',
-                    },
-                    fontFamily: {
-                        'display': ['Alexandria', 'Tajawal', 'sans-serif'],
-                        'body': ['Tajawal', 'sans-serif'],
-                        'handwritten': ['Aref Ruqaa', 'Caveat', 'cursive'],
-                    },
-                    borderRadius: {
-                        'pill': '20px',
-                        'card': '12px',
-                        'footer-cap': '56px',
-                    },
-                    boxShadow: {
-                        'paper': 'rgba(0, 0, 0, 0.06) 0px 2px 20px 0px',
-                        'button-lift': 'rgba(0, 0, 0, 0.25) 0px 1px 2px 0px',
-                        'sticker': '2px 3px 0px rgba(23, 23, 23, 0.9)',
-                        'superr': '4px 4px 0px #171717',
-                        'superr-sm': '2px 2px 0px #171717',
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style id="dynamic-theme-styles">
+    
+    <style>
         :root {
+            /* الألوان الرئيسية حسب نظام الهوية */
             --color-cream-paper: #fdfbf9;
             --color-charcoal: #171717;
             --color-cocoa-ink: #2b1a07;
@@ -60,538 +23,773 @@
             --color-sky-sticker: #3b82f6;
             --color-bubblegum-sticker: #ff66cf;
             --color-sprout-sticker: #22c55e;
-            
-            --font-heading: 'Alexandria';
-            --font-body: 'Tajawal';
-            --font-script: 'Aref Ruqaa';
-            
-            --size-display: 2.5rem;
-            --size-body: 1rem;
-            --lh-body: 1.6;
+            --color-shadow-mist: rgba(0, 0, 0, 0.06);
+
+            --font-main: 'Cairo', sans-serif;
+            --font-display: 'Reem Kufi', 'Cairo', sans-serif;
+
+            --radius-pill: 20px;
+            --radius-card: 16px;
+            --radius-footer: 56px;
+            --shadow-subtle: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+            --shadow-paper: rgba(0, 0, 0, 0.06) 0px 4px 20px 0px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             background-color: var(--color-cream-paper);
             color: var(--color-cocoa-ink);
-            font-family: var(--font-body), 'Tajawal', sans-serif;
+            font-family: var(--font-main);
+            line-height: 1.6;
             overflow-x: hidden;
-            background-image: radial-gradient(#2b1a07 0.4px, transparent 0.4px);
-            background-size: 24px 24px;
+            position: relative;
         }
 
-        .notebook-lines {
-            background-image: repeating-linear-gradient(transparent, transparent 31px, #e5dfd8 31px, #e5dfd8 32px);
-            line-height: 32px;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .marker-underline {
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .brand-logo {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-cocoa-ink);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo i {
+            color: var(--color-marker-orange);
+            transform: rotate(-10deg);
+        }
+
+        .btn-pill {
+            background: var(--color-cream-paper);
+            border: 2px solid var(--color-charcoal);
+            padding: 10px 28px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-charcoal);
+            cursor: pointer;
+            box-shadow: 0px 2px 0px var(--color-charcoal);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 4px 0px var(--color-charcoal);
+        }
+
+        .btn-pill:active {
+            transform: translateY(0);
+            box-shadow: 0px 1px 0px var(--color-charcoal);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+            padding: 40px 0 80px 0;
+            position: relative;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--color-cocoa-ink);
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: 42px;
+            }
+        }
+
+        .marker-annotation {
+            color: var(--color-marker-orange);
+            font-size: 22px;
+            font-weight: 700;
+            display: inline-block;
+            transform: rotate(-2deg);
+            margin-bottom: 12px;
+        }
+
+        .highlight-word {
+            color: var(--color-marker-orange);
             position: relative;
             display: inline-block;
-            color: var(--color-marker-orange);
         }
-        .marker-underline::after {
+
+        .highlight-word::after {
             content: '';
             position: absolute;
             bottom: -2px;
             left: 0;
             width: 100%;
             height: 4px;
-            background-color: var(--color-marker-orange);
-            border-radius: 4px;
-            transform: rotate(-0.5deg);
-            opacity: 0.85;
+            background: var(--color-marker-orange);
+            border-radius: 2px;
+            transform: rotate(-1deg);
         }
 
-        .btn-pill, .superr-btn {
-            background-color: #fdfbf9;
-            border: 1.5px solid #171717;
-            border-radius: 20px;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0px;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-            font-weight: 700;
-        }
-        .btn-pill:hover, .superr-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px 0px;
-            background-color: #ffffff;
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--color-cocoa-ink);
+            margin-bottom: 32px;
+            max-width: 540px;
         }
 
-        .sticker-badge {
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Sticker Accents */
+        .sticker {
+            position: absolute;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #171717;
-            box-shadow: 2px 2px 0px #171717;
-        }
-        .sticker-badge:hover {
-            transform: scale(1.1) rotate(0deg) !important;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f7efe9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff6f1e;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            border: 2px solid var(--color-charcoal);
+            box-shadow: 2px 2px 0px var(--color-charcoal);
+            z-index: 2;
+            user-select: none;
         }
 
-        .tilt-left { transform: rotate(-2deg); }
-        .tilt-right { transform: rotate(2deg); }
-        .tilt-left-sm { transform: rotate(-1deg); }
-        .tilt-right-sm { transform: rotate(1deg); }
-
-        .superr-border { border: 2px solid #171717; }
-        .superr-card {
-            background-color: var(--color-cream-paper);
-            border: 2px solid #171717;
-            border-radius: 16px;
-            box-shadow: 4px 4px 0px #171717;
+        .sticker-sky {
+            background: var(--color-sky-sticker);
+            color: white;
+            transform: rotate(8deg);
         }
 
-        .tab-btn.active {
-            background-color: var(--color-marker-orange);
-            color: #ffffff;
-            box-shadow: 3px 3px 0px #171717;
+        .sticker-pink {
+            background: var(--color-bubblegum-sticker);
+            color: white;
+            transform: rotate(-12deg);
         }
 
-        .preview-wrapper { transition: width 0.3s ease, height 0.3s ease; margin: 0 auto; }
-        .preview-desktop { width: 100%; height: 100%; }
-        .preview-tablet { width: 768px; height: 90%; border-radius: 24px; border: 8px solid #171717; }
-        .preview-mobile { width: 375px; height: 750px; border-radius: 36px; border: 10px solid #171717; }
+        .sticker-green {
+            background: var(--color-sprout-sticker);
+            color: white;
+            transform: rotate(5deg);
+        }
+
+        /* Visual Notebook Card */
+        .notebook-preview-card {
+            background: var(--color-dew-drop);
+            border: 2px solid var(--color-charcoal);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            position: relative;
+            box-shadow: 6px 6px 0px var(--color-charcoal);
+            transform: rotate(3deg);
+            transition: transform 0.3s ease;
+        }
+
+        .notebook-preview-card:hover {
+            transform: rotate(0deg);
+        }
+
+        .notebook-inner {
+            background: #ffffff;
+            border: 1.5px solid var(--color-charcoal);
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Label Sticker */
+        .name-label-sticker {
+            background: #ffffff;
+            border: 2px solid var(--color-charcoal);
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 80%;
+            margin: 0 auto;
+            box-shadow: 3px 3px 0px var(--color-shadow-mist);
+        }
+
+        .name-label-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #ccc;
+            padding: 4px 0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 64px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 40px;
+            color: var(--color-cocoa-ink);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .feature-card {
+            background: var(--color-dew-drop);
+            border: 2px solid var(--color-charcoal);
+            border-radius: var(--radius-card);
+            padding: 32px 24px;
+            position: relative;
+            box-shadow: 4px 4px 0px var(--color-charcoal);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            color: var(--color-marker-orange);
+            margin-bottom: 16px;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Services / Order Form */
+        .order-section {
+            background: var(--color-dew-drop);
+            border: 2px solid var(--color-charcoal);
+            border-radius: var(--radius-card);
+            padding: 40px;
+            margin: 64px 0;
+            box-shadow: 6px 6px 0px var(--color-charcoal);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--color-cream-paper);
+            border: 2px solid var(--color-charcoal);
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 16px;
+            color: var(--color-cocoa-ink);
+            outline: none;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--color-marker-orange);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-marker-orange);
+            border-top-left-radius: var(--radius-footer);
+            border-top-right-radius: var(--radius-footer);
+            padding: 48px 24px 32px 24px;
+            color: var(--color-cocoa-ink);
+            margin-top: 80px;
+            border-top: 2px solid var(--color-charcoal);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Modal Admin Panel */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .admin-box {
+            background: var(--color-cream-paper);
+            border: 3px solid var(--color-charcoal);
+            border-radius: var(--radius-card);
+            width: 100%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px;
+            box-shadow: 8px 8px 0px var(--color-charcoal);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-charcoal);
+        }
+
+        /* Admin Tabs & Tables */
+        .admin-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--color-charcoal);
+            padding-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .admin-tab {
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            border: 2px solid var(--color-charcoal);
+            background: var(--color-dew-drop);
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .admin-tab.active {
+            background: var(--color-marker-orange);
+            color: white;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .admin-table th, .admin-table td {
+            border: 1.5px solid var(--color-charcoal);
+            padding: 10px 14px;
+            text-align: right;
+        }
+
+        .admin-table th {
+            background: var(--color-dew-drop);
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .status-new { background: #fef08a; color: #854d0e; }
+        .status-progress { background: #bfdbfe; color: #1e40af; }
+        .status-done { background: #bbf7d0; color: #166534; }
+
     </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Top Mode Switcher Bar -->
-    <div class="bg-[#171717] text-white px-4 py-2 flex items-center justify-between z-50 text-xs sm:text-sm font-bold">
-        <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-[#ff6f1e] animate-ping"></span>
-            <span>منصة تصميمي المتكاملة</span>
-        </div>
-        <div class="flex items-center gap-2">
-            <button onclick="switchAppView('site')" id="btnViewSite" class="px-3 py-1 rounded-full bg-[#ff6f1e] text-white border border-white/20">
-                <i class="fa-solid fa-globe ml-1"></i> الواجهة الرئيسية
-            </button>
-            <button onclick="switchAppView('admin')" id="btnViewAdmin" class="px-3 py-1 rounded-full bg-stone-800 text-stone-300 hover:text-white border border-white/20">
-                <i class="fa-solid fa-sliders ml-1"></i> لوحة التحكم (Admin Pro)
-            </button>
-        </div>
-    </div>
+    <!-- Dynamic Sticker Decoration -->
+    <div class="sticker sticker-sky" style="top: 120px; left: 5%;">⚡ تنسيق سريع!</div>
+    <div class="sticker sticker-pink" style="top: 220px; right: 4%;">🎨 غلاف مخصص</div>
+    <div class="sticker sticker-green" style="bottom: 150px; left: 8%;">📖 جاهز للطباعة</div>
 
-    <!-- ==================== MAIN WEBSITE VIEW ==================== -->
-    <div id="websiteViewSection" class="block flex-grow">
-        <header class="sticky top-0 z-40 bg-[#fdfbf9]/90 backdrop-blur-md border-b border-[#171717]/10 py-3 px-4 sm:px-8">
-            <div class="max-w-[1200px] mx-auto flex items-center justify-between">
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-2xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center text-white shadow-[2px_2px_0px_#171717] group-hover:rotate-6 transition-transform">
-                        <i class="fa-solid fa-pen-nib text-lg text-[#fdfbf9]"></i>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="font-display font-extrabold text-2xl tracking-tight text-[#2b1a07] leading-none">تصميمي</span>
-                        <span class="font-handwritten text-xs text-[#ff6f1e] -mt-1 font-bold">لتنسيق المذكرات والكتب</span>
-                    </div>
-                </a>
-
-                <div class="flex items-center gap-3">
-                    <nav class="hidden md:flex items-center gap-6 text-base font-medium text-[#2b1a07]">
-                        <a href="#calculator" class="hover:text-[#ff6f1e] transition-colors">الحاسبة</a>
-                        <a href="#showcase" class="hover:text-[#ff6f1e] transition-colors">نماذج المذكرات</a>
-                        <a href="#preview-tool" class="hover:text-[#ff6f1e] transition-colors">جرب بنفسك</a>
-                        <a href="#pricing" class="hover:text-[#ff6f1e] transition-colors">الباقات</a>
-                        <a href="#faq" class="hover:text-[#ff6f1e] transition-colors">الأسئلة</a>
-                    </nav>
-
-                    <button onclick="openOrderModal()" class="btn-pill px-5 py-2 text-sm md:text-base font-semibold text-[#171717] flex items-center gap-2">
-                        <i class="fa-solid fa-file-arrow-up text-[#ff6f1e]"></i>
-                        <span>اطلب تنسيق مذكرتك</span>
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <main>
-            <!-- Hero Section -->
-            <section class="relative pt-8 pb-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto overflow-hidden">
-                <div class="absolute top-6 left-12 bg-[#3b82f6] text-white px-3 py-1 rounded-full text-xs font-bold rotate-[-12deg] sticker-badge shadow-sticker hidden lg:flex items-center gap-1">
-                    <span>⚡ ملخصات متكتكة</span>
-                </div>
-                <div class="absolute bottom-10 right-8 bg-[#ff66cf] text-[#171717] px-3 py-1 rounded-full text-xs font-bold rotate-[8deg] sticker-badge shadow-sticker hidden lg:flex items-center gap-1">
-                    <span>🐻 يفتح النفس للدراسة</span>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-7 flex flex-col items-start text-right">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f7efe9] border border-[#171717]/20 text-xs sm:text-sm font-semibold mb-4">
-                            <span class="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
-                            <span>متاح استقبال طلبات هذا الأسبوع</span>
-                        </div>
-
-                        <h1 id="siteHeroTitle" class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl text-[#2b1a07] leading-[1.15] mb-6 tracking-tight">
-                            مذكراتك الدراسية.. <br/>
-                            بكل <span class="marker-underline">إتقان ولطافة</span> تفتح النفس
-                        </h1>
-
-                        <p id="siteHeroDesc" class="text-lg sm:text-xl text-[#2b1a07]/80 leading-relaxed mb-8 max-w-2xl font-normal">
-                            نحوّل نصوصك ومذكراتك الجافة إلى تحف فنية مريحة للعين! تنسيق احترافي، جداول مقارنة، هوامش واسعة للملاحظات، أغلفة جذابة، وأيقونات توضيحية تجعل الاستذكار رحلة ممتعة وسهلة.
-                        </p>
-
-                        <div class="relative mb-8 w-full max-w-md">
-                            <div class="flex items-center gap-3">
-                                <span id="siteHeroScript" class="font-handwritten text-xl sm:text-2xl text-[#ff6f1e] font-bold rotate-[-2deg]">
-                                    شاهد الفرق بنفسك واحسب التكلفة فاعلياً!
-                                </span>
-                                <svg class="w-16 h-10 text-[#ff6f1e]" viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                                    <path d="M 10 10 Q 50 40 85 20 L 75 15 M 85 20 L 80 32" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-                            <a href="#calculator" id="siteHeroCta" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#fdfbf9] flex items-center justify-center gap-2 w-full sm:w-auto text-center">
-                                <i class="fa-solid fa-calculator text-[#ff6f1e]"></i>
-                                <span>احسب تكلفة مذكرتك</span>
-                            </a>
-                            <a href="#showcase" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#f7efe9] flex items-center justify-center gap-2 w-full sm:w-auto text-center border-dashed">
-                                <i class="fa-regular fa-folder-open text-[#22c55e]"></i>
-                                <span>استعراض المذكرات</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 relative flex justify-center">
-                        <div class="w-full max-w-sm sm:max-w-md bg-[#ffffff] border-2 border-[#171717] rounded-card p-6 shadow-[8px_12px_0px_#171717] tilt-right relative">
-                            <div class="absolute -top-3 left-6 right-6 flex justify-between z-10">
-                                <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                                <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                                <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                                <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                                <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                            </div>
-
-                            <div class="mt-3 mb-6 bg-[#f7efe9] border-1.5 border-[#171717] rounded-lg p-3 shadow-sm relative">
-                                <div class="text-[10px] uppercase font-bold tracking-widest text-[#2b1a07]/50 mb-1">DESIGNED BY TASMEEMY</div>
-                                <div class="grid grid-cols-3 gap-2 text-xs font-bold text-[#2b1a07]">
-                                    <div class="col-span-2 border-b border-[#171717]/30 pb-0.5">المادة: <span class="font-handwritten text-base text-[#ff6f1e]">الاحياء العشبي</span></div>
-                                    <div class="border-b border-[#171717]/30 pb-0.5">الصف: <span class="font-handwritten text-base text-[#3b82f6]">3 ثانوي</span></div>
-                                </div>
-                            </div>
-
-                            <div class="space-y-4 text-right notebook-lines px-2 py-1 rounded bg-[#fdfbf9] border border-[#171717]/10">
-                                <div class="flex items-center justify-between border-b-2 border-[#ff6f1e] pb-1">
-                                    <span class="font-bold text-sm text-[#ff6f1e]">الوحدة الأولى: البناء الضوئي</span>
-                                    <span class="text-xs bg-[#ff6f1e]/10 text-[#ff6f1e] px-2 py-0.5 rounded-full font-bold">درس 01</span>
-                                </div>
-                                <p class="text-xs sm:text-sm text-[#2b1a07] font-medium leading-relaxed">
-                                    عملية حيوية تقوم بها <span class="bg-[#ff6f1e]/20 px-1 rounded font-bold">النباتات الخضراء</span> لتحويل الطاقة الضوئية إلى طاقة كيميائية.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Calculator Section -->
-            <section id="calculator" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-y-2 border-[#171717] relative">
-                <div class="max-w-[1200px] mx-auto">
-                    <div class="text-center max-w-2xl mx-auto mb-12">
-                        <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">احسب وتأكد بنفسك</span>
-                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">حاسبة تنسيق المذكرات التفاعلية</h2>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        <div class="lg:col-span-7 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717]">
-                            <div class="mb-8">
-                                <div class="flex justify-between items-center mb-3">
-                                    <label class="font-bold text-lg text-[#2b1a07] flex items-center gap-2">
-                                        <i class="fa-solid fa-copy text-[#ff6f1e]"></i>
-                                        <span>عدد صفحات المذكرة:</span>
-                                    </label>
-                                    <div class="flex items-center gap-1 bg-[#f7efe9] border border-[#171717] px-3 py-1 rounded-lg">
-                                        <input type="number" id="pageInput" value="30" min="5" max="500" class="w-16 bg-transparent font-extrabold text-lg text-[#ff6f1e] text-center focus:outline-none" oninput="updateCalculator()">
-                                        <span class="text-xs font-bold text-[#2b1a07]">صفحة</span>
-                                    </div>
-                                </div>
-                                <input type="range" id="pageSlider" min="5" max="300" value="30" step="5" class="w-full h-3 bg-[#e5dfd8] rounded-lg appearance-none cursor-pointer accent-[#ff6f1e]" oninput="syncPageInput(this.value)">
-                            </div>
-
-                            <div class="mb-8">
-                                <label class="font-bold text-lg text-[#2b1a07] block mb-3">مستوى التنسيق والتصميم:</label>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                    <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] has-[:checked]:bg-[#ff6f1e]/10">
-                                        <input type="radio" name="serviceTier" value="basic" class="sr-only" onchange="updateCalculator()">
-                                        <div class="font-bold text-sm text-[#2b1a07]">تنسيق أساسي</div>
-                                        <div class="text-xs font-extrabold text-[#ff6f1e] mt-2" id="calcTierBasicLabel">12 ج.م / صفحة</div>
-                                    </label>
-
-                                    <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] has-[:checked]:bg-[#ff6f1e]/10 relative">
-                                        <input type="radio" name="serviceTier" value="pro" checked class="sr-only" onchange="updateCalculator()">
-                                        <div class="font-bold text-sm text-[#2b1a07]">احترافي شامل</div>
-                                        <div class="text-xs font-extrabold text-[#ff6f1e] mt-2" id="calcTierProLabel">18 ج.م / صفحة</div>
-                                    </label>
-
-                                    <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] has-[:checked]:bg-[#ff6f1e]/10">
-                                        <input type="radio" name="serviceTier" value="vip" class="sr-only" onchange="updateCalculator()">
-                                        <div class="font-bold text-sm text-[#2b1a07]">كتاب VIP</div>
-                                        <div class="text-xs font-extrabold text-[#ff6f1e] mt-2" id="calcTierVipLabel">25 ج.م / صفحة</div>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-5 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between h-full">
-                            <div>
-                                <span class="font-bold text-xl text-[#2b1a07] block mb-4">ملخص التكلفة المقدرة</span>
-                                <div class="bg-[#f7efe9] border-2 border-[#171717] rounded-xl p-5 text-center mb-6">
-                                    <div class="font-display font-black text-4xl sm:text-5xl text-[#ff6f1e]" id="totalPriceVal">576 <span class="text-lg font-bold text-[#2b1a07]">ج.م</span></div>
-                                </div>
-                            </div>
-                            <button onclick="applyFromCalc()" class="btn-pill w-full py-4 bg-[#ff6f1e] text-[#171717] text-lg font-bold flex items-center justify-center gap-2 border-2 border-[#171717]">
-                                <i class="fa-brands fa-whatsapp text-xl"></i>
-                                <span>تأكيد الطلب عبر الواتساب</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Pricing Cards Section -->
-            <section id="pricing" class="py-16 px-4 sm:px-8 max-w-[1200px] mx-auto">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">باقات تناسب الجميع</span>
-                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">خطط وباقات التنسيق</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="font-bold text-lg text-[#2b1a07] mb-1">الباقة الأساسية</div>
-                            <div class="font-display font-black text-3xl text-[#ff6f1e] mb-6" id="sitePkg1Price">12 ج.م <span class="text-xs text-[#2b1a07]">/ صفحة</span></div>
-                        </div>
-                        <button onclick="selectPackage('الباقة الأساسية')" class="btn-pill w-full py-3 font-bold text-sm">اختيار الباقة</button>
-                    </div>
-
-                    <div class="bg-[#fdfbf9] border-4 border-[#ff6f1e] rounded-card p-6 flex flex-col justify-between shadow-[8px_8px_0px_#171717]">
-                        <div>
-                            <div class="font-bold text-xl text-[#2b1a07] mb-1">الباقة الاحترافية</div>
-                            <div class="font-display font-black text-4xl text-[#ff6f1e] mb-6" id="sitePkg2Price">18 ج.م <span class="text-xs text-[#2b1a07]">/ صفحة</span></div>
-                        </div>
-                        <button onclick="selectPackage('الباقة الاحترافية')" class="btn-pill w-full py-3.5 font-bold text-sm bg-[#ff6f1e] text-white">اطلب الآن</button>
-                    </div>
-
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="font-bold text-lg text-[#2b1a07] mb-1">باقة الكتب VIP</div>
-                            <div class="font-display font-black text-3xl text-[#ff6f1e] mb-6" id="sitePkg3Price">25 ج.م <span class="text-xs text-[#2b1a07]">/ صفحة</span></div>
-                        </div>
-                        <button onclick="selectPackage('باقة الكتب VIP')" class="btn-pill w-full py-3 font-bold text-sm">اختيار VIP</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="mt-16 bg-[#ff6f1e] text-[#2b1a07] border-t-2 border-[#171717] rounded-t-footer-cap pt-12 pb-8 px-6 sm:px-12">
-            <div class="max-w-[1200px] mx-auto text-center font-bold text-sm">
-                جميع الحقوق محفوظة © 2026 لموقع تصميمي (Tasmeemy)
-            </div>
-        </footer>
-    </div>
-
-    <!-- ==================== ADMIN PANEL VIEW ==================== -->
-    <div id="adminPanelSection" class="hidden flex-col h-screen overflow-hidden">
-        <header class="bg-[#fdfbf9] border-b-2 border-[#171717] px-6 py-3 flex items-center justify-between shrink-0">
-            <div class="flex items-center gap-2">
-                <div class="w-9 h-9 rounded-xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center font-extrabold text-white">
-                    <i class="fa-solid fa-pen-nib"></i>
-                </div>
-                <div>
-                    <h1 class="font-display font-black text-lg">لوحة تحكم تصميمي Pro</h1>
-                    <p class="text-xs text-stone-500">إدارة مظهر ومحتوى الموقع في الوقت الفعلي</p>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <button onclick="saveAllSettings()" class="superr-btn bg-[#ff6f1e] text-white px-4 py-1.5 text-xs flex items-center gap-2">
-                    <i class="fa-solid fa-floppy-disk"></i> حفظ التغييرات
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <a href="#" class="brand-logo">
+                <i class="fa-solid fa-pen-ruler"></i> تصميمي
+            </a>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn-pill" onclick="openAdminModal()">
+                    <i class="fa-solid fa-user-gear"></i> لوحة الأدمن
                 </button>
+                <a href="#order" class="btn-pill" style="background: var(--color-marker-orange); color: white;">
+                    اطلب تنسيقك الآن
+                </a>
             </div>
-        </header>
+        </nav>
 
-        <div class="flex-1 flex overflow-hidden">
-            <!-- Left Controls -->
-            <div class="w-1/2 bg-[#fdfbf9] border-l-2 border-[#171717] flex flex-col overflow-hidden">
-                <div class="bg-[#f7efe9] border-b-2 border-[#171717] p-2 flex gap-2 overflow-x-auto shrink-0">
-                    <button onclick="switchTab('tab-colors')" id="btn-tab-colors" class="tab-btn active superr-btn px-3 py-1.5 text-xs whitespace-nowrap">الألوان والسمات</button>
-                    <button onclick="switchTab('tab-content')" id="btn-tab-content" class="tab-btn superr-btn px-3 py-1.5 text-xs whitespace-nowrap">محتوى الموقع</button>
-                    <button onclick="switchTab('tab-pricing')" id="btn-tab-pricing" class="tab-btn superr-btn px-3 py-1.5 text-xs whitespace-nowrap">الأسعار والباقات</button>
-                </div>
-
-                <div class="flex-1 overflow-y-auto p-6 space-y-6">
-                    <!-- Color Customization -->
-                    <div id="tab-colors" class="tab-content block space-y-4">
-                        <h3 class="font-bold text-sm">تخصيص الألوان الأساسية</h3>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="p-3 bg-[#f7efe9] superr-border rounded-xl flex justify-between items-center">
-                                <span class="text-xs font-bold">لون الماركر (Marker)</span>
-                                <input type="color" id="input-color-orange" value="#ff6f1e" oninput="updateColorVar('--color-marker-orange', this.value)" class="w-8 h-8 cursor-pointer">
-                            </div>
-                            <div class="p-3 bg-[#f7efe9] superr-border rounded-xl flex justify-between items-center">
-                                <span class="text-xs font-bold">خلفية الورق (Cream)</span>
-                                <input type="color" id="input-color-cream" value="#fdfbf9" oninput="updateColorVar('--color-cream-paper', this.value)" class="w-8 h-8 cursor-pointer">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Customization -->
-                    <div id="tab-content" class="tab-content hidden space-y-4">
-                        <div>
-                            <label class="text-xs font-bold block mb-1">العنوان الرئيسي للموقع</label>
-                            <textarea id="adminInputHeroTitle" rows="2" oninput="updateContent('siteHeroTitle', this.value)" class="w-full p-2 text-xs superr-border rounded-lg">مذكراتك الدراسية.. بكل إتقان ولطافة تفتح النفس</textarea>
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold block mb-1">الوصف الفرعي</label>
-                            <textarea id="adminInputHeroDesc" rows="3" oninput="updateContent('siteHeroDesc', this.value)" class="w-full p-2 text-xs superr-border rounded-lg">نحوّل نصوصك ومذكراتك الجافة إلى تحف فنية مريحة للعين! تنسيق احترافي، جداول مقارنة، هوامش واسعة للملاحظات.</textarea>
-                        </div>
-                    </div>
-
-                    <!-- Pricing Customization -->
-                    <div id="tab-pricing" class="tab-content hidden space-y-4">
-                        <div class="space-y-3">
-                            <div>
-                                <label class="text-xs font-bold block">سعر الباقة الأساسية (لكل صفحة)</label>
-                                <input type="text" id="adminPkg1Val" value="12 ج.م / صفحة" oninput="updatePricing('basic', this.value)" class="w-full p-2 text-xs superr-border rounded-lg">
-                            </div>
-                            <div>
-                                <label class="text-xs font-bold block">سعر الباقة الاحترافية (لكل صفحة)</label>
-                                <input type="text" id="adminPkg2Val" value="18 ج.م / صفحة" oninput="updatePricing('pro', this.value)" class="w-full p-2 text-xs superr-border rounded-lg">
-                            </div>
-                        </div>
-                    </div>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div>
+                <span class="marker-annotation">يا هلا بالمعلمين والطلاب 👋</span>
+                <h1 class="hero-title">مذكراتك المدرسية بأسلوب <span class="highlight-word">جذاب</span> ومرتب.</h1>
+                <p class="hero-subtitle">
+                    نحول أوراقك وملخصاتك العادية إلى مذكرات احترافية، منسقة بشكل مريح للعين ومجهزة للطباعة أو التوزيع الرقمي بلمسات فنية أنيقة.
+                </p>
+                <div style="display: flex; gap: 16px; align-items: center;">
+                    <a href="#order" class="btn-pill">
+                        ابدأ طلبك الآن <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <span style="font-size: 14px; font-weight: 600; color: var(--color-burnt-sienna);">
+                        * التسليم خلال 24 إلى 48 ساعة فقط!
+                    </span>
                 </div>
             </div>
 
-            <!-- Right Preview -->
-            <div class="w-1/2 bg-stone-200 p-4 flex items-center justify-center">
-                <div class="w-full h-full bg-[#fdfbf9] superr-border rounded-xl p-4 overflow-y-auto">
-                    <span class="text-xs bg-[#ff6f1e] text-white px-2 py-0.5 rounded font-bold mb-4 inline-block">معاينة فورية</span>
-                    <h2 class="font-bold text-xl mb-2" id="adminPreviewHeroTitle">مذكراتك الدراسية.. بكل إتقان ولطافة تفتح النفس</h2>
-                    <p class="text-xs text-stone-600 mb-4" id="adminPreviewHeroDesc">نحوّل نصوصك ومذكراتك الجافة إلى تحف فنية مريحة للعين!</p>
+            <div class="notebook-preview-card">
+                <div class="notebook-inner">
+                    <div style="text-align: center; font-family: var(--font-display); font-size: 24px; font-weight: 700;">
+                        مذكرة الفيزياء - الصف الثالث الثانوي
+                    </div>
+                    
+                    <div class="name-label-sticker">
+                        <div class="name-label-row">
+                            <span>اسم المادة:</span>
+                            <span id="preview-subject" style="color: var(--color-burnt-sienna);">الفيزياء الحديثة</span>
+                        </div>
+                        <div class="name-label-row">
+                            <span>إعداد الأستاذ:</span>
+                            <span id="preview-teacher">أ. أحمد مصطفى</span>
+                        </div>
+                        <div class="name-label-row">
+                            <span>العام الدراسي:</span>
+                            <span>2026/2027</span>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 12px; text-align: center; opacity: 0.7;">
+                        ✨ تصميم خاص بـ "تصميمي" - جودة فائقة للطباعة
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Order Modal -->
-    <div id="orderModal" class="fixed inset-0 z-50 bg-[#171717]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card max-w-lg w-full p-6 shadow-[10px_10px_0px_#171717] relative">
-            <button onclick="closeOrderModal()" class="absolute top-4 left-4 w-8 h-8 bg-[#f7efe9] border border-[#171717] rounded-full flex items-center justify-center text-sm font-bold">✕</button>
-            <h3 class="font-display font-extrabold text-2xl text-[#2b1a07] mb-4">طلب تنسيق مذكرة جديدة</h3>
-            <form onsubmit="handleOrderSubmit(event)" class="space-y-4">
-                <input type="text" id="orderName" required placeholder="الاسم الكريم" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm">
-                <button type="submit" class="btn-pill w-full py-3 bg-[#ff6f1e] text-white font-bold text-base">إرسال عبر الواتساب</button>
+        <!-- Features -->
+        <section class="features">
+            <div class="section-header">
+                <h2 class="section-title">ليه تختار موقع "تصميمي"؟</h2>
+            </div>
+            <div class="grid-3">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3 class="feature-title">تنسيق مريح للعين</h3>
+                    <p>نعتمد خطوطاً واضحة، تقسيمات ذكية للفقرات، وإبراز المفاهيم المهمة بألوان مريحة تساعد على التركيز.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                    <h3 class="feature-title">ملفات جاهزة للطباعة</h3>
+                    <p>نسلمك ملفات PDF عالية الدقة بصيغ جاهزة للمطابع فوراً، مع أغطية (غلاف) مميزة وحصرية.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h3 class="feature-title">سرعة ودقة</h3>
+                    <p>نلبي طلباتك في وقت قياسي مع مراجعة كاملة للأخطاء الإملائية والتركيبية والتنسيقية.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Form Section -->
+        <section id="order" class="order-section">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h2 class="section-title">طلب خدمة تنسيق مذكرة</h2>
+                <p>امعد ملفك وملاحظاتك واترك الباقي علينا!</p>
+            </div>
+
+            <form id="client-order-form" onsubmit="handleOrderSubmit(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-input" id="client-name" placeholder="أدخل اسمك الكريم" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">رقم الهاتف / الواتساب</label>
+                        <input type="tel" class="form-input" id="client-phone" placeholder="05xxxxxxxx" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label">عنوان المذكرة / المادة</label>
+                        <input type="text" class="form-input" id="doc-title" placeholder="مثال: مذكرة الرياضيات الشاملة" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">عدد الصفحات التقريبي</label>
+                        <select class="form-select" id="doc-pages">
+                            <option value="1-20">من 1 إلى 20 صفحة</option>
+                            <option value="21-50">من 21 إلى 50 صفحة</option>
+                            <option value="51-100">من 51 إلى 100 صفحة</option>
+                            <option value="+100">أكثر من 100 صفحة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">ملاحظاتك وتعليمات التنسيق الخاصة</label>
+                    <textarea class="form-textarea" id="doc-notes" rows="4" placeholder="اكتب ألوانك المفضل، هل تريد إضافة صور؟ أي تفاصيل إضافية..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-pill" style="width: 100%; justify-content: center; background: var(--color-charcoal); color: white; font-size: 18px; padding: 14px;">
+                    إرسال الطلب للتحضير 🚀
+                </button>
             </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <h3 style="font-family: var(--font-display); font-size: 28px;">تصميمي — Tasmeemy</h3>
+                <p>خدمتك الأولى لتنسيق المذكرات والملخصات الدراسية بأعلى جودة.</p>
+            </div>
+            <div style="font-weight: 700;">
+                جميع الحقوق محفوظة © 2026 موقع تصميمي
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal-overlay" id="adminModal">
+        <div class="admin-box">
+            <button class="close-modal" onclick="closeAdminModal()">&times;</button>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="font-family: var(--font-display); font-size: 32px;">🛠️ لوحة تحكم الأدمن (تصميمي)</h2>
+            </div>
+
+            <!-- Admin Nav Tabs -->
+            <div class="admin-nav">
+                <button class="admin-tab active" onclick="switchAdminTab('tab-orders')">إدارة الطلبات (<span id="orders-count">0</span>)</button>
+                <button class="admin-tab" onclick="switchAdminTab('tab-services')">الخدمات والأسعار</button>
+                <button class="admin-tab" onclick="switchAdminTab('tab-stats')">الإحصائيات</button>
+                <button class="admin-tab" onclick="switchAdminTab('tab-settings')">إعدادات الموقع</button>
+            </div>
+
+            <!-- Tab 1: Orders -->
+            <div id="tab-orders" class="tab-content">
+                <h3>جدول طلبات التنسيق الواردة</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>العميل</th>
+                            <th>الهاتف</th>
+                            <th>المذكرة</th>
+                            <th>الصفحات</th>
+                            <th>الحالة</th>
+                            <th>إجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body">
+                        <!-- dynamic content -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tab 2: Services & Pricing -->
+            <div id="tab-services" class="tab-content" style="display: none;">
+                <h3>تعديل أسعار خدمات التنسيق</h3>
+                <div style="margin-top: 16px;" class="grid-3">
+                    <div style="border: 2px solid var(--color-charcoal); padding: 16px; border-radius: 8px;">
+                        <h4>تنسيق عادي (1-20 صفحة)</h4>
+                        <input type="text" class="form-input" value="50 ريال/جنيه" style="margin-top: 8px;">
+                    </div>
+                    <div style="border: 2px solid var(--color-charcoal); padding: 16px; border-radius: 8px;">
+                        <h4>تنسيق احترافي + غلاف</h4>
+                        <input type="text" class="form-input" value="120 ريال/جنيه" style="margin-top: 8px;">
+                    </div>
+                    <div style="border: 2px solid var(--color-charcoal); padding: 16px; border-radius: 8px;">
+                        <h4>تسليم مستعجل (خلال 12 ساعة)</h4>
+                        <input type="text" class="form-input" value="+30%" style="margin-top: 8px;">
+                    </div>
+                </div>
+                <button class="btn-pill" style="margin-top: 16px; background: var(--color-sprout-sticker); color: white;" onclick="alert('تم حفظ الأسعار الجديدة بنجاح!')">حفظ التغييرات</button>
+            </div>
+
+            <!-- Tab 3: Stats -->
+            <div id="tab-stats" class="tab-content" style="display: none;">
+                <h3>إحصائيات موقع تصميمي</h3>
+                <div class="grid-3" style="margin-top: 16px;">
+                    <div class="feature-card">
+                        <h4>إجمالي الطلبات</h4>
+                        <p style="font-size: 32px; font-weight: 800; color: var(--color-marker-orange);" id="stat-total-orders">0</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>الطلبات المكتملة</h4>
+                        <p style="font-size: 32px; font-weight: 800; color: var(--color-sprout-sticker);">12</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>الزوار هذا الشهر</h4>
+                        <p style="font-size: 32px; font-weight: 800; color: var(--color-sky-sticker);">1,450</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: Settings -->
+            <div id="tab-settings" class="tab-content" style="display: none;">
+                <h3>إعدادات الموقع العامة</h3>
+                <div class="form-group" style="margin-top: 16px;">
+                    <label class="form-label">اسم الموقع</label>
+                    <input type="text" class="form-input" value="تصميمي - لخدمات تنسيق المذكرات">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">رقم الواتساب الرئيسي لتلقي الإشعارات</label>
+                    <input type="text" class="form-input" value="0500000000">
+                </div>
+                <button class="btn-pill" style="background: var(--color-marker-orange); color: white;" onclick="alert('تم حفظ إعدادات الموقع!')">تحديث الإعدادات</button>
+            </div>
+
         </div>
     </div>
 
-    <!-- Combined Logic & State Scripts -->
+    <!-- JavaScript code for interactivity and storage -->
     <script>
-        // View Switching Logic (Site <-> Admin)
-        function switchAppView(view) {
-            const siteSection = document.getElementById('websiteViewSection');
-            const adminSection = document.getElementById('adminPanelSection');
-            const btnSite = document.getElementById('btnViewSite');
-            const btnAdmin = document.getElementById('btnViewAdmin');
+        // Sample stored orders
+        let orders = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [
+            { id: 1, name: 'أحمد محمود', phone: '0551234567', title: 'مذكرة الكيمياء العضوية', pages: '21-50', status: 'جديد' },
+            { id: 2, name: 'سارة خالد', phone: '0509876543', title: 'ملخص التاريخ الحديث', pages: '1-20', status: 'مكتمل' }
+        ];
 
-            if (view === 'site') {
-                siteSection.classList.remove('hidden');
-                adminSection.classList.add('hidden');
-                btnSite.className = "px-3 py-1 rounded-full bg-[#ff6f1e] text-white border border-white/20";
-                btnAdmin.className = "px-3 py-1 rounded-full bg-stone-800 text-stone-300 hover:text-white border border-white/20";
-            } else {
-                adminSection.classList.remove('hidden');
-                adminSection.classList.add('flex');
-                siteSection.classList.add('hidden');
-                btnAdmin.className = "px-3 py-1 rounded-full bg-[#ff6f1e] text-white border border-white/20";
-                btnSite.className = "px-3 py-1 rounded-full bg-stone-800 text-stone-300 hover:text-white border border-white/20";
-            }
+        function renderOrders() {
+            const tbody = document.getElementById('orders-table-body');
+            tbody.innerHTML = '';
+            orders.forEach((order, index) => {
+                let badgeClass = 'status-new';
+                if (order.status === 'قيد التنفيذ') badgeClass = 'status-progress';
+                if (order.status === 'مكتمل') badgeClass = 'status-done';
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${order.name}</td>
+                        <td>${order.phone}</td>
+                        <td>${order.title}</td>
+                        <td>${order.pages}</td>
+                        <td><span class="status-badge ${badgeClass}">${order.status}</span></td>
+                        <td>
+                            <button onclick="changeStatus(${order.id}, 'قيد التنفيذ')" style="cursor:pointer; padding: 2px 6px;">⏳</button>
+                            <button onclick="changeStatus(${order.id}, 'مكتمل')" style="cursor:pointer; padding: 2px 6px;">✅</button>
+                            <button onclick="deleteOrder(${order.id})" style="cursor:pointer; padding: 2px 6px; color:red;">🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            document.getElementById('orders-count').innerText = orders.length;
+            document.getElementById('stat-total-orders').innerText = orders.length;
         }
-
-        // Admin Tab Switching
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.remove('hidden');
-            document.getElementById('btn-' + tabId).classList.add('active');
-        }
-
-        // Live Dynamic CSS Variables Updates
-        function updateColorVar(varName, colorVal) {
-            document.documentElement.style.setProperty(varName, colorVal);
-        }
-
-        function updateContent(targetId, textVal) {
-            const element = document.getElementById(targetId);
-            if (element) element.innerText = textVal;
-
-            const adminPrev = document.getElementById('adminPreview' + targetId.charAt(0).toUpperCase() + targetId.slice(1));
-            if (adminPrev) adminPrev.innerText = textVal;
-        }
-
-        function updatePricing(tier, val) {
-            if (tier === 'basic') {
-                document.getElementById('sitePkg1Price').innerHTML = val;
-                document.getElementById('calcTierBasicLabel').innerText = val;
-            } else if (tier === 'pro') {
-                document.getElementById('sitePkg2Price').innerHTML = val;
-                document.getElementById('calcTierProLabel').innerText = val;
-            }
-            updateCalculator();
-        }
-
-        // Interactive Calculator Logic
-        function syncPageInput(val) {
-            document.getElementById('pageInput').value = val;
-            updateCalculator();
-        }
-
-        function updateCalculator() {
-            const pages = parseInt(document.getElementById('pageInput').value) || 0;
-            const selectedTierEl = document.querySelector('input[name="serviceTier"]:checked');
-            const tier = selectedTierEl ? selectedTierEl.value : 'pro';
-
-            let ratePerPage = 18;
-            if (tier === 'basic') ratePerPage = 12;
-            if (tier === 'vip') ratePerPage = 25;
-
-            let total = pages * ratePerPage;
-            document.getElementById('totalPriceVal').innerHTML = total + ' <span class="text-lg font-bold text-[#2b1a07]">ج.م</span>';
-        }
-
-        // Modal Controls
-        function openOrderModal() { document.getElementById('orderModal').classList.remove('hidden'); }
-        function closeOrderModal() { document.getElementById('orderModal').classList.add('hidden'); }
-        function selectPackage(pkg) { openOrderModal(); }
-        function applyFromCalc() { openOrderModal(); }
 
         function handleOrderSubmit(e) {
             e.preventDefault();
-            const name = document.getElementById('orderName').value;
-            window.open(`https://wa.me/?text=طلب%20تنسيق%20من:%20${encodeURIComponent(name)}`, '_blank');
-            closeOrderModal();
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const title = document.getElementById('doc-title').value;
+            const pages = document.getElementById('doc-pages').value;
+
+            const newOrder = {
+                id: Date.now(),
+                name,
+                phone,
+                title,
+                pages,
+                status: 'جديد'
+            };
+
+            orders.push(newOrder);
+            localStorage.setItem('tasmeemy_orders', JSON.stringify(orders));
+            renderOrders();
+
+            alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً على الواتساب.');
+            document.getElementById('client-order-form').reset();
         }
 
-        function saveAllSettings() {
-            alert('تم حفظ كافة إعدادات وتغييرات المظهر بنجاح!');
+        function changeStatus(id, newStatus) {
+            orders = orders.map(o => o.id === id ? {...o, status: newStatus} : o);
+            localStorage.setItem('tasmeemy_orders', JSON.stringify(orders));
+            renderOrders();
         }
 
-        window.onload = function() {
-            updateCalculator();
-        };
+        function deleteOrder(id) {
+            if(confirm('هل أنت تأكد من حذف هذا الطلب؟')) {
+                orders = orders.filter(o => o.id !== id);
+                localStorage.setItem('tasmeemy_orders', JSON.stringify(orders));
+                renderOrders();
+            }
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'flex';
+            renderOrders();
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // Initialize on load
+        renderOrders();
     </script>
 </body>
 </html>
