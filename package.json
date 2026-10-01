@@ -1,9 +1,0 @@
-{
-  "name":"tasmimi-pro",
-  "version":"2.0.0",
-  "private":true,
-  "description":"Tasmimi editable portfolio CMS",
-  "main":"server.js",
-  "scripts":{"start":"node server.js"},
-  "dependencies":{"express":"^4.21.2","multer":"^1.4.5-lts.1","express-session":"^1.18.1"}
-}
