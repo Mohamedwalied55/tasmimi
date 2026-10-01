@@ -70,7 +70,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- شاشة تسجيل الدخول -->
+    <!-- شاشة تسجيل الدخول للحماية -->
     <div id="loginOverlay" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 max-w-md w-full shadow-hard-lg text-right relative">
             <div class="flex items-center gap-3 mb-6">
@@ -79,13 +79,13 @@
                 </div>
                 <div>
                     <h2 class="font-display font-extrabold text-2xl text-[#2b1a07]">لوحة إدارة تصميمي</h2>
-                    <span class="font-handwritten text-sm text-[#ff6f1e] font-bold">تسجيل دخول المسؤول</span>
+                    <span class="font-handwritten text-sm text-[#ff6f1e] font-bold">تسجيل دخول المسؤول (كلمة المرور الافتراضية: 123456)</span>
                 </div>
             </div>
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold mb-1 text-[#2b1a07]">كلمة المرور:</label>
-                    <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور (الافتراضية: 123456)..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
+                    <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
                     <p id="loginError" class="text-xs font-bold text-red-600 mt-1 hidden">كلمة المرور غير صحيحة!</p>
                 </div>
                 <button type="submit" class="btn-pill w-full py-3 bg-[#ff6f1e] text-white font-bold border-2 border-[#171717] flex items-center justify-center gap-2">
@@ -126,10 +126,10 @@
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
+    <!-- المحتوى الرئيسي للوحة التحكم -->
     <main class="flex-grow max-w-[1300px] w-full mx-auto p-4 sm:p-8 space-y-10">
 
-        <!-- الإحصائيات السريعة -->
+        <!-- الإحصائيات -->
         <section class="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-hard flex items-center justify-between">
                 <div>
@@ -165,7 +165,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-[#171717] gap-4 mb-6">
                 <div>
                     <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">📋 بيانات طلبات العملاء</h3>
-                    <p class="text-xs text-[#2b1a07]/70 font-medium">متابعة تفاصيل الطلبات وإرسال التحديثات الفورية للعملاء عبر الواتساب</p>
+                    <p class="text-xs text-[#2b1a07]/70 font-medium">متابعة تفاصيل الطلبات وإرسال التحديثات للعملاء عبر الواتساب بنقرة زر</p>
                 </div>
                 <div class="flex gap-2">
                     <button onclick="addNewOrderMock()" class="btn-pill px-4 py-2 bg-[#22c55e] text-white font-bold text-xs border-2 border-[#171717]">
@@ -186,8 +186,8 @@
                             <th class="p-3 font-bold">رقم الواتساب</th>
                             <th class="p-3 font-bold">المادة / المذكرة</th>
                             <th class="p-3 font-bold">الصفحات</th>
-                            <th class="p-3 font-bold">الباقة والتكلفة</th>
-                            <th class="p-3 font-bold">الحالة الحالية</th>
+                            <th class="p-3 font-bold">الباقة المختارة</th>
+                            <th class="p-3 font-bold">الحالة</th>
                             <th class="p-3 font-bold text-center">إجراءات المراسلة والتحديث</th>
                         </tr>
                     </thead>
@@ -196,43 +196,39 @@
             </div>
         </section>
 
-        <!-- 2. إدارة الباقات والأسعار (إضافة، تعديل، حذف) -->
+        <!-- 2. إدارة وتعديل الباقات -->
         <section class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-[#171717] gap-4 mb-6">
                 <div>
                     <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">🏷️ إدارة وتعديل الباقات</h3>
-                    <p class="text-xs text-[#2b1a07]/70 font-medium">إضافة باقات جديدة، تعديل الأسعار، أو حذف الباقات القديمة لتظهر فوراً في موقعك</p>
+                    <p class="text-xs text-[#2b1a07]/70 font-medium">أضف باقات جديدة، عدل الأسعار، أو احذف الباقات القديمة لتظهر فوراً في موقعك</p>
                 </div>
                 <button onclick="openPackageModal()" class="btn-pill px-4 py-2 bg-[#ff6f1e] text-white font-bold text-xs border-2 border-[#171717]">
                     + إضافة باقة جديدة
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="packagesAdminGrid">
-                <!-- يتم توليدها ديناميكياً -->
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="packagesAdminGrid"></div>
         </section>
 
-        <!-- 3. إدارة معرض الأعمال (إضافة صور، عناوين، وحذف) -->
+        <!-- 3. إدارة معرض الأعمال (أعمالي) -->
         <section class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-[#171717] gap-4 mb-6">
                 <div>
-                    <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">🖼️ معرض الأعمال (أحدث المذكرات المصممة)</h3>
-                    <p class="text-xs text-[#2b1a07]/70 font-medium">أضف روابط صور أعمالك ووسمها لتظهر في قسم "أعمالي" بالواجهة الرئيسية</p>
+                    <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">🖼️ معرض الأعمال (قسم أعمالي)</h3>
+                    <p class="text-xs text-[#2b1a07]/70 font-medium">أضف صور أعمالك، عدل عناوينها، أو احذف ما تحب لتظهر في الواجهة الرئيسية</p>
                 </div>
                 <button onclick="openPortfolioModal()" class="btn-pill px-4 py-2 bg-[#3b82f6] text-white font-bold text-xs border-2 border-[#171717]">
-                    + إضافة عمل جديد
+                    + إضافة عمل جديد للمعرض
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolioAdminGrid">
-                <!-- يتم توليدها ديناميكياً -->
-            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolioAdminGrid"></div>
         </section>
 
     </main>
 
-    <!-- مودال إضافة/تعديل باقة -->
+    <!-- مودال الباقات -->
     <div id="packageModal" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 max-w-lg w-full shadow-hard-lg text-right">
             <h3 class="font-display font-extrabold text-xl text-[#2b1a07] mb-4" id="pkgModalTitle">إضافة باقة جديدة</h3>
@@ -254,7 +250,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold mb-1">المميزات (مفصولة بفاصلة ,):</label>
-                    <textarea id="pkgFeatures" rows="3" placeholder="تنسيق احترافي, غلاف هدية, ألوان مخصصة" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-xs"></textarea>
+                    <textarea id="pkgFeatures" rows="3" placeholder="تنسيق وورد احترافي, غلاف هدية, ألوان مخصصة" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-xs"></textarea>
                 </div>
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="closePackageModal()" class="btn-pill px-4 py-2 bg-gray-200 text-[#2b1a07] font-bold text-xs">إلغاء</button>
@@ -264,7 +260,7 @@
         </div>
     </div>
 
-    <!-- مودال إضافة عمل للمعرض -->
+    <!-- مودال معرض الأعمال -->
     <div id="portfolioModal" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 max-w-lg w-full shadow-hard-lg text-right">
             <h3 class="font-display font-extrabold text-xl text-[#2b1a07] mb-4">إضافة صورة أعمال جديدة</h3>
@@ -294,9 +290,8 @@
         لوحة تحكم منصة تصميمي المتقدمة © 2026 — مزامنة تلقائية مع الموقع الرئيسي
     </footer>
 
-    <!-- سكربت التشغيل والإدارة -->
+    <!-- سكربت التحكم والأدمن -->
     <script>
-        // التحقق من كلمة المرور
         const DEFAULT_PASS = "123456";
         function checkAuth() {
             if (sessionStorage.getItem('admin_authenticated') === 'true') {
@@ -319,25 +314,12 @@
             checkAuth();
         }
 
-        // قاعدة البيانات المحلية (Local Databases)
-        let ordersDB = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [
-            { id: 101, name: "أحمد محمود", phone: "201012345678", subject: "فيزياء ثانوية", pages: 40, pkg: "الباقة الاحترافية (18 ج.م)", status: "جديد" },
-            { id: 102, name: "د. سارة علي", phone: "201122334455", subject: "ملخص الفارما", pages: 75, pkg: "باقة الكتب VIP (25 ج.م)", status: "قيد التنسيق" }
-        ];
+        let ordersDB = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [];
+        let packagesDB = JSON.parse(localStorage.getItem('tasmeemy_packages')) || [];
+        let portfolioDB = JSON.parse(localStorage.getItem('tasmeemy_portfolio')) || [];
 
-        let packagesDB = JSON.parse(localStorage.getItem('tasmeemy_packages')) || [
-            { name: "الباقة الأساسية", price: 12, badge: "اقتصادية", features: ["تنسيق وورد احترافي", "خطوط واضحة", "فهارس أساسية"] },
-            { name: "الباقة الاحترافية", price: 18, badge: "الأكثر طلباً", features: ["رسومات توضيحية", "تنسيق مخصص لليوتيوب", "ألوان متناسقة"] },
-            { name: "باقة الكتب VIP", price: 25, badge: "شامل كامل", features: ["غلاف احترافي مجاني", "موكب ثلاثي الأبعاد", "دعم ومراجعة مفتوحة"] }
-        ];
-
-        let portfolioDB = JSON.parse(localStorage.getItem('tasmeemy_portfolio')) || [
-            { title: "مذكرة الفيزياء الحديثة", image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=500&auto=format&fit=crop&q=60", tag: "ثانوية عامة" },
-            { title: "ملخص الأحياء والتشريح", image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=500&auto=format&fit=crop&q=60", tag: "مراجعة نهائية" }
-        ];
-
-        // 1. إدارة الطلبات وعرضها مع رسائل الواتساب الفورية
-        function renderOrders() {
+        // إدارة الطلبات والواتساب الفوري
+        function renderOrdersAdmin() {
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = '';
             document.getElementById('statTotalOrders').innerText = ordersDB.length;
@@ -347,7 +329,6 @@
                 if (order.status === 'قيد التنسيق') statusBadge = "bg-[#3b82f6]/10 text-[#3b82f6]";
                 if (order.status === 'تم التسليم') statusBadge = "bg-[#22c55e]/10 text-[#22c55e]";
 
-                // تجهيز رسالة الواتساب التلقائية بناءً على الحالة الحالية
                 let waMessage = `مرحباً ${order.name}، بخصوص طلبك لتنسيق مذكرة (${order.subject}) - حالته الآن: [${order.status}].`;
                 if(order.status === 'قيد التنسيق') {
                     waMessage = `مرحباً ${order.name}، نحيطك علماً بأننا بدأنا العمل وتنسيق مذكرة (${order.subject}) الآن! 🚀`;
@@ -355,7 +336,7 @@
                     waMessage = `مرحباً ${order.name}، لقد تم بحمد الله الانتهاء من تنسيق مذكرة (${order.subject}) وجاهزة للاستلام! 🎉`;
                 }
                 const encodedMsg = encodeURIComponent(waMessage);
-                const cleanPhone = order.phone.replace(/[^0-9]/g, '');
+                const cleanPhone = order.phone ? order.phone.replace(/[^0-9]/g, '') : '';
 
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-[#f7efe9]/50 transition-colors";
@@ -375,10 +356,10 @@
                         <button onclick="changeOrderStatus(${index})" class="px-2 py-1.5 bg-[#f7efe9] border border-[#171717] rounded text-xs font-bold hover:bg-[#ff6f1e] hover:text-white" title="تغيير الحالة">
                             🔄 الحالة
                         </button>
-                        <a href="https://wa.me/${cleanPhone}?text=${encodedMsg}" target="_blank" class="px-3 py-1.5 bg-[#22c55e] text-white border border-[#171717] rounded text-xs font-bold inline-flex items-center gap-1 shadow-sm" title="إرسال رسالة واتساب للعميل">
+                        <a href="https://wa.me/${cleanPhone}?text=${encodedMsg}" target="_blank" class="px-3 py-1.5 bg-[#22c55e] text-white border border-[#171717] rounded text-xs font-bold inline-flex items-center gap-1 shadow-sm" title="مراسلة وتحديث">
                             <i class="fa-brands fa-whatsapp"></i> مراسلة وتحديث
                         </a>
-                        <button onclick="deleteOrder(${index})" class="px-2 py-1.5 bg-red-100 text-red-600 border border-red-300 rounded text-xs font-bold hover:bg-red-200" title="حذف الطلب">
+                        <button onclick="deleteOrder(${index})" class="px-2 py-1.5 bg-red-100 text-red-600 border border-red-300 rounded text-xs font-bold hover:bg-red-200" title="حذف">
                             🗑️
                         </button>
                     </td>
@@ -392,38 +373,37 @@
             const statuses = ["جديد", "قيد التنسيق", "تم التسليم"];
             let curr = statuses.indexOf(ordersDB[index].status);
             ordersDB[index].status = statuses[(curr + 1) % statuses.length];
-            renderOrders();
+            renderOrdersAdmin();
         }
 
         function deleteOrder(index) {
-            if (confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
+            if (confirm("هل تريد حذف هذا الطلب؟")) {
                 ordersDB.splice(index, 1);
-                renderOrders();
+                renderOrdersAdmin();
             }
         }
 
         function clearAllOrders() {
-            if (confirm("هل تريد مسح كل الطلبات؟")) {
+            if (confirm("هل تريد مسح جميع الطلبات؟")) {
                 ordersDB = [];
-                renderOrders();
+                renderOrdersAdmin();
             }
         }
 
         function addNewOrderMock() {
-            const newId = Math.floor(100 + Math.random() * 900);
             ordersDB.unshift({
-                id: newId,
-                name: "عميل جديد " + newId,
-                phone: "201000000000",
-                subject: "مذكرة كيمياء ثانوية",
-                pages: 50,
-                pkg: "الباقة الاحترافية (18 ج.م)",
+                id: Math.floor(100 + Math.random() * 900),
+                name: "أحمد محمد",
+                phone: "201012345678",
+                subject: "مذكرة الأحياء والتجريبي",
+                pages: 45,
+                pkg: "الباقة الاحترافية",
                 status: "جديد"
             });
-            renderOrders();
+            renderOrdersAdmin();
         }
 
-        // 2. إدارة وتعديل الباقات
+        // إدارة الباقات
         function renderPackagesAdmin() {
             const grid = document.getElementById('packagesAdminGrid');
             grid.innerHTML = '';
@@ -471,9 +451,7 @@
                 document.getElementById('pkgFeatures').value = '';
             }
         }
-        function closePackageModal() {
-            document.getElementById('packageModal').classList.add('hidden');
-        }
+        function closePackageModal() { document.getElementById('packageModal').classList.add('hidden'); }
         function savePackageForm(e) {
             e.preventDefault();
             const index = parseInt(document.getElementById('pkgIndex').value);
@@ -483,11 +461,8 @@
                 badge: document.getElementById('pkgBadge').value,
                 features: document.getElementById('pkgFeatures').value.split(',').map(s => s.trim()).filter(Boolean)
             };
-            if (index > -1) {
-                packagesDB[index] = data;
-            } else {
-                packagesDB.push(data);
-            }
+            if (index > -1) packagesDB[index] = data;
+            else packagesDB.push(data);
             closePackageModal();
             renderPackagesAdmin();
         }
@@ -499,7 +474,7 @@
             }
         }
 
-        // 3. إدارة معرض الأعمال (أعمالي)
+        // إدارة معرض الأعمال
         function renderPortfolioAdmin() {
             const grid = document.getElementById('portfolioAdminGrid');
             grid.innerHTML = '';
@@ -525,12 +500,8 @@
             localStorage.setItem('tasmeemy_portfolio', JSON.stringify(portfolioDB));
         }
 
-        function openPortfolioModal() {
-            document.getElementById('portfolioModal').classList.remove('hidden');
-        }
-        function closePortfolioModal() {
-            document.getElementById('portfolioModal').classList.add('hidden');
-        }
+        function openPortfolioModal() { document.getElementById('portfolioModal').classList.remove('hidden'); }
+        function closePortfolioModal() { document.getElementById('portfolioModal').classList.add('hidden'); }
         function savePortfolioForm(e) {
             e.preventDefault();
             const newItem = {
@@ -543,16 +514,15 @@
             renderPortfolioAdmin();
         }
         function deletePortfolio(index) {
-            if (confirm("هل تريد حذف هذا العمل من المعرض؟")) {
+            if (confirm("هل تريد حذف هذا العمل؟")) {
                 portfolioDB.splice(index, 1);
                 renderPortfolioAdmin();
             }
         }
 
-        // تهيئة الصفحة عند التحميل
         window.onload = function() {
             checkAuth();
-            renderOrders();
+            renderOrdersAdmin();
             renderPackagesAdmin();
             renderPortfolioAdmin();
         };
