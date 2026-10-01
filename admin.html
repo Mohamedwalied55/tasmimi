@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة تحكم الأدمن — تصميمي</title>
+  <style>
+    :root {
+      --color-cream-paper: #fdfbf9;
+      --color-charcoal: #171717;
+      --color-cocoa-ink: #2b1a07;
+      --color-dew-drop: #f7efe9;
+      --color-marker-orange: #ff6f1e;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--color-cream-paper); color: var(--color-cocoa-ink); font-family: var(--font-main); }
+    .admin-header { background: var(--color-charcoal); color: white; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; }
+    .admin-header a { color: var(--color-marker-orange); text-decoration: none; font-weight: bold; }
+    .layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 64px); }
+    .sidebar { background: var(--color-dew-drop); border-left: 2px solid var(--color-charcoal); padding: 24px; }
+    .main-content { padding: 32px; }
+    .section-title { font-size: 24px; margin-bottom: 24px; border-bottom: 2px solid var(--color-marker-orange); padding-bottom: 8px; }
+    .control-group { margin-bottom: 20px; }
+    .control-group label { display: block; font-weight: bold; margin-bottom: 8px; }
+    .control-group input, .control-group select { width: 100%; padding: 10px; border: 1.5px solid var(--color-charcoal); border-radius: 8px; background: white; }
+    .preview-box { border: 2px dashed var(--color-charcoal); border-radius: 12px; padding: 32px; margin-top: 24px; background: white; }
+    .btn-save { background: var(--color-marker-orange); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
+    .btn-save:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <header class="admin-header">
+    <h2>⚙️ لوحة تحكم الأدمن — تصميمي</h2>
+    <a href="/">الرجوع للموقع الرئيسي ↗</a>
+  </header>
+  <div class="layout">
+    <div class="sidebar">
+      <h3 style="margin-bottom: 16px;">تخصيص المظهر والخطوط</h3>
+      <div class="control-group">
+        <label>اللون الرئيسي (Accent):</label>
+        <input type="color" id="primaryColor" value="#ff6f1e" onchange="updatePreview()">
+      </div>
+      <div class="control-group">
+        <label>خلفية الصفحات:</label>
+        <input type="color" id="bgColor" value="#fdfbf9" onchange="updatePreview()">
+      </div>
+      <div class="control-group">
+        <label>نوع الخط الرئيسية:</label>
+        <select id="fontFamily" onchange="updatePreview()">
+          <option value="system-ui">افتراضي النظام (System UI)</option>
+          <option value="'Cairo', sans-serif">Cairo (عربي)</option>
+          <option value="'Tajawal', sans-serif">Tajawal (عربي)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>حجم العنوان (px):</label>
+        <input type="number" id="titleSize" value="32" onchange="updatePreview()">
+      </div>
+      <button class="btn-save" onclick="saveSettings()">حفظ التغييرات 💾</button>
+    </div>
+    <div class="main-content">
+      <h2 class="section-title">المعاينة الحية والتعديل المباشر</h2>
+      <div class="preview-box" id="previewContainer">
+        <h1 id="previewTitle" style="color: var(--color-marker-orange); margin-bottom: 12px;">معاينة العنوان الرئيسي</h1>
+        <p id="previewText">هذا النص يعبر عن كيفية ظهور المذكرات والنصوص داخل الموقع بعد تعديل الألوان والخطوط من اللوحة الجانبية.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    function updatePreview() {
+      const primaryColor = document.getElementById('primaryColor').value;
+      const bgColor = document.getElementById('bgColor').value;
+      const fontFamily = document.getElementById('fontFamily').value;
+      const titleSize = document.getElementById('titleSize').value + 'px';
+      const previewContainer = document.getElementById('previewContainer');
+      const previewTitle = document.getElementById('previewTitle');
+      previewContainer.style.backgroundColor = bgColor;
+      previewContainer.style.fontFamily = fontFamily;
+      previewTitle.style.color = primaryColor;
+      previewTitle.style.fontSize = titleSize;
+    }
+    function saveSettings() { alert('تم حفظ التغييرات بنجاح!'); }
+  </script>
+</body>
+</html>
