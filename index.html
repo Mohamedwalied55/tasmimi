@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تصميمي — خدمات تنسيق وتصميم المذكرات التعليمية</title>
+  <style>
+    :root {
+      --color-cream-paper: #fdfbf9;
+      --color-charcoal: #171717;
+      --color-cocoa-ink: #2b1a07;
+      --color-dew-drop: #f7efe9;
+      --color-marker-orange: #ff6f1e;
+      --color-sky-sticker: #3b82f6;
+      --color-bubblegum-sticker: #ff66cf;
+      --font-main: system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--color-cream-paper); color: var(--color-cocoa-ink); font-family: var(--font-main); line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 2px dashed var(--color-dew-drop); }
+    .logo { font-size: 28px; font-weight: 800; color: var(--color-cocoa-ink); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .logo-badge { background: var(--color-marker-orange); color: white; padding: 2px 10px; border-radius: 20px; font-size: 14px; }
+    .btn-pill { background: var(--color-cream-paper); border: 1.5px solid var(--color-charcoal); color: var(--color-charcoal); padding: 10px 24px; border-radius: 20px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0px; transition: 0.2s; }
+    .btn-pill:hover { transform: translateY(-2px); box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px 0px; }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 64px 0; }
+    .hero-title { font-size: 64px; line-height: 1.1; font-weight: 800; margin-bottom: 16px; }
+    .hero-title span { color: var(--color-marker-orange); text-decoration: underline; text-decoration-style: wavy; }
+    .handwritten-tag { color: var(--color-marker-orange); font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+    .card { background: var(--color-dew-drop); border: 1.5px solid var(--color-charcoal); border-radius: 12px; padding: 32px; position: relative; }
+    .sticker { position: absolute; background: white; border: 1.5px solid var(--color-charcoal); padding: 6px 14px; border-radius: 20px; font-weight: bold; transform: rotate(-5deg); box-shadow: 2px 2px 0px var(--color-charcoal); }
+    .sticker-pink { background: var(--color-bubblegum-sticker); color: white; top: -12px; right: -12px; }
+    .calculator-section { background: var(--color-dew-drop); border: 2px solid var(--color-charcoal); border-radius: 20px; padding: 40px; margin: 64px 0; }
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .form-control { width: 100%; padding: 12px; border: 1.5px solid var(--color-charcoal); border-radius: 8px; font-size: 16px; background: var(--color-cream-paper); }
+    .total-box { background: var(--color-cream-paper); border: 2px solid var(--color-charcoal); border-radius: 12px; padding: 24px; text-align: center; }
+    .total-price { font-size: 48px; font-weight: 800; color: var(--color-marker-orange); }
+    footer { background: var(--color-marker-orange); color: white; border-radius: 56px 56px 0 0; padding: 48px 0 24px; text-align: center; margin-top: 64px; }
+    footer a { color: white; }
+    @media (max-width: 768px) { .hero, .calc-grid { grid-template-columns: 1fr; } .hero-title { font-size: 40px; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="/" class="logo">✏️ تصميمي <span class="logo-badge">تنسيق المذكرات</span></a>
+      <div>
+        <a href="#calculator" class="btn-pill">احسب التكلفة</a>
+        <a href="/admin" class="btn-pill" style="margin-right: 8px;">لوحة الأدمن</a>
+      </div>
+    </nav>
+    <section class="hero">
+      <div>
+        <div class="handwritten-tag">✦ مذكراتك بشكل منظم وجذاب</div>
+        <h1 class="hero-title">نحول كتاباتك إلى <span>مذكرات احترافية</span> أبهر طلابك!</h1>
+        <p style="font-size: 20px; margin-bottom: 32px;">خدمة تنسيق وتصميم المذكرات التعليمية بألوان مريحة للعين، وجداول منظمة.</p>
+        <a href="#calculator" class="btn-pill" style="font-size: 18px; padding: 14px 32px;">ابدأ طلبك الآن 🚀</a>
+      </div>
+      <div class="card">
+        <div class="sticker sticker-pink">تنسيق فاخر ✨</div>
+        <h3 style="font-size: 24px; margin-bottom: 16px;">لماذا تُفضل "تصميمي"؟</h3>
+        <ul style="list-style: none; gap: 12px; display: flex; flex-direction: column;">
+          <li>✅ خطوط واضحة وتوزيع متناسق.</li>
+          <li>✅ تصميم غلاف جذاب يعبر عن مادتك.</li>
+          <li>✅ تسليم الملف بصيغ جاهزة للطباعة PDF.</li>
+        </ul>
+      </div>
+    </section>
+    <section id="calculator" class="calculator-section">
+      <h2 style="font-size: 32px; text-align: center; margin-bottom: 32px;">حاسبة التكلفة التقديرية</h2>
+      <div class="calc-grid">
+        <div>
+          <div class="form-group">
+            <label>عدد الصفحات المقدر:</label>
+            <input type="number" id="pagesCount" class="form-control" value="20" min="1" oninput="calculateCost()">
+          </div>
+          <div class="form-group">
+            <label>نوع الخدمة:</label>
+            <select id="serviceType" class="form-control" onchange="calculateCost()">
+              <option value="15">تنسيق داخلي فقط (15 ج.م / صفحة)</option>
+              <option value="25">تنسيق + تصميم غلاف (25 ج.م / صفحة)</option>
+            </select>
+          </div>
+        </div>
+        <div class="total-box">
+          <h3>الإجمالي التقديري</h3>
+          <div class="total-price"><span id="totalPrice">300</span> ج.م</div>
+          <button class="btn-pill" style="margin-top: 20px; width: 100%;" onclick="sendOrder()">تأكيد الطلب عبر واتساب 💬</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer>
+    <div class="container">
+      <h3>منصة تصميمي — جميع الحقوق محفوظة © 2026</h3>
+      <p style="margin-top: 8px;"><a href="/admin">انتقل إلى لوحة التحكم</a></p>
+    </div>
+  </footer>
+  <script>
+    function calculateCost() {
+      const pages = parseInt(document.getElementById('pagesCount').value) || 0;
+      const rate = parseInt(document.getElementById('serviceType').value);
+      document.getElementById('totalPrice').innerText = pages * rate;
+    }
+    function sendOrder() {
+      const pages = document.getElementById('pagesCount').value;
+      const total = document.getElementById('totalPrice').innerText;
+      const msg = encodeURIComponent(`مرحباً! أود طلب خدمة تنسيق مذكرة عدد صفحاتها ${pages} صفحة، والتكلفة التقديرية ${total} ج.م.`);
+      window.open(`https://wa.me/?text=${msg}`, '_blank');
+    }
+  </script>
+</body>
+</html>
