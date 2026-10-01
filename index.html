@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XBOOK | المذكرات التعليمية</title>
+  <title>تصميمي | منصة تنسيق المذكرات التعليمية</title>
   
   <!-- FontAwesome للأيقونات -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,7 +11,7 @@
   <!-- مكتبة AOS للأنيميشن عند التمرير -->
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   
-  <!-- ملف الـ CSS الخاص بنا -->
+  <!-- ملف التنسيقات الخاص بالموقع -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,11 +19,13 @@
   <!-- Navbar (بدون أي وجود لزر الأدمن) -->
   <nav class="navbar">
     <div class="logo" data-aos="fade-down">
-      <span>XBOOK 🚀</span>
+      <span class="logo-icon">✏️</span>
+      <span class="logo-text">تصميمي</span>
     </div>
     <ul class="nav-links" data-aos="fade-down" data-aos-delay="100">
       <li><a href="#hero">الرئيسية</a></li>
-      <li><a href="#books">المذكرات</a></li>
+      <li><a href="#services">خدماتنا</a></li>
+      <li><a href="#packages">نماذج المذكرات</a></li>
       <li><a href="#contact">تواصل معنا</a></li>
     </ul>
   </nav>
@@ -31,49 +33,50 @@
   <!-- Hero Section -->
   <header id="hero" class="hero-section">
     <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
-      <h1 class="bounce-text">جاهز لتفوقك الدراسي؟ 🎓✨</h1>
-      <p>احصل على أقوى المذكرات التعليمية المنسقة بأعلى جودة!</p>
-      <a href="#books" class="btn btn-fun">تصفح المذكرات الآن 🔥</a>
+      <div class="handwritten-tag" data-aos="fade-right" data-aos-delay="300">أعلى جودة تنسيق ✍️</div>
+      <h1 class="bounce-text">مذكراتك التعليمية.. بشكل احترافي ومبتكر ✨</h1>
+      <p>نُصمم وننسق المذكرات والكتب الدراسية بأعلى معايير الجودة البصرية لتناسب الطلاب وتزيد من استيعابهم!</p>
+      <a href="#packages" class="btn btn-pill">تصفح نماذج الأعمال 🔥</a>
     </div>
   </header>
 
-  <!-- قسم المذكرات / الكروت -->
-  <section id="books" class="container">
-    <h2 class="section-title" data-aos="fade-up">📚 أحدث المذكرات المتاحة</h2>
+  <!-- قسم الخدمات والكرت -->
+  <section id="packages" class="container">
+    <h2 class="section-title" data-aos="fade-up">📚 باقات خدمات التنسيق والتصميم</h2>
     
     <div class="cards-grid">
       <!-- كارت 1 -->
       <div class="card" data-aos="flip-left" data-aos-delay="100">
-        <div class="card-badge">الملف السري 🕵️‍♂️</div>
-        <h3>مذكرة الفيزياء - الثانوية العامة</h3>
-        <p>تنسيق كامل، أسئلة مجابة، وإفكتات توضيحية ممتازة.</p>
-        <a href="https://wa.me/201000000000?text=أريد%20طلب%20مذكرة%20الفيزياء" target="_blank" class="btn btn-order whatsapp-btn">طلب عبر الواتساب 💬</a>
+        <div class="card-badge">الأكثر طلباً ⭐</div>
+        <h3>تنسيق مذكرات الثانوية العامة</h3>
+        <p>تصميم الغلاف، تنسيق جداول ورسومات توضيحية، وإضافة علامات مائية مع اختيار ألوان مريحة للعين.</p>
+        <a href="https://wa.me/201000000000?text=أريد%20استفسار%20عن%20تنسيق%20مذكرة%20ثانوية%20عامة" target="_blank" class="btn btn-order whatsapp-btn">طلب تنسيق عبر الواتساب 💬</a>
       </div>
 
       <!-- كارت 2 -->
       <div class="card" data-aos="flip-left" data-aos-delay="200">
-        <div class="card-badge">الأكثر طلباً ⭐</div>
-        <h3>مذكرة الأحياء - الشاملة</h3>
-        <p>شرح كامل مع رسومات توضيحية عالية الدقة.</p>
-        <a href="https://wa.me/201000000000?text=أريد%20طلب%20مذكرة%20الأحياء" target="_blank" class="btn btn-order whatsapp-btn">طلب عبر الواتساب 💬</a>
+        <div class="card-badge">شامل والكامل 🎯</div>
+        <h3>تنسيق الملخصات والمراجعات النهائية</h3>
+        <p>تنسيق سريع للمراجعات والخرائط الذهنية مع تجهيز الملفات جاهزة للطباعة المباشرة PDF.</p>
+        <a href="https://wa.me/201000000000?text=أريد%20طلب%20تنسيق%20مراجعة%20نهائية" target="_blank" class="btn btn-order whatsapp-btn">طلب تنسيق عبر الواتساب 💬</a>
       </div>
 
       <!-- كارت 3 -->
       <div class="card" data-aos="flip-left" data-aos-delay="300">
-        <div class="card-badge">جديد 🆕</div>
-        <h3>مذكرة الكيمياء - المراجعة النهائية</h3>
-        <p>تلخيص شامل لجميع القوانين والمعادلات بشكل مبسط.</p>
-        <a href="https://wa.me/201000000000?text=أريد%20طلب%20مذكرة%20الكيمياء" target="_blank" class="btn btn-order whatsapp-btn">طلب عبر الواتساب 💬</a>
+        <div class="card-badge">تصميم خاص 🎨</div>
+        <h3>تصميم أغلفة وكتب دراسية</h3>
+        <p>تصميم أغلفة كرتونية أو احترافية مودرن مع توفير موك آب (Mockup) تسويقي للمذكرة.</p>
+        <a href="https://wa.me/201000000000?text=أريد%20تصميم%20غلاف%20مذكرة" target="_blank" class="btn btn-order whatsapp-btn">طلب تصميم غلاف 💬</a>
       </div>
     </div>
   </section>
 
   <!-- Social Section & Footer -->
   <footer id="contact" class="footer">
-    <h3 data-aos="fade-up">تابعنا على وسائل التواصل الاجتماعي 🌟</h3>
+    <h3 data-aos="fade-up">تواصل معنا وابدأ تنسيق مذكراتك الآن 🌟</h3>
     <div class="social-links" data-aos="zoom-in" data-aos-delay="100">
       
-      <!-- زرار الإنستجرام (شغال مباشر) -->
+      <!-- زرار الإنستجرام (معدل وشغال 100%) -->
       <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="social-btn instagram-btn" id="instaBtn">
         <i class="fab fa-instagram"></i>
         <span>Instagram</span>
@@ -85,7 +88,7 @@
         <span>WhatsApp</span>
       </a>
     </div>
-    <p class="copyright">جميع الحقوق محفوظة © XBOOK 2026</p>
+    <p class="copyright">جميع الحقوق محفوظة © منصة تصميمي 2026</p>
   </footer>
 
   <!-- Scripts -->
