@@ -3,793 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تصميمي | تنسيق وإعداد المذكرات والملخصات الدراسية</title>
-    <!-- خطوط عربية متناسقة مع الهوية -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome للأيقونات -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>تصميمي — تنسيق المذكرات باحترافية</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#fdfbf9',
+                        charcoal: '#171717',
+                        cocoa: '#2b1a07',
+                        dew: '#f7efe9',
+                        orangeMarker: '#ff6f1e',
+                        burntSienna: '#ce500a',
+                        skySticker: '#3b82f6',
+                        bubblegum: '#ff66cf',
+                        sprout: '#22c55e',
+                        shadowMist: '#bebcbb',
+                    },
+                    borderRadius: {
+                        'tags': '20px',
+                        'cards': '12px',
+                        'buttons': '20px',
+                        'footer-radius': '56px',
+                    },
+                    boxShadow: {
+                        'custom-lg': 'rgba(0, 0, 0, 0.06) 0px 2px 20px 0px',
+                        'custom-subtle': 'rgba(0, 0, 0, 0.25) 0px 1px 2px 0px',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            /* الألوان الرئيسية حسب نظام الهوية */
-            --color-cream-paper: #fdfbf9;
-            --color-charcoal: #171717;
-            --color-cocoa-ink: #2b1a07;
-            --color-dew-drop: #f7efe9;
-            --color-marker-orange: #ff6f1e;
-            --color-burnt-sienna: #ce500a;
-            --color-sky-sticker: #3b82f6;
-            --color-bubblegum-sticker: #ff66cf;
-            --color-sprout-sticker: #22c55e;
-            --color-shadow-mist: rgba(0, 0, 0, 0.06);
-
-            --font-main: 'Cairo', sans-serif;
-            --font-display: 'Reem Kufi', 'Cairo', sans-serif;
-
-            --radius-pill: 20px;
-            --radius-card: 16px;
-            --radius-footer: 56px;
-            --shadow-subtle: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
-            --shadow-paper: rgba(0, 0, 0, 0.06) 0px 4px 20px 0px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
         body {
-            background-color: var(--color-cream-paper);
-            color: var(--color-cocoa-ink);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
+            font-family: 'Cairo', sans-serif;
+            background-color: #fdfbf9;
+            color: #171717;
         }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
+        .handwritten {
+            font-family: cursive, sans-serif;
+            color: #ff6f1e;
         }
-
-        /* Navbar */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 0;
-            position: relative;
-            z-index: 10;
-        }
-
-        .brand-logo {
-            font-family: var(--font-display);
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--color-cocoa-ink);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-logo i {
-            color: var(--color-marker-orange);
-            transform: rotate(-10deg);
-        }
-
-        .btn-pill {
-            background: var(--color-cream-paper);
-            border: 2px solid var(--color-charcoal);
-            padding: 10px 28px;
-            border-radius: var(--radius-pill);
-            font-weight: 700;
-            font-size: 16px;
-            color: var(--color-charcoal);
-            cursor: pointer;
-            box-shadow: 0px 2px 0px var(--color-charcoal);
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-pill:hover {
-            transform: translateY(-2px);
-            box-shadow: 0px 4px 0px var(--color-charcoal);
-        }
-
-        .btn-pill:active {
-            transform: translateY(0);
-            box-shadow: 0px 1px 0px var(--color-charcoal);
-        }
-
-        /* Hero Section */
-        .hero {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 48px;
-            align-items: center;
-            padding: 40px 0 80px 0;
-            position: relative;
-        }
-
-        @media (max-width: 900px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-
-        .hero-title {
-            font-family: var(--font-display);
-            font-size: 64px;
-            font-weight: 700;
-            line-height: 1.15;
-            color: var(--color-cocoa-ink);
-            margin-bottom: 16px;
-        }
-
-        @media (max-width: 600px) {
-            .hero-title {
-                font-size: 42px;
-            }
-        }
-
-        .marker-annotation {
-            color: var(--color-marker-orange);
-            font-size: 22px;
-            font-weight: 700;
-            display: inline-block;
-            transform: rotate(-2deg);
-            margin-bottom: 12px;
-        }
-
-        .highlight-word {
-            color: var(--color-marker-orange);
-            position: relative;
-            display: inline-block;
-        }
-
-        .highlight-word::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--color-marker-orange);
-            border-radius: 2px;
-            transform: rotate(-1deg);
-        }
-
-        .hero-subtitle {
-            font-size: 20px;
-            color: var(--color-cocoa-ink);
-            margin-bottom: 32px;
-            max-width: 540px;
-        }
-
-        /* Sticker Accents */
-        .sticker {
-            position: absolute;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            border: 2px solid var(--color-charcoal);
-            box-shadow: 2px 2px 0px var(--color-charcoal);
-            z-index: 2;
-            user-select: none;
-        }
-
-        .sticker-sky {
-            background: var(--color-sky-sticker);
-            color: white;
-            transform: rotate(8deg);
-        }
-
-        .sticker-pink {
-            background: var(--color-bubblegum-sticker);
-            color: white;
-            transform: rotate(-12deg);
-        }
-
-        .sticker-green {
-            background: var(--color-sprout-sticker);
-            color: white;
-            transform: rotate(5deg);
-        }
-
-        /* Visual Notebook Card */
-        .notebook-preview-card {
-            background: var(--color-dew-drop);
-            border: 2px solid var(--color-charcoal);
-            border-radius: var(--radius-card);
-            padding: 24px;
-            position: relative;
-            box-shadow: 6px 6px 0px var(--color-charcoal);
-            transform: rotate(3deg);
-            transition: transform 0.3s ease;
-        }
-
-        .notebook-preview-card:hover {
-            transform: rotate(0deg);
-        }
-
-        .notebook-inner {
-            background: #ffffff;
-            border: 1.5px solid var(--color-charcoal);
-            border-radius: 8px;
-            padding: 20px;
-            min-height: 320px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        /* Label Sticker */
-        .name-label-sticker {
-            background: #ffffff;
-            border: 2px solid var(--color-charcoal);
-            border-radius: 8px;
-            padding: 12px 16px;
-            width: 80%;
-            margin: 0 auto;
-            box-shadow: 3px 3px 0px var(--color-shadow-mist);
-        }
-
-        .name-label-row {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed #ccc;
-            padding: 4px 0;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 64px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 40px;
-            color: var(--color-cocoa-ink);
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 28px;
-        }
-
-        .feature-card {
-            background: var(--color-dew-drop);
-            border: 2px solid var(--color-charcoal);
-            border-radius: var(--radius-card);
-            padding: 32px 24px;
-            position: relative;
-            box-shadow: 4px 4px 0px var(--color-charcoal);
-        }
-
-        .feature-icon {
-            font-size: 36px;
-            color: var(--color-marker-orange);
-            margin-bottom: 16px;
-        }
-
-        .feature-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        /* Services / Order Form */
-        .order-section {
-            background: var(--color-dew-drop);
-            border: 2px solid var(--color-charcoal);
-            border-radius: var(--radius-card);
-            padding: 40px;
-            margin: 64px 0;
-            box-shadow: 6px 6px 0px var(--color-charcoal);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--color-cream-paper);
-            border: 2px solid var(--color-charcoal);
-            border-radius: 8px;
-            font-family: var(--font-main);
-            font-size: 16px;
-            color: var(--color-cocoa-ink);
-            outline: none;
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            border-color: var(--color-marker-orange);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--color-marker-orange);
-            border-top-left-radius: var(--radius-footer);
-            border-top-right-radius: var(--radius-footer);
-            padding: 48px 24px 32px 24px;
-            color: var(--color-cocoa-ink);
-            margin-top: 80px;
-            border-top: 2px solid var(--color-charcoal);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        /* Modal Admin Panel */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.6);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        .admin-box {
-            background: var(--color-cream-paper);
-            border: 3px solid var(--color-charcoal);
-            border-radius: var(--radius-card);
-            width: 100%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 32px;
-            box-shadow: 8px 8px 0px var(--color-charcoal);
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--color-charcoal);
-        }
-
-        /* Admin Tabs & Tables */
-        .admin-nav {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-            border-bottom: 2px solid var(--color-charcoal);
-            padding-bottom: 12px;
-            flex-wrap: wrap;
-        }
-
-        .admin-tab {
-            padding: 8px 16px;
-            border-radius: var(--radius-pill);
-            border: 2px solid var(--color-charcoal);
-            background: var(--color-dew-drop);
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .admin-tab.active {
-            background: var(--color-marker-orange);
-            color: white;
-        }
-
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 16px;
-        }
-
-        .admin-table th, .admin-table td {
-            border: 1.5px solid var(--color-charcoal);
-            padding: 10px 14px;
-            text-align: right;
-        }
-
-        .admin-table th {
-            background: var(--color-dew-drop);
-        }
-
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 700;
-            display: inline-block;
-        }
-        .status-new { background: #fef08a; color: #854d0e; }
-        .status-progress { background: #bfdbfe; color: #1e40af; }
-        .status-done { background: #bbf7d0; color: #166534; }
-
     </style>
 </head>
-<body>
+<body class="bg-cream text-charcoal antialiased selection:bg-orangeMarker selection:text-white">
 
-    <!-- Dynamic Sticker Decoration -->
-    <div class="sticker sticker-sky" style="top: 120px; left: 5%;">⚡ تنسيق سريع!</div>
-    <div class="sticker sticker-pink" style="top: 220px; right: 4%;">🎨 غلاف مخصص</div>
-    <div class="sticker sticker-green" style="bottom: 150px; left: 8%;">📖 جاهز للطباعة</div>
+    <!-- Header -->
+    <header class="max-w-[1200px] mx-auto px-6 py-6 flex items-center justify-between">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('home')">
+            <div class="w-10 h-10 border-2 border-charcoal rounded-full flex items-center justify-center bg-dew shadow-custom-subtle font-bold text-lg">✏️</div>
+            <span class="font-extrabold text-xl text-cocoa tracking-tight">تصميمي</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button onclick="openOrderModal()" class="border-1.5 border-charcoal bg-cream px-7 py-2.5 rounded-buttons font-medium text-charcoal shadow-custom-subtle hover:bg-dew transition">
+                اطلب تنسيق مذكرتك ✨
+            </button>
+            <button onclick="switchView('admin')" class="border-1.5 border-charcoal bg-cocoa text-cream px-4 py-2.5 rounded-buttons font-medium text-sm shadow-custom-subtle hover:bg-charcoal transition">
+                🔒 لوحة الأدمن
+            </button>
+        </div>
+    </header>
 
-    <div class="container">
-        <!-- Navigation -->
-        <nav>
-            <a href="#" class="brand-logo">
-                <i class="fa-solid fa-pen-ruler"></i> تصميمي
-            </a>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-pill" onclick="openAdminModal()">
-                    <i class="fa-solid fa-user-gear"></i> لوحة الأدمن
-                </button>
-                <a href="#order" class="btn-pill" style="background: var(--color-marker-orange); color: white;">
-                    اطلب تنسيقك الآن
-                </a>
-            </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <div>
-                <span class="marker-annotation">يا هلا بالمعلمين والطلاب 👋</span>
-                <h1 class="hero-title">مذكراتك المدرسية بأسلوب <span class="highlight-word">جذاب</span> ومرتب.</h1>
-                <p class="hero-subtitle">
-                    نحول أوراقك وملخصاتك العادية إلى مذكرات احترافية، منسقة بشكل مريح للعين ومجهزة للطباعة أو التوزيع الرقمي بلمسات فنية أنيقة.
-                </p>
-                <div style="display: flex; gap: 16px; align-items: center;">
-                    <a href="#order" class="btn-pill">
-                        ابدأ طلبك الآن <i class="fa-solid fa-arrow-left"></i>
-                    </a>
-                    <span style="font-size: 14px; font-weight: 600; color: var(--color-burnt-sienna);">
-                        * التسليم خلال 24 إلى 48 ساعة فقط!
-                    </span>
-                </div>
-            </div>
-
-            <div class="notebook-preview-card">
-                <div class="notebook-inner">
-                    <div style="text-align: center; font-family: var(--font-display); font-size: 24px; font-weight: 700;">
-                        مذكرة الفيزياء - الصف الثالث الثانوي
-                    </div>
-                    
-                    <div class="name-label-sticker">
-                        <div class="name-label-row">
-                            <span>اسم المادة:</span>
-                            <span id="preview-subject" style="color: var(--color-burnt-sienna);">الفيزياء الحديثة</span>
-                        </div>
-                        <div class="name-label-row">
-                            <span>إعداد الأستاذ:</span>
-                            <span id="preview-teacher">أ. أحمد مصطفى</span>
-                        </div>
-                        <div class="name-label-row">
-                            <span>العام الدراسي:</span>
-                            <span>2026/2027</span>
-                        </div>
-                    </div>
-
-                    <div style="font-size: 12px; text-align: center; opacity: 0.7;">
-                        ✨ تصميم خاص بـ "تصميمي" - جودة فائقة للطباعة
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section class="features">
-            <div class="section-header">
-                <h2 class="section-title">ليه تختار موقع "تصميمي"؟</h2>
-            </div>
-            <div class="grid-3">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <h3 class="feature-title">تنسيق مريح للعين</h3>
-                    <p>نعتمد خطوطاً واضحة، تقسيمات ذكية للفقرات، وإبراز المفاهيم المهمة بألوان مريحة تساعد على التركيز.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
-                    <h3 class="feature-title">ملفات جاهزة للطباعة</h3>
-                    <p>نسلمك ملفات PDF عالية الدقة بصيغ جاهزة للمطابع فوراً، مع أغطية (غلاف) مميزة وحصرية.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                    <h3 class="feature-title">سرعة ودقة</h3>
-                    <p>نلبي طلباتك في وقت قياسي مع مراجعة كاملة للأخطاء الإملائية والتركيبية والتنسيقية.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Order Form Section -->
-        <section id="order" class="order-section">
-            <div style="text-align: center; margin-bottom: 32px;">
-                <h2 class="section-title">طلب خدمة تنسيق مذكرة</h2>
-                <p>امعد ملفك وملاحظاتك واترك الباقي علينا!</p>
-            </div>
-
-            <form id="client-order-form" onsubmit="handleOrderSubmit(event)">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="form-group">
-                        <label class="form-label">الاسم الكامل</label>
-                        <input type="text" class="form-input" id="client-name" placeholder="أدخل اسمك الكريم" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">رقم الهاتف / الواتساب</label>
-                        <input type="tel" class="form-input" id="client-phone" placeholder="05xxxxxxxx" required>
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div class="form-group">
-                        <label class="form-label">عنوان المذكرة / المادة</label>
-                        <input type="text" class="form-input" id="doc-title" placeholder="مثال: مذكرة الرياضيات الشاملة" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">عدد الصفحات التقريبي</label>
-                        <select class="form-select" id="doc-pages">
-                            <option value="1-20">من 1 إلى 20 صفحة</option>
-                            <option value="21-50">من 21 إلى 50 صفحة</option>
-                            <option value="51-100">من 51 إلى 100 صفحة</option>
-                            <option value="+100">أكثر من 100 صفحة</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">ملاحظاتك وتعليمات التنسيق الخاصة</label>
-                    <textarea class="form-textarea" id="doc-notes" rows="4" placeholder="اكتب ألوانك المفضل، هل تريد إضافة صور؟ أي تفاصيل إضافية..."></textarea>
-                </div>
-
-                <button type="submit" class="btn-pill" style="width: 100%; justify-content: center; background: var(--color-charcoal); color: white; font-size: 18px; padding: 14px;">
-                    إرسال الطلب للتحضير 🚀
-                </button>
-            </form>
-        </section>
-    </div>
+    <!-- Main Container -->
+    <main id="app-container">
+        <!-- سيتم تحميل المحتوى ديناميكياً هنا (الرئيسية أو لوحة الأدمن) -->
+    </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <div>
-                <h3 style="font-family: var(--font-display); font-size: 28px;">تصميمي — Tasmeemy</h3>
-                <p>خدمتك الأولى لتنسيق المذكرات والملخصات الدراسية بأعلى جودة.</p>
-            </div>
-            <div style="font-weight: 700;">
-                جميع الحقوق محفوظة © 2026 موقع تصميمي
-            </div>
+    <footer class="mt-20 bg-orangeMarker text-cream pt-12 pb-12 px-6 rounded-t-[56px] text-center">
+        <div class="max-w-[1200px] mx-auto flex flex-col items-center justify-center gap-4">
+            <div class="text-2xl font-bold">موقع تصميمي لتنسيق المذكرات المدرسية والجامعية 📚</div>
+            <p class="text-dew text-sm">نصنع جمال الأوراق ونرتب أفكارك بعناية فائقة لتبدو مذكرتك كتحفة فنية.</p>
+            <div class="text-xs opacity-80 mt-4">جميع الحقوق محفوظة © 2026 تصميمي</div>
         </div>
     </footer>
 
-    <!-- Admin Panel Modal -->
-    <div class="modal-overlay" id="adminModal">
-        <div class="admin-box">
-            <button class="close-modal" onclick="closeAdminModal()">&times;</button>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="font-family: var(--font-display); font-size: 32px;">🛠️ لوحة تحكم الأدمن (تصميمي)</h2>
-            </div>
-
-            <!-- Admin Nav Tabs -->
-            <div class="admin-nav">
-                <button class="admin-tab active" onclick="switchAdminTab('tab-orders')">إدارة الطلبات (<span id="orders-count">0</span>)</button>
-                <button class="admin-tab" onclick="switchAdminTab('tab-services')">الخدمات والأسعار</button>
-                <button class="admin-tab" onclick="switchAdminTab('tab-stats')">الإحصائيات</button>
-                <button class="admin-tab" onclick="switchAdminTab('tab-settings')">إعدادات الموقع</button>
-            </div>
-
-            <!-- Tab 1: Orders -->
-            <div id="tab-orders" class="tab-content">
-                <h3>جدول طلبات التنسيق الواردة</h3>
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>العميل</th>
-                            <th>الهاتف</th>
-                            <th>المذكرة</th>
-                            <th>الصفحات</th>
-                            <th>الحالة</th>
-                            <th>إجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orders-table-body">
-                        <!-- dynamic content -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Tab 2: Services & Pricing -->
-            <div id="tab-services" class="tab-content" style="display: none;">
-                <h3>تعديل أسعار خدمات التنسيق</h3>
-                <div style="margin-top: 16px;" class="grid-3">
-                    <div style="border: 2px solid var(--color-charcoal); padding: 16px; border-radius: 8px;">
-                        <h4>تنسيق عادي (1-20 صفحة)</h4>
-                        <input type="text" class="form-input" value="50 ريال/جنيه" style="margin-top: 8px;">
-                    </div>
-                    <div style="border: 2px solid var(--color-charcoal); padding: 16px; border-radius: 8px;">
-                        <h4>تنسيق احترافي + غلاف</h4>
-                        <input type="text" class="form-input" value="120 ريال/جنيه" style="margin-top: 8px;">
-                    </div>
-                    <div style="border: 2px solid var(--color-charcoal); padding: 16px; border-radius: 8px;">
-                        <h4>تسليم مستعجل (خلال 12 ساعة)</h4>
-                        <input type="text" class="form-input" value="+30%" style="margin-top: 8px;">
-                    </div>
+    <!-- Order Modal -->
+    <div id="orderModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-cream border-2 border-charcoal rounded-cards max-w-lg w-full p-8 shadow-custom-lg relative">
+            <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-charcoal font-bold text-xl">✕</button>
+            <h3 class="text-2xl font-bold text-cocoa mb-2">طلب تنسيق مذكرّة جديدة 📋</h3>
+            <p class="text-sm text-charcoal opacity-85 mb-6">املأ البيانات التالية وسنتواصل معك فوراً لتجهيز مذكرتك.</p>
+            <form id="orderForm" onsubmit="submitOrder(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">اسمك الكريم:</label>
+                    <input type="text" id="clientName" required class="w-full border-1.5 border-charcoal rounded-inputs p-2.5 bg-dew focus:outline-none">
                 </div>
-                <button class="btn-pill" style="margin-top: 16px; background: var(--color-sprout-sticker); color: white;" onclick="alert('تم حفظ الأسعار الجديدة بنجاح!')">حفظ التغييرات</button>
-            </div>
-
-            <!-- Tab 3: Stats -->
-            <div id="tab-stats" class="tab-content" style="display: none;">
-                <h3>إحصائيات موقع تصميمي</h3>
-                <div class="grid-3" style="margin-top: 16px;">
-                    <div class="feature-card">
-                        <h4>إجمالي الطلبات</h4>
-                        <p style="font-size: 32px; font-weight: 800; color: var(--color-marker-orange);" id="stat-total-orders">0</p>
-                    </div>
-                    <div class="feature-card">
-                        <h4>الطلبات المكتملة</h4>
-                        <p style="font-size: 32px; font-weight: 800; color: var(--color-sprout-sticker);">12</p>
-                    </div>
-                    <div class="feature-card">
-                        <h4>الزوار هذا الشهر</h4>
-                        <p style="font-size: 32px; font-weight: 800; color: var(--color-sky-sticker);">1,450</p>
-                    </div>
+                <div>
+                    <label class="block text-sm font-semibold mb-1">رقم الهاتف / الواتساب:</label>
+                    <input type="text" id="clientPhone" required class="w-full border-1.5 border-charcoal rounded-inputs p-2.5 bg-dew focus:outline-none">
                 </div>
-            </div>
-
-            <!-- Tab 4: Settings -->
-            <div id="tab-settings" class="tab-content" style="display: none;">
-                <h3>إعدادات الموقع العامة</h3>
-                <div class="form-group" style="margin-top: 16px;">
-                    <label class="form-label">اسم الموقع</label>
-                    <input type="text" class="form-input" value="تصميمي - لخدمات تنسيق المذكرات">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">نوع المادة / الصف الدراسي:</label>
+                    <input type="text" id="clientSubject" required class="w-full border-1.5 border-charcoal rounded-inputs p-2.5 bg-dew focus:outline-none" placeholder="مثال: مذكرة احياء الصف الثالث الثانوي">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">رقم الواتساب الرئيسي لتلقي الإشعارات</label>
-                    <input type="text" class="form-input" value="0500000000">
+                <div>
+                    <label class="block text-sm font-semibold mb-1">تفاصيل إضافية أو ملاحظات:</label>
+                    <textarea id="clientNotes" rows="3" class="w-full border-1.5 border-charcoal rounded-inputs p-2.5 bg-dew focus:outline-none" placeholder="اكتب أي ألوان أو تصميم تفضله..."></textarea>
                 </div>
-                <button class="btn-pill" style="background: var(--color-marker-orange); color: white;" onclick="alert('تم حفظ إعدادات الموقع!')">تحديث الإعدادات</button>
-            </div>
-
+                <button type="submit" class="w-full border-1.5 border-charcoal bg-orangeMarker text-white font-bold py-3 rounded-buttons shadow-custom-subtle hover:bg-burntSienna transition">
+                    إرسال الطلب الآن 🚀
+                </button>
+            </form>
         </div>
     </div>
 
-    <!-- JavaScript code for interactivity and storage -->
+    <!-- JavaScript Logic & State Management -->
     <script>
-        // Sample stored orders
-        let orders = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [
-            { id: 1, name: 'أحمد محمود', phone: '0551234567', title: 'مذكرة الكيمياء العضوية', pages: '21-50', status: 'جديد' },
-            { id: 2, name: 'سارة خالد', phone: '0509876543', title: 'ملخص التاريخ الحديث', pages: '1-20', status: 'مكتمل' }
-        ];
+        // Default Data State
+        let siteData = {
+            heroTitle: "ننسق مذكرتك باحترافية وتصميم مبهر",
+            heroSubtitle: "وداعاً للملخصات التقليدية! نحول أوراقك إلى قطع فنية مريحة للعين ومنسقة بعناية فائقة.",
+            features: [
+                { title: "تصميم غلاف مخصص", desc: "نصمم لك أغطية جذابة بأسماء ملصقات مدرسية أنيقة ومبهجة." },
+                { title: "تنسيق احترافي للجداول", desc: "جداول منظمة ورسومات توضيحية تزيد من استيعابك للمادة العلمية." },
+                { title: "خطوط مريحة ومدروسة", desc: "استخدام مسافات وعناوين واضحة تضمن لك قراءة ممتعة بدون إجهاد." }
+            ],
+            orders: [
+                { id: 1, name: "أحمد محمد", phone: "01012345678", subject: "مذكرة رياضيات الثانوية العامة", notes: "أريد غلاف باللون الأزرق", status: "قيد العمل", date: "2026-06-01" },
+                { id: 2, name: "سارة خالد", phone: "01198765432", subject: "مذكرة لغة إنجليزية الجامعة", notes: "إضافة ملصقات لطيفة", status: "مكتمل", date: "2026-06-02" }
+            ]
+        };
 
-        function renderOrders() {
-            const tbody = document.getElementById('orders-table-body');
-            tbody.innerHTML = '';
-            orders.forEach((order, index) => {
-                let badgeClass = 'status-new';
-                if (order.status === 'قيد التنفيذ') badgeClass = 'status-progress';
-                if (order.status === 'مكتمل') badgeClass = 'status-done';
-
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td>${order.name}</td>
-                        <td>${order.phone}</td>
-                        <td>${order.title}</td>
-                        <td>${order.pages}</td>
-                        <td><span class="status-badge ${badgeClass}">${order.status}</span></td>
-                        <td>
-                            <button onclick="changeStatus(${order.id}, 'قيد التنفيذ')" style="cursor:pointer; padding: 2px 6px;">⏳</button>
-                            <button onclick="changeStatus(${order.id}, 'مكتمل')" style="cursor:pointer; padding: 2px 6px;">✅</button>
-                            <button onclick="deleteOrder(${order.id})" style="cursor:pointer; padding: 2px 6px; color:red;">🗑️</button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            document.getElementById('orders-count').innerText = orders.length;
-            document.getElementById('stat-total-orders').innerText = orders.length;
+        // Load from LocalStorage if exists
+        if (localStorage.getItem('tasmeemiData')) {
+            siteData = JSON.parse(localStorage.getItem('tasmeemiData'));
         }
 
-        function handleOrderSubmit(e) {
+        function saveData() {
+            localStorage.setItem('tasmeemiData', JSON.stringify(siteData));
+        }
+
+        // Router / View Switcher
+        function switchView(view) {
+            const container = document.getElementById('app-container');
+            if (view === 'home') {
+                container.innerHTML = renderHome();
+            } else if (view === 'admin') {
+                container.innerHTML = renderAdmin();
+            }
+            window.scrollTo(0,0);
+        }
+
+        // Render Home Page
+        function renderHome() {
+            return `
+                <div class="max-w-[1200px] mx-auto px-6 mt-8">
+                    <!-- Hero Section -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-10">
+                        <div class="space-y-6">
+                            <span class="handwritten text-xl font-bold bg-dew px-3 py-1 rounded-tags border border-charcoal/20 inline-block">✨ طريقتك الخاصة في المذاكرة</span>
+                            <h1 class="text-5xl lg:text-6xl font-extrabold text-cocoa leading-tight tracking-tight">
+                                ${siteData.heroTitle}
+                            </h1>
+                            <p class="text-lg text-charcoal opacity-90 leading-relaxed">
+                                ${siteData.heroSubtitle}
+                            </p>
+                            <div class="pt-4 flex items-center gap-4">
+                                <button onclick="openOrderModal()" class="border-1.5 border-charcoal bg-cream px-8 py-3.5 rounded-buttons font-bold text-charcoal shadow-custom-subtle hover:bg-dew transition text-lg">
+                                    اطلب تنسيق مذكرتك الآن 🎒
+                                </button>
+                            </div>
+                            <p class="text-sm text-cocoa opacity-75">⚡ جاهزون لتسليم طلبك خلال أقل من 48 ساعة.</p>
+                        </div>
+                        <div class="relative flex justify-center">
+                            <!-- Notebook Hero Card Mockup -->
+                            <div class="bg-dew border-2 border-charcoal rounded-cards p-6 shadow-custom-lg max-w-md w-full relative transform rotate-2 hover:rotate-0 transition duration-300">
+                                <div class="absolute -top-4 -right-4 bg-skySticker text-white text-xs px-3 py-1 rounded-tags border border-charcoal font-bold rotate-12">مميز جداً ⭐</div>
+                                <div class="bg-cream border border-charcoal rounded-lg p-4 mb-4">
+                                    <div class="text-xs text-charcoal opacity-60 mb-1">اسم الطالب / Class</div>
+                                    <div class="font-bold text-cocoa text-lg">مذكرة التفوق في الفيزياء</div>
+                                    <div class="text-xs text-orangeMarker mt-2 font-semibold">تنسيق مخصص بالكامل 📚</div>
+                                </div>
+                                <div class="space-y-2 text-sm">
+                                    <div class="h-3 bg-shadowMist/30 rounded w-full"></div>
+                                    <div class="h-3 bg-shadowMist/30 rounded w-5/6"></div>
+                                    <div class="h-3 bg-shadowMist/30 rounded w-4/6"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Section -->
+                    <div class="mt-24">
+                        <div class="text-center mb-12">
+                            <span class="handwritten text-lg font-bold">لماذا تختار خدمة تصميمي؟</span>
+                            <h2 class="text-3xl font-bold text-cocoa mt-1">مميزات تجعل مذكرتك مميزة وفريدة</h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            ${siteData.features.map(f => `
+                                <div class="bg-dew border-2 border-charcoal rounded-cards p-8 shadow-custom-lg flex flex-col justify-between">
+                                    <div>
+                                        <div class="w-10 h-10 bg-orangeMarker text-white font-bold rounded-full flex items-center justify-center mb-4 border border-charcoal">✓</div>
+                                        <h3 class="text-xl font-bold text-cocoa mb-3">${f.title}</h3>
+                                        <p class="text-charcoal opacity-85 leading-relaxed">${f.desc}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Admin Dashboard
+        function renderAdmin() {
+            return `
+                <div class="max-w-[1200px] mx-auto px-6 mt-8">
+                    <div class="flex items-center justify-between mb-8 pb-4 border-b border-charcoal/20">
+                        <div>
+                            <h1 class="text-3xl font-bold text-cocoa">🔒 لوحة تحكم الأدمن</h1>
+                            <p class="text-sm text-charcoal opacity-80 mt-1">من هنا يمكنك تعديل محتوى الموقع ومتابعة طلبات العملاء بسهولة.</p>
+                        </div>
+                        <button onclick="switchView('home')" class="border-1.5 border-charcoal bg-dew px-5 py-2 rounded-buttons font-medium text-charcoal hover:bg-cream transition">
+                            ← العودة للموقع الرئيسي
+                        </button>
+                    </div>
+
+                    <!-- Tabs or Sections -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Left/Top: Edit Site Content -->
+                        <div class="lg:col-span-1 bg-dew border-2 border-charcoal rounded-cards p-6 shadow-custom-lg">
+                            <h3 class="text-xl font-bold text-cocoa mb-4">⚙️ تعديل نصوص الرئيسية</h3>
+                            <form onsubmit="updateHeroContent(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-semibold mb-1">العنوان الرئيسي (Hero Title):</label>
+                                    <input type="text" id="editTitle" value="${siteData.heroTitle}" class="w-full border-1.5 border-charcoal rounded-inputs p-2 bg-cream text-sm focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold mb-1">الوصف الفرعي:</label>
+                                    <textarea id="editSubtitle" rows="3" class="w-full border-1.5 border-charcoal rounded-inputs p-2 bg-cream text-sm focus:outline-none">${siteData.heroSubtitle}</textarea>
+                                </div>
+                                <button type="submit" class="w-full border-1.5 border-charcoal bg-orangeMarker text-white font-bold py-2.5 rounded-buttons text-sm shadow-custom-subtle hover:bg-burntSienna transition">
+                                    حفظ التغييرات 💾
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Right/Bottom: Manage Orders -->
+                        <div class="lg:col-span-2 bg-dew border-2 border-charcoal rounded-cards p-6 shadow-custom-lg">
+                            <h3 class="text-xl font-bold text-cocoa mb-4">📦 طلبات العملاء الواردة (${siteData.orders.length})</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-right border-collapse">
+                                    <thead>
+                                        <tr class="border-b-2 border-charcoal text-xs text-cocoa">
+                                            <th class="py-2 px-2">العميل</th>
+                                            <th class="py-2 px-2">الهاتف</th>
+                                            <th class="py-2 px-2">المادة / المذكرة</th>
+                                            <th class="py-2 px-2">الحالة</th>
+                                            <th class="py-2 px-2">الإجراء</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-sm">
+                                        ${siteData.orders.length === dataIsEmpty() ? `<tr><td colspan="5" class="text-center py-4 opacity-65">لا توجد طلبات حتى الآن.</td></tr>` : 
+                                          siteData.orders.map((o, idx) => `
+                                            <tr class="border-b border-charcoal/10">
+                                                <td class="py-3 px-2 font-bold">${o.name}</td>
+                                                <td class="py-3 px-2">${o.phone}</td>
+                                                <td class="py-3 px-2">${o.subject}</td>
+                                                <td class="py-3 px-2">
+                                                    <span class="px-2.5 py-1 rounded-tags text-xs border border-charcoal ${o.status === 'مكتمل' ? 'bg-sprout text-white' : 'bg-orangeMarker text-white'}">${o.status}</span>
+                                                </td>
+                                                <td class="py-3 px-2 flex gap-2">
+                                                    <button onclick="toggleOrderStatus(${idx})" class="text-xs bg-cream border border-charcoal px-2 py-1 rounded hover:bg-dew">تبديل الحالة</button>
+                                                    <button onclick="deleteOrder(${idx})" class="text-xs bg-red-500 text-white border border-charcoal px-2 py-1 rounded hover:bg-red-600">حذف</button>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function dataIsEmpty() {
+            return siteData.orders.length === 0 ? 1 : 0;
+        }
+
+        // Modal Controls
+        function openOrderModal() {
+            document.getElementById('orderModal').classList.remove('hidden');
+            document.getElementById('orderModal').classList.add('flex');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('flex');
+            document.getElementById('orderModal').classList.add('hidden');
+        }
+
+        // Submit New Order
+        function submitOrder(e) {
             e.preventDefault();
-            const name = document.getElementById('client-name').value;
-            const phone = document.getElementById('client-phone').value;
-            const title = document.getElementById('doc-title').value;
-            const pages = document.getElementById('doc-pages').value;
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const subject = document.getElementById('clientSubject').value;
+            const notes = document.getElementById('clientNotes').value;
 
             const newOrder = {
                 id: Date.now(),
                 name,
                 phone,
-                title,
-                pages,
-                status: 'جديد'
+                subject,
+                notes,
+                status: "قيد العمل",
+                date: new Date().toISOString().split('T')[0]
             };
 
-            orders.push(newOrder);
-            localStorage.setItem('tasmeemy_orders', JSON.stringify(orders));
-            renderOrders();
-
-            alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً على الواتساب.');
-            document.getElementById('client-order-form').reset();
+            siteData.orders.unshift(newOrder);
+            saveData();
+            closeOrderModal();
+            document.getElementById('orderForm').reset();
+            alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً.');
         }
 
-        function changeStatus(id, newStatus) {
-            orders = orders.map(o => o.id === id ? {...o, status: newStatus} : o);
-            localStorage.setItem('tasmeemy_orders', JSON.stringify(orders));
-            renderOrders();
+        // Admin: Update Hero Content
+        function updateHeroContent(e) {
+            e.preventDefault();
+            siteData.heroTitle = document.getElementById('editTitle').value;
+            siteData.heroSubtitle = document.getElementById('editSubtitle').value;
+            saveData();
+            alert('تم تحديث محتوى الموقع بنجاح!');
+            switchView('admin');
         }
 
-        function deleteOrder(id) {
-            if(confirm('هل أنت تأكد من حذف هذا الطلب؟')) {
-                orders = orders.filter(o => o.id !== id);
-                localStorage.setItem('tasmeemy_orders', JSON.stringify(orders));
-                renderOrders();
+        // Admin: Toggle Order Status
+        function toggleOrderStatus(index) {
+            siteData.orders[index].status = siteData.orders[index].status === 'قيد العمل' ? 'مكتمل' : 'قيد العمل';
+            saveData();
+            switchView('admin');
+        }
+
+        // Admin: Delete Order
+        function deleteOrder(index) {
+            if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+                siteData.orders.splice(index, 1);
+                saveData();
+                switchView('admin');
             }
         }
 
-        function openAdminModal() {
-            document.getElementById('adminModal').style.display = 'flex';
-            renderOrders();
-        }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').style.display = 'none';
-        }
-
-        function switchAdminTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(tabId).style.display = 'block';
-            event.target.classList.add('active');
-        }
-
-        // Initialize on load
-        renderOrders();
+        // Initialize App on load
+        window.onload = function() {
+            switchView('home');
+        };
     </script>
 </body>
 </html>
