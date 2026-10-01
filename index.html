@@ -15,11 +15,11 @@
             theme: {
                 extend: {
                     colors: {
-                        'cream-paper': 'var(--color-cream-paper, #fdfbf9)',
+                        'cream-paper': '#fdfbf9',
                         'charcoal': '#171717',
-                        'cocoa-ink': 'var(--color-cocoa-ink, #2b1a07)',
+                        'cocoa-ink': '#2b1a07',
                         'dew-drop': '#f7efe9',
-                        'marker-orange': 'var(--color-marker-orange, #ff6f1e)',
+                        'marker-orange': '#ff6f1e',
                         'burnt-sienna': '#ce500a',
                         'sky-sticker': '#3b82f6',
                         'bubblegum-sticker': '#ff66cf',
@@ -39,7 +39,7 @@
                     boxShadow: {
                         'paper': 'rgba(0, 0, 0, 0.06) 0px 2px 20px 0px',
                         'button-lift': 'rgba(0, 0, 0, 0.25) 0px 1px 2px 0px',
-                        'sticker': '2px 3px 0px #171717',
+                        'sticker': '2px 3px 0px rgba(23, 23, 23, 0.9)',
                         'floating': '0 10px 25px -5px rgba(43, 26, 7, 0.1)',
                     }
                 }
@@ -50,7 +50,9 @@
     <style>
         :root {
             --color-cream-paper: #fdfbf9;
+            --color-charcoal: #171717;
             --color-cocoa-ink: #2b1a07;
+            --color-dew-drop: #f7efe9;
             --color-marker-orange: #ff6f1e;
         }
 
@@ -59,16 +61,8 @@
             color: var(--color-cocoa-ink);
             font-family: 'Tajawal', sans-serif;
             overflow-x: hidden;
-            background-image: radial-gradient(var(--color-cocoa-ink) 0.4px, transparent 0.4px);
+            background-image: radial-gradient(#2b1a07 0.4px, transparent 0.4px);
             background-size: 24px 24px;
-        }
-
-        h1, h2, h3, h4, .font-display {
-            font-family: 'Alexandria', 'Tajawal', sans-serif;
-        }
-
-        .font-handwritten {
-            font-family: 'Aref Ruqaa', 'Caveat', cursive;
         }
 
         .notebook-lines {
@@ -79,7 +73,7 @@
         .marker-underline {
             position: relative;
             display: inline-block;
-            color: var(--color-marker-orange);
+            color: #ff6f1e;
         }
         .marker-underline::after {
             content: '';
@@ -88,14 +82,14 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background-color: var(--color-marker-orange);
+            background-color: #ff6f1e;
             border-radius: 4px;
             transform: rotate(-0.5deg);
             opacity: 0.85;
         }
 
         .btn-pill {
-            background-color: var(--color-cream-paper);
+            background-color: #fdfbf9;
             border: 1.5px solid #171717;
             border-radius: 20px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0px;
@@ -130,7 +124,7 @@
             background: #f7efe9;
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--color-marker-orange);
+            background: #ff6f1e;
             border-radius: 10px;
             border: 2px solid #f7efe9;
         }
@@ -140,443 +134,613 @@
         .tilt-left-sm { transform: rotate(-1deg); }
         .tilt-right-sm { transform: rotate(1deg); }
 
-        .dynamic-theme-bg { background-color: var(--color-marker-orange) !important; }
-        .dynamic-theme-text { color: var(--color-marker-orange) !important; }
-        .dynamic-theme-border { border-color: var(--color-marker-orange) !important; }
+        .tilt-left:hover, .tilt-right:hover {
+            transform: rotate(0deg) scale(1.01);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- FLOATING SOCIAL BAR -->
-    <div class="fixed left-4 bottom-6 z-40 flex flex-col gap-3">
-        <a id="floatWhatsapp" href="https://wa.me/201000000000" target="_blank" class="w-12 h-12 bg-[#25D366] text-white rounded-full border-2 border-[#171717] flex items-center justify-center text-xl shadow-[3px_3px_0px_#171717] hover:scale-110 transition-transform" title="واتساب">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <a id="floatInstagram" href="https://instagram.com" target="_blank" class="w-12 h-12 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white rounded-full border-2 border-[#171717] flex items-center justify-center text-xl shadow-[3px_3px_0px_#171717] hover:scale-110 transition-transform" title="إنستغرام">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a id="floatFacebook" href="https://facebook.com" target="_blank" class="w-12 h-12 bg-[#1877F2] text-white rounded-full border-2 border-[#171717] flex items-center justify-center text-xl shadow-[3px_3px_0px_#171717] hover:scale-110 transition-transform" title="فيسبوك">
-            <i class="fa-brands fa-facebook-f"></i>
-        </a>
-    </div>
-
-    <!-- MAIN CLIENT WEBSITE VIEW -->
-    <div id="clientWebsiteView" class="flex-grow flex flex-col justify-between">
-        
-        <header class="sticky top-0 z-40 bg-[#fdfbf9]/90 backdrop-blur-md border-b border-[#171717]/10 py-3 px-4 sm:px-8">
-            <div class="max-w-[1200px] mx-auto flex items-center justify-between">
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-2xl dynamic-theme-bg border-2 border-[#171717] flex items-center justify-center text-white shadow-[2px_2px_0px_#171717] group-hover:rotate-6 transition-transform">
-                        <i class="fa-solid fa-pen-nib text-lg text-white"></i>
-                    </div>
-                    <div class="flex flex-col">
-                        <span id="siteLogoTitle" class="font-display font-extrabold text-2xl tracking-tight text-[#2b1a07] leading-none">تصميمي</span>
-                        <span id="siteLogoSub" class="font-handwritten text-xs dynamic-theme-text -mt-1 font-bold">لتنسيق المذكرات والكتب</span>
-                    </div>
-                </a>
-
-                <div class="flex items-center gap-3">
-                    <nav class="hidden md:flex items-center gap-6 text-base font-medium text-[#2b1a07]">
-                        <a href="#calculator" class="hover:text-[#ff6f1e] transition-colors">الحاسبة</a>
-                        <a href="#showcase" class="hover:text-[#ff6f1e] transition-colors">نماذج المذكرات</a>
-                        <a href="#preview-tool" class="hover:text-[#ff6f1e] transition-colors">جرب بنفسك</a>
-                        <a href="#pricing" class="hover:text-[#ff6f1e] transition-colors">الباقات</a>
-                        <a href="#faq" class="hover:text-[#ff6f1e] transition-colors">الأسئلة</a>
-                    </nav>
-
-                    <div class="hidden lg:flex items-center gap-2 border-r border-[#171717]/15 pr-3 mr-1">
-                        <a id="navWhatsapp" href="https://wa.me/201000000000" target="_blank" class="w-8 h-8 rounded-full border border-[#171717] flex items-center justify-center text-sm bg-white hover:bg-[#25D366] hover:text-white transition-all" title="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
-                        <a id="navInstagram" href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full border border-[#171717] flex items-center justify-center text-sm bg-white hover:bg-[#dc2743] hover:text-white transition-all" title="إنستغرام"><i class="fa-brands fa-instagram"></i></a>
-                        <a id="navFacebook" href="https://facebook.com" target="_blank" class="w-8 h-8 rounded-full border border-[#171717] flex items-center justify-center text-sm bg-white hover:bg-[#1877F2] hover:text-white transition-all" title="فيسبوك"><i class="fa-brands fa-facebook-f"></i></a>
-                    </div>
-
-                    <button onclick="openOrderModal()" class="btn-pill px-5 py-2 text-sm md:text-base font-semibold text-[#171717] flex items-center gap-2">
-                        <i class="fa-solid fa-file-arrow-up dynamic-theme-text"></i>
-                        <span>اطلب تنسيق مذكرتك</span>
-                    </button>
-
-                    <button onclick="navigateToAdmin()" class="btn-pill px-3 py-2 text-xs font-bold bg-[#171717] text-white hover:bg-[#2b1a07]">
-                        <i class="fa-solid fa-user-gear"></i>
-                        <span class="hidden sm:inline">لوحة الأدمن</span>
-                    </button>
+    <!-- Header Bar -->
+    <header class="sticky top-0 z-40 bg-[#fdfbf9]/90 backdrop-blur-md border-b border-[#171717]/10 py-3 px-4 sm:px-8">
+        <div class="max-w-[1200px] mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-2xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center text-white shadow-[2px_2px_0px_#171717] group-hover:rotate-6 transition-transform">
+                    <i class="fa-solid fa-pen-nib text-lg text-[#fdfbf9]"></i>
                 </div>
-            </div>
-        </header>
-
-        <main class="flex-grow">
-            <section class="relative pt-8 pb-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto overflow-hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    <div class="lg:col-span-7 flex flex-col items-start text-right">
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f7efe9] border border-[#171717]/20 text-xs sm:text-sm font-semibold mb-4">
-                            <span class="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
-                            <span>متاح استقبال طلبات هذا الأسبوع</span>
-                        </div>
-
-                        <h1 id="heroTitle" class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl text-[#2b1a07] leading-[1.15] mb-6 tracking-tight">
-                            مذكراتك الدراسية.. <br/>
-                            بكل <span class="marker-underline">إتقان ولطافة</span> تفتح النفس
-                        </h1>
-
-                        <p id="heroSub" class="text-lg sm:text-xl text-[#2b1a07]/80 leading-relaxed mb-8 max-w-2xl font-normal">
-                            نحوّل نصوصك ومذكراتك الجافة إلى تحف فنية مريحة للعين! تنسيق احترافي، جداول مقارنة، هوامش واسعة للملاحظات، أغلفة جذابة، وأيقونات توضيحية تجعل الاستذكار رحلة ممتعة وسهلة.
-                        </p>
-
-                        <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-                            <a href="#calculator" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#fdfbf9] flex items-center justify-center gap-2 w-full sm:w-auto text-center">
-                                <i class="fa-solid fa-calculator dynamic-theme-text"></i>
-                                <span>احسب تكلفة مذكرتك</span>
-                            </a>
-                            <a href="#showcase" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#f7efe9] flex items-center justify-center gap-2 w-full sm:w-auto text-center border-dashed">
-                                <i class="fa-regular fa-folder-open text-[#22c55e]"></i>
-                                <span>استعراض المذكرات</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 relative flex justify-center">
-                        <div class="w-full max-w-sm sm:max-w-md bg-[#ffffff] border-2 border-[#171717] rounded-card p-6 shadow-[8px_12px_0px_#171717] tilt-right relative">
-                            <div class="mt-3 mb-6 bg-[#f7efe9] border-1.5 border-[#171717] rounded-lg p-3 shadow-sm relative">
-                                <div class="text-[10px] uppercase font-bold tracking-widest text-[#2b1a07]/50 mb-1">DESIGNED BY TASMEEMY</div>
-                                <div class="grid grid-cols-3 gap-2 text-xs font-bold text-[#2b1a07]">
-                                    <div class="col-span-2 border-b border-[#171717]/30 pb-0.5">المادة: <span class="font-handwritten text-base dynamic-theme-text">الأحياء العشبي</span></div>
-                                    <div class="border-b border-[#171717]/30 pb-0.5">الصف: <span class="font-handwritten text-base text-[#3b82f6]">3 ثانوي</span></div>
-                                </div>
-                            </div>
-
-                            <div class="space-y-4 text-right notebook-lines px-2 py-1 rounded bg-[#fdfbf9] border border-[#171717]/10">
-                                <div class="flex items-center justify-between border-b-2 dynamic-theme-border pb-1">
-                                    <span class="font-bold text-sm dynamic-theme-text">الوحدة الأولى: البناء الضوئي</span>
-                                    <span class="text-xs bg-[#ff6f1e]/10 dynamic-theme-text px-2 py-0.5 rounded-full font-bold">درس 01</span>
-                                </div>
-                                <p class="text-xs sm:text-sm text-[#2b1a07] font-medium leading-relaxed">
-                                    عملية حيوية تقوم بها النباتات الخضراء لتحويل الطاقة الضوئية إلى طاقة كيميائية مخزنة.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-2xl tracking-tight text-[#2b1a07] leading-none">تصميمي</span>
+                    <span class="font-handwritten text-xs text-[#ff6f1e] -mt-1 font-bold">لتنسيق المذكرات والكتب</span>
                 </div>
-            </section>
+            </a>
 
-            <!-- CALCULATOR SECTION -->
-            <section id="calculator" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-y-2 border-[#171717]">
-                <div class="max-w-[1200px] mx-auto">
-                    <div class="text-center max-w-2xl mx-auto mb-12">
-                        <span class="font-handwritten text-2xl dynamic-theme-text font-bold block mb-1">احسب وتأكد بنفسك</span>
-                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">حاسبة تنسيق المذكرات التفاعلية</h2>
-                        <p class="text-base text-[#2b1a07]/70">حدد عدد الصفحات ونوع الباقة المطلوبة لمعرفة التكلفة التقديرية فوراً</p>
-                    </div>
+            <div class="flex items-center gap-3">
+                <nav class="hidden md:flex items-center gap-6 text-base font-medium text-[#2b1a07]">
+                    <a href="#calculator" class="hover:text-[#ff6f1e] transition-colors">الحاسبة</a>
+                    <a href="#showcase" class="hover:text-[#ff6f1e] transition-colors">نماذج المذكرات</a>
+                    <a href="#preview-tool" class="hover:text-[#ff6f1e] transition-colors">جرب بنفسك</a>
+                    <a href="#pricing" class="hover:text-[#ff6f1e] transition-colors">الباقات</a>
+                    <a href="#faq" class="hover:text-[#ff6f1e] transition-colors">الأسئلة</a>
+                </nav>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        <div class="lg:col-span-7 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717]">
-                            <div class="mb-8">
-                                <div class="flex justify-between items-center mb-3">
-                                    <label class="font-bold text-lg text-[#2b1a07] flex items-center gap-2">
-                                        <i class="fa-solid fa-copy dynamic-theme-text"></i>
-                                        <span>عدد صفحات المذكرة:</span>
-                                    </label>
-                                    <div class="flex items-center gap-1 bg-[#f7efe9] border border-[#171717] px-3 py-1 rounded-lg">
-                                        <input type="number" id="pageInput" value="30" min="5" max="500" class="w-16 bg-transparent font-extrabold text-lg dynamic-theme-text text-center focus:outline-none" oninput="updateCalculator()">
-                                        <span class="text-xs font-bold text-[#2b1a07]">صفحة</span>
-                                    </div>
-                                </div>
-                                <input type="range" id="pageSlider" min="5" max="300" value="30" step="5" class="w-full h-3 bg-[#e5dfd8] rounded-lg appearance-none cursor-pointer accent-[#ff6f1e]" oninput="syncPageInput(this.value)">
-                            </div>
+                <button onclick="promptAdminLogin()" class="p-2 text-xs font-bold text-[#171717] bg-[#f7efe9] border border-[#171717] rounded-lg hover:bg-[#ff6f1e] hover:text-white transition-colors" title="لوحة التحكم">
+                    <i class="fa-solid fa-user-gear text-sm"></i>
+                    <span class="hidden sm:inline-block mr-1">الإدارة</span>
+                </button>
 
-                            <div class="mb-8">
-                                <label class="font-bold text-lg text-[#2b1a07] block mb-3">اختر الباقة المطلوب تطبيقها:</label>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="calcPackagesContainer">
-                                    <!-- Dynamic calc package radios -->
-                                </div>
-                            </div>
-
-                            <div class="space-y-3">
-                                <label class="font-bold text-base text-[#2b1a07] block">إضافات اختيارية:</label>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <label class="flex items-center gap-3 p-3 border border-[#171717]/30 rounded-lg cursor-pointer hover:bg-[#f7efe9]">
-                                        <input type="checkbox" id="addCover" checked class="w-4 h-4 accent-[#ff6f1e]" onchange="updateCalculator()">
-                                        <span class="text-sm font-semibold text-[#2b1a07]">تصميم غلاف احترافي جديد (+100 ج.م)</span>
-                                    </label>
-                                    <label class="flex items-center gap-3 p-3 border border-[#171717]/30 rounded-lg cursor-pointer hover:bg-[#f7efe9]">
-                                        <input type="checkbox" id="addUrgent" class="w-4 h-4 accent-[#ff6f1e]" onchange="updateCalculator()">
-                                        <span class="text-sm font-semibold text-[#2b1a07]">تسليم عاجل خلال 24 ساعة (+25%)</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-5 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between h-full">
-                            <div>
-                                <div class="flex items-center justify-between border-b border-[#171717]/20 pb-4 mb-4">
-                                    <span class="font-bold text-xl text-[#2b1a07]">ملخص التكلفة المقدرة</span>
-                                    <span class="bg-[#3b82f6] text-white text-xs font-bold px-2.5 py-1 rounded-full border border-[#171717]">حساب فوري</span>
-                                </div>
-
-                                <div class="space-y-3 text-sm text-[#2b1a07]/80 mb-6">
-                                    <div class="flex justify-between">
-                                        <span>تكلفة التنسيق الأساسية:</span>
-                                        <span id="baseCostText" class="font-bold text-[#2b1a07]">540 ج.م</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span>تصميم الغلاف:</span>
-                                        <span id="coverCostText" class="font-bold text-[#2b1a07]">100 ج.م</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span>رسوم العاجل:</span>
-                                        <span id="urgentCostText" class="font-bold text-[#2b1a07]">0 ج.م</span>
-                                    </div>
-                                </div>
-
-                                <div class="bg-[#f7efe9] border-2 border-[#171717] rounded-xl p-5 text-center mb-6">
-                                    <span class="text-xs font-bold text-[#2b1a07]/60 block mb-1">الإجمالي الكلي المتوقع</span>
-                                    <div class="font-display font-black text-4xl sm:text-5xl dynamic-theme-text leading-none mb-1" id="totalPriceVal">
-                                        576 <span class="text-lg font-bold text-[#2b1a07]">ج.م</span>
-                                    </div>
-                                    <span class="text-[11px] text-[#2b1a07]/50">الوقت المتوقع للتسليم: <strong id="deliveryDaysText" class="text-[#2b1a07]">2 إلى 3 أيام</strong></span>
-                                </div>
-                            </div>
-
-                            <button onclick="applyFromCalc()" class="btn-pill w-full py-4 dynamic-theme-bg text-white text-lg font-bold flex items-center justify-center gap-2 border-2 border-[#171717]">
-                                <i class="fa-brands fa-whatsapp text-xl"></i>
-                                <span>تأكيد الطلب بهذا السعر عبر الواتساب</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PACKAGES MANAGEMENT SECTION -->
-            <section id="pricing" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-t-2 border-[#171717]">
-                <div class="max-w-[1200px] mx-auto">
-                    <div class="text-center max-w-2xl mx-auto mb-12">
-                        <span class="font-handwritten text-2xl dynamic-theme-text font-bold block mb-1">باقات تناسب الجميع</span>
-                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">خطط وباقات التنسيق</h2>
-                        <p class="text-base text-[#2b1a07]/70">اختر الباقة المناسبة لمذكرتك أو كتابك واستلم ملفك جاهز للطباعة مباشرة</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="clientPackagesGrid">
-                        <!-- Dynamic packages cards populated via JS -->
-                    </div>
-                </div>
-            </section>
-
-        </main>
-
-        <footer class="mt-16 dynamic-theme-bg text-[#2b1a07] border-t-2 border-[#171717] rounded-t-footer-cap pt-12 pb-8 px-6 sm:px-12 relative">
-            <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 border-b border-[#171717]/20 pb-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-[#fdfbf9] border-2 border-[#171717] flex items-center justify-center dynamic-theme-text text-2xl font-black shadow-sticker">
-                        ت
-                    </div>
-                    <div>
-                        <h3 class="font-display font-extrabold text-2xl text-[#171717]">تصميمي</h3>
-                        <p class="font-handwritten text-lg text-[#2b1a07]/90 font-bold">كل صفحة تلهمك للنجاح والاستذكار</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-3 bg-white/20 p-2 rounded-2xl border border-[#171717]/20">
-                    <a id="footerWhatsapp" href="https://wa.me/201000000000" target="_blank" class="w-10 h-10 bg-white rounded-xl border border-[#171717] flex items-center justify-center text-lg hover:bg-[#25D366] hover:text-white transition-all"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a id="footerInstagram" href="https://instagram.com" target="_blank" class="w-10 h-10 bg-white rounded-xl border border-[#171717] flex items-center justify-center text-lg hover:bg-[#dc2743] hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
-                    <a id="footerFacebook" href="https://facebook.com" target="_blank" class="w-10 h-10 bg-white rounded-xl border border-[#171717] flex items-center justify-center text-lg hover:bg-[#1877F2] hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
-            </div>
-
-            <div class="max-w-[1200px] mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-[#2b1a07]/80 gap-2">
-                <div>جميع الحقوق محفوظة © 2026 لموقع تصميمي (Tasmeemy)</div>
-                <button onclick="navigateToAdmin()" class="underline font-bold text-[#171717]">تسجيل دخول الأدمن (/admin)</button>
-            </div>
-        </footer>
-    </div>
-
-    <!-- ADMIN PANEL VIEW (SEPARATE INTERFACE) -->
-    <div id="adminPanelPage" class="hidden flex-grow bg-[#f7efe9] min-h-screen">
-        
-        <!-- ADMIN LOGIN SCREEN -->
-        <div id="adminAuthScreen" class="min-h-screen flex items-center justify-center p-4">
-            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card max-w-md w-full p-8 shadow-[10px_10px_0px_#171717] relative">
-                <div class="text-center mb-6">
-                    <div class="w-14 h-14 bg-[#171717] text-white rounded-2xl mx-auto flex items-center justify-center text-2xl font-bold shadow-sticker mb-3">
-                        <i class="fa-solid fa-lock"></i>
-                    </div>
-                    <h2 class="font-display font-extrabold text-2xl text-[#2b1a07]">تسجيل دخول الأدمن</h2>
-                    <p class="text-xs text-[#2b1a07]/70 mt-1">أدخل كلمة المرور للوصول للوحة التحكم الشاملة</p>
-                </div>
-
-                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-[#2b1a07] mb-1">كلمة المرور:</label>
-                        <input type="password" id="adminPassInput" required placeholder="••••••••" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
-                    </div>
-
-                    <div id="loginErrorMsg" class="text-xs font-bold text-red-600 hidden text-center">
-                        كلمة المرور غير صحيحة! جرب كلمة السر الافتراضية: admin123
-                    </div>
-
-                    <button type="submit" class="btn-pill w-full py-3.5 bg-[#171717] text-white font-bold text-base flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        <span>دخول لوحة التحكم</span>
-                    </button>
-
-                    <button type="button" onclick="navigateToClient()" class="w-full text-center text-xs text-[#2b1a07]/60 font-bold hover:underline pt-2">
-                        ← العودة للموقع الرئيسي
-                    </button>
-                </form>
+                <button onclick="openOrderModal()" class="btn-pill px-5 py-2 text-sm md:text-base font-semibold text-[#171717] flex items-center gap-2">
+                    <i class="fa-solid fa-file-arrow-up text-[#ff6f1e]"></i>
+                    <span>اطلب تنسيق مذكرتك</span>
+                </button>
             </div>
         </div>
+    </header>
 
-        <!-- ADMIN DASHBOARD CONTENT -->
-        <div id="adminDashboardView" class="hidden">
-            <header class="bg-[#171717] text-white py-4 px-6 border-b-2 border-[#171717] flex justify-between items-center sticky top-0 z-50">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 bg-white text-[#171717] rounded-xl flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-sliders"></i>
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative pt-8 pb-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto overflow-hidden">
+            <div class="absolute top-6 left-12 bg-[#3b82f6] text-white px-3 py-1 rounded-full text-xs font-bold rotate-[-12deg] sticker-badge shadow-sticker hidden lg:flex items-center gap-1">
+                <span>⚡ ملخصات متكتكة</span>
+            </div>
+            <div class="absolute bottom-10 right-8 bg-[#ff66cf] text-[#171717] px-3 py-1 rounded-full text-xs font-bold rotate-[8deg] sticker-badge shadow-sticker hidden lg:flex items-center gap-1">
+                <span>🐻 يفتح النفس للدراسة</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 flex flex-col items-start text-right">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f7efe9] border border-[#171717]/20 text-xs sm:text-sm font-semibold mb-4">
+                        <span class="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
+                        <span>متاح استقبال طلبات هذا الأسبوع</span>
                     </div>
-                    <div>
-                        <h1 class="font-display font-bold text-lg leading-none">لوحة تحكم أدمن تصميمي</h1>
-                        <span class="text-[11px] text-gray-400">إدارة الباقات، العملاء، الرسائل والهوية</span>
+
+                    <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl text-[#2b1a07] leading-[1.15] mb-6 tracking-tight">
+                        مذكراتك الدراسية.. <br/>
+                        بكل <span class="marker-underline">إتقان ولطافة</span> تفتح النفس
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-[#2b1a07]/80 leading-relaxed mb-8 max-w-2xl font-normal">
+                        نحوّل نصوصك ومذكراتك الجافة إلى تحف فنية مريحة للعين! تنسيق احترافي، جداول مقارنة، هوامش واسعة للملاحظات، أغلفة جذابة، وأيقونات توضيحية تجعل الاستذكار رحلة ممتعة وسهلة.
+                    </p>
+
+                    <div class="relative mb-8 w-full max-w-md">
+                        <div class="flex items-center gap-3">
+                            <span class="font-handwritten text-xl sm:text-2xl text-[#ff6f1e] font-bold rotate-[-2deg]">
+                                شاهد الفرق بنفسك واحسب التكلفة فاعلياً!
+                            </span>
+                            <svg class="w-16 h-10 text-[#ff6f1e]" viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                <path d="M 10 10 Q 50 40 85 20 L 75 15 M 85 20 L 80 32" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+                        <a href="#calculator" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#fdfbf9] flex items-center justify-center gap-2 w-full sm:w-auto text-center">
+                            <i class="fa-solid fa-calculator text-[#ff6f1e]"></i>
+                            <span>احسب تكلفة مذكرتك</span>
+                        </a>
+                        <a href="#showcase" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#f7efe9] flex items-center justify-center gap-2 w-full sm:w-auto text-center border-dashed">
+                            <i class="fa-regular fa-folder-open text-[#22c55e]"></i>
+                            <span>استعراض المذكرات</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-4 text-xs sm:text-sm text-[#2b1a07]/60 font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-[#22c55e]"></i>
+                        <span>تسليم بصيغة PDF جاهزة للطباعة عالي الجودة + ملف Word قابل للتعديل</span>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3">
-                    <button onclick="navigateToClient()" class="px-3 py-1.5 rounded-lg border border-white/20 text-xs font-bold bg-white/10 hover:bg-white/20">
-                        <i class="fa-solid fa-globe ml-1"></i> العودة للموقع
-                    </button>
-                    <button onclick="adminLogout()" class="px-3 py-1.5 rounded-lg border border-red-500/30 text-xs font-bold bg-red-500/20 text-red-300 hover:bg-red-500/40">
-                        خروج <i class="fa-solid fa-right-from-bracket mr-1"></i>
-                    </button>
-                </div>
-            </header>
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="w-full max-w-sm sm:max-w-md bg-[#ffffff] border-2 border-[#171717] rounded-card p-6 shadow-[8px_12px_0px_#171717] tilt-right relative">
+                        <div class="absolute -top-3 left-6 right-6 flex justify-between z-10">
+                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
+                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
+                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
+                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
+                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
+                        </div>
 
-            <div class="max-w-[1300px] mx-auto p-4 sm:p-8">
-                
-                <!-- ADMIN TABS -->
-                <div class="flex flex-wrap gap-2 mb-8 border-b-2 border-[#171717]/20 pb-4">
-                    <button onclick="switchAdminTab('orders')" id="tabBtn-orders" class="admin-tab-btn active px-5 py-2.5 rounded-xl font-bold text-sm bg-[#171717] text-white border border-[#171717]">
-                        <i class="fa-solid fa-users-rectangle ml-1"></i> طلبات العملاء وبياناتهم
-                    </button>
-                    <button onclick="switchAdminTab('packages')" id="tabBtn-packages" class="admin-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-[#fdfbf9] text-[#2b1a07] border border-[#171717]">
-                        <i class="fa-solid fa-cubes ml-1"></i> إدارة الباقات والأسعار
-                    </button>
-                    <button onclick="switchAdminTab('theme')" id="tabBtn-theme" class="admin-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-[#fdfbf9] text-[#2b1a07] border border-[#171717]">
-                        <i class="fa-solid fa-palette ml-1"></i> التحكم بالهوية والألوان
-                    </button>
-                    <button onclick="switchAdminTab('social')" id="tabBtn-social" class="admin-tab-btn px-5 py-2.5 rounded-xl font-bold text-sm bg-[#fdfbf9] text-[#2b1a07] border border-[#171717]">
-                        <i class="fa-solid fa-share-nodes ml-1"></i> روابط التواصل الاجتماعي
-                    </button>
-                </div>
-
-                <!-- TAB 1: CLIENT ORDERS & DATA -->
-                <div id="adminTabContent-orders" class="admin-tab-pane space-y-6">
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717]">
-                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h2 class="font-display font-extrabold text-xl text-[#2b1a07]">سجل طلبات العملاء الشامل</h2>
-                                <p class="text-xs text-[#2b1a07]/60">استعرض كافة البيانات وتفاعل مع العميل بإرسال رسالة واتساب تلقائية فور تغيير الحالة</p>
+                        <div class="mt-3 mb-6 bg-[#f7efe9] border-1.5 border-[#171717] rounded-lg p-3 shadow-sm relative">
+                            <div class="text-[10px] uppercase font-bold tracking-widest text-[#2b1a07]/50 mb-1">DESIGNED BY TASMEEMY</div>
+                            <div class="grid grid-cols-3 gap-2 text-xs font-bold text-[#2b1a07]">
+                                <div class="col-span-2 border-b border-[#171717]/30 pb-0.5">المادة: <span class="font-handwritten text-base text-[#ff6f1e]">الاحياء العشبي</span></div>
+                                <div class="border-b border-[#171717]/30 pb-0.5">الصف: <span class="font-handwritten text-base text-[#3b82f6]">3 ثانوي</span></div>
                             </div>
-                            <span class="text-xs font-bold px-3 py-1 bg-[#f7efe9] border border-[#171717] rounded-full" id="orderCountBadge">0 طلب مسجل</span>
                         </div>
 
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-right text-xs">
-                                <thead>
-                                    <tr class="bg-[#f7efe9] border-b-2 border-[#171717] text-[#2b1a07] font-bold">
-                                        <th class="p-3">اسم العميل</th>
-                                        <th class="p-3">رقم الهاتف</th>
-                                        <th class="p-3">المادة / الكتاب</th>
-                                        <th class="p-3">الصفحات</th>
-                                        <th class="p-3">الباقة</th>
-                                        <th class="p-3">الملاحظات</th>
-                                        <th class="p-3">حالة الطلب</th>
-                                        <th class="p-3">إجراءات</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="ordersTableBody" class="divide-y divide-[#171717]/10">
-                                    <!-- Dynamic rows -->
-                                </tbody>
-                            </table>
+                        <div class="space-y-4 text-right notebook-lines px-2 py-1 rounded bg-[#fdfbf9] border border-[#171717]/10">
+                            <div class="flex items-center justify-between border-b-2 border-[#ff6f1e] pb-1">
+                                <span class="font-bold text-sm text-[#ff6f1e]">الوحدة الأولى: البناء الضوئي</span>
+                                <span class="text-xs bg-[#ff6f1e]/10 text-[#ff6f1e] px-2 py-0.5 rounded-full font-bold">درس 01</span>
+                            </div>
+
+                            <p class="text-xs sm:text-sm text-[#2b1a07] font-medium leading-relaxed">
+                                عملية حيوية تقوم بها <span class="bg-[#ff6f1e]/20 px-1 rounded font-bold">النباتات الخضراء</span> لتحويل الطاقة الضوئية إلى طاقة كيميائية مخزنة.
+                            </p>
+
+                            <div class="bg-[#f7efe9] border-r-4 border-[#3b82f6] p-2.5 rounded text-xs space-y-1">
+                                <div class="font-bold text-[#3b82f6] flex items-center gap-1">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <span>ملاحظة مهمة للاختبار:</span>
+                                </div>
+                                <p class="text-[#2b1a07]/80">يحدث التفاعل الضوئي داخل الثايلاكويد بينما التفاعل المظلم في الستروما.</p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                                <div class="border border-[#171717]/20 p-1.5 rounded text-center bg-white font-semibold">
+                                    ☀️ التفاعلات الضوئية
+                                </div>
+                                <div class="border border-[#171717]/20 p-1.5 rounded text-center bg-white font-semibold">
+                                    🌙 التفاعلات المظلمة
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-5 -left-5 bg-[#22c55e] text-white font-black text-xs px-3 py-1.5 rounded-full border-2 border-[#171717] shadow-sticker rotate-[-10deg]">
+                            ★ مراجعة ممتازة!
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- TAB 2: PACKAGES CRUD MANAGEMENT -->
-                <div id="adminTabContent-packages" class="admin-tab-pane hidden space-y-6">
-                    <div class="flex justify-between items-center bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717]">
-                        <div>
-                            <h2 class="font-display font-extrabold text-xl text-[#2b1a07]">إدارة باقات التنسيق</h2>
-                            <p class="text-xs text-[#2b1a07]/60">أضف باقات جديدة، عدّل أسعار ومحتويات الباقات الحالية أو احذفها</p>
+        <!-- Calculator Section -->
+        <section id="calculator" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-y-2 border-[#171717] relative">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">احسب وتأكد بنفسك</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">حاسبة تنسيق المذكرات التفاعلية</h2>
+                    <p class="text-base text-[#2b1a07]/70">حدد عدد الصفحات ونوع الخدمة المطلوبة لمعرفة التكلفة التقديرية فوراً</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-7 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717]">
+                        <div class="mb-8">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="font-bold text-lg text-[#2b1a07] flex items-center gap-2">
+                                    <i class="fa-solid fa-copy text-[#ff6f1e]"></i>
+                                    <span>عدد صفحات المذكرة:</span>
+                                </label>
+                                <div class="flex items-center gap-1 bg-[#f7efe9] border border-[#171717] px-3 py-1 rounded-lg">
+                                    <input type="number" id="pageInput" value="30" min="5" max="500" class="w-16 bg-transparent font-extrabold text-lg text-[#ff6f1e] text-center focus:outline-none" oninput="updateCalculator()">
+                                    <span class="text-xs font-bold text-[#2b1a07]">صفحة</span>
+                                </div>
+                            </div>
+                            <input type="range" id="pageSlider" min="5" max="300" value="30" step="5" class="w-full h-3 bg-[#e5dfd8] rounded-lg appearance-none cursor-pointer accent-[#ff6f1e]" oninput="syncPageInput(this.value)">
+                            <div class="flex justify-between text-xs font-medium text-[#2b1a07]/50 mt-1">
+                                <span>5 صفحات</span>
+                                <span>150 صفحة</span>
+                                <span>300+ صفحة</span>
+                            </div>
                         </div>
-                        <button onclick="openAddPackageModal()" class="btn-pill px-4 py-2 bg-[#ff6f1e] text-white text-xs font-bold border border-[#171717] flex items-center gap-1">
-                            <i class="fa-solid fa-plus"></i> إضافة باقة جديدة
+
+                        <div class="mb-8">
+                            <label class="font-bold text-lg text-[#2b1a07] block mb-3">مستوى التنسيق والتصميم:</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] transition-all has-[:checked]:bg-[#ff6f1e]/10 has-[:checked]:border-[#ff6f1e]">
+                                    <input type="radio" name="serviceTier" value="basic" class="sr-only" onchange="updateCalculator()">
+                                    <div class="font-bold text-sm text-[#2b1a07]">تنسيق أساسي</div>
+                                    <div class="text-xs text-[#2b1a07]/60 mt-1">خطوط واضحة، تنظيم فقرات وعناوين.</div>
+                                    <div class="text-xs font-extrabold text-[#ff6f1e] mt-2">12 ج.م / صفحة</div>
+                                </label>
+
+                                <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] transition-all has-[:checked]:bg-[#ff6f1e]/10 has-[:checked]:border-[#ff6f1e] relative">
+                                    <div class="absolute -top-2.5 -right-2 bg-[#ff66cf] text-[#171717] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#171717]">الأكثر طلباً</div>
+                                    <input type="radio" name="serviceTier" value="pro" checked class="sr-only" onchange="updateCalculator()">
+                                    <div class="font-bold text-sm text-[#2b1a07]">احترافي شامل</div>
+                                    <div class="text-xs text-[#2b1a07]/60 mt-1">جداول، أيقونات، صناديق تنبيهات وألوان.</div>
+                                    <div class="text-xs font-extrabold text-[#ff6f1e] mt-2">18 ج.م / صفحة</div>
+                                </label>
+
+                                <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] transition-all has-[:checked]:bg-[#ff6f1e]/10 has-[:checked]:border-[#ff6f1e]">
+                                    <input type="radio" name="serviceTier" value="vip" class="sr-only" onchange="updateCalculator()">
+                                    <div class="font-bold text-sm text-[#2b1a07]">كتاب / كورسات VIP</div>
+                                    <div class="text-xs text-[#2b1a07]/60 mt-1">غلاف خاص، رسوم تفاعلية، هويّة كاملة.</div>
+                                    <div class="text-xs font-extrabold text-[#ff6f1e] mt-2">25 ج.م / صفحة</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="font-bold text-base text-[#2b1a07] block">إضافات اختيارية:</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label class="flex items-center gap-3 p-3 border border-[#171717]/30 rounded-lg cursor-pointer hover:bg-[#f7efe9]">
+                                    <input type="checkbox" id="addCover" checked class="w-4 h-4 accent-[#ff6f1e]" onchange="updateCalculator()">
+                                    <span class="text-sm font-semibold text-[#2b1a07]">تصميم غلاف احترافي جديد (+100 ج.م)</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 border border-[#171717]/30 rounded-lg cursor-pointer hover:bg-[#f7efe9]">
+                                    <input type="checkbox" id="addUrgent" class="w-4 h-4 accent-[#ff6f1e]" onchange="updateCalculator()">
+                                    <span class="text-sm font-semibold text-[#2b1a07]">تسليم عاجل خلال 24 ساعة (+25%)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-[#171717]/20 pb-4 mb-4">
+                                <span class="font-bold text-xl text-[#2b1a07]">ملخص التكلفة المقدرة</span>
+                                <span class="bg-[#3b82f6] text-white text-xs font-bold px-2.5 py-1 rounded-full border border-[#171717]">حساب فوري</span>
+                            </div>
+
+                            <div class="space-y-3 text-sm text-[#2b1a07]/80 mb-6">
+                                <div class="flex justify-between">
+                                    <span>تكلفة التنسيق الأساسية:</span>
+                                    <span id="baseCostText" class="font-bold text-[#2b1a07]">540 ج.م</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>تصميم الغلاف:</span>
+                                    <span id="coverCostText" class="font-bold text-[#2b1a07]">100 ج.م</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>رسوم العاجل:</span>
+                                    <span id="urgentCostText" class="font-bold text-[#2b1a07]">0 ج.م</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-[#22c55e] font-bold pt-2 border-t border-dashed border-[#171717]/20">
+                                    <span>خصم الكميات (أكثر من 20 صفحة):</span>
+                                    <span id="discountText">-10% مخصوم</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-[#f7efe9] border-2 border-[#171717] rounded-xl p-5 text-center mb-6">
+                                <span class="text-xs font-bold text-[#2b1a07]/60 block mb-1">الإجمالي الكلي المتوقع</span>
+                                <div class="font-display font-black text-4xl sm:text-5xl text-[#ff6f1e] leading-none mb-1" id="totalPriceVal">
+                                    576 <span class="text-lg font-bold text-[#2b1a07]">ج.م</span>
+                                </div>
+                                <span class="text-[11px] text-[#2b1a07]/50">الوقت المتوقع للتسليم: <strong id="deliveryDaysText" class="text-[#2b1a07]">2 إلى 3 أيام</strong></span>
+                            </div>
+                        </div>
+
+                        <button onclick="applyFromCalc()" class="btn-pill w-full py-4 bg-[#ff6f1e] text-[#171717] text-lg font-bold flex items-center justify-center gap-2 border-2 border-[#171717]">
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
+                            <span>تأكيد الطلب بهذا السعر عبر الواتساب</span>
                         </button>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="adminPackagesList">
-                        <!-- Dynamic editable packages -->
+        <!-- Before & After Comparison -->
+        <section class="py-16 px-4 sm:px-8 max-w-[1200px] mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">فرق السماء والأرض</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">مذكرتك قبل وبعد لمسات تصميمي</h2>
+                <p class="text-base text-[#2b1a07]/70">حرك الشريط في المنتصف لتكتشف كيف تتحول الصفحة العادية إلى مذكرات جذابة وسهلة القراءة</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white border-2 border-[#171717] rounded-card p-4 sm:p-6 shadow-[8px_8px_0px_#171717]">
+                <div class="flex items-center justify-between mb-6 border-b border-[#171717]/10 pb-4">
+                    <div class="flex items-center gap-2">
+                        <button id="btnShowBefore" onclick="setCompareMode('before')" class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#f7efe9] text-[#2b1a07]">
+                            الملف الخام (قبل)
+                        </button>
+                        <button id="btnShowAfter" onclick="setCompareMode('after')" class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#ff6f1e] text-white">
+                            تنسيق تصميمي (بعد) ★
+                        </button>
+                    </div>
+                    <span class="text-xs font-bold text-[#ff6f1e] hidden sm:inline-block">انقر للتنقل بين العرضين</span>
+                </div>
+
+                <div class="min-h-[320px] rounded-lg border border-[#171717]/20 p-6 relative bg-[#fdfbf9]">
+                    <div id="viewBefore" class="hidden space-y-3 font-serif text-gray-800 text-sm leading-normal">
+                        <div class="text-red-600 font-bold underline">درس الكيمياء العضوية المركبات الهيدروكربونية</div>
+                        <p>
+                            تعتبر الكيمياء العضوية فرع من فروع الكيمياء يدرس المركبات التي تحتوي كربون وهيدروجين وتصنف الهيدروكربونات الى مشبعة وغير مشبعة الالكانات هي مشبعة صيغتها العامة CnH2n+2 ومثالها الميثان والإيثان وتتميز بأن جميع روابطها أحادية سيجما قوية صعبة الكسر ولذلك هي خاملة نسبياً كيميائياً.
+                        </p>
+                        <p>
+                            ملاحظة هام جدا: الالكينات تحتوي رابطة مزدوجة وصيغتها CnH2n مثل الايثيلين والالكينات انشط من الالكانات بسبب وجود رابطة باي سهلة الكسر.
+                        </p>
+                        <div class="text-xs text-gray-500 italic">[ملاحظة المعلم: يجب حفظ الصيغ العامة قبل الامتحان]</div>
+                    </div>
+
+                    <div id="viewAfter" class="space-y-4 font-body notebook-lines">
+                        <div class="flex items-center justify-between bg-[#f7efe9] border-2 border-[#171717] p-3 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-[#ff6f1e] text-white font-bold text-xs px-2 py-0.5 rounded">كيمياء 03</span>
+                                <h3 class="font-display font-extrabold text-lg text-[#2b1a07]">المركبات الهيدروكربونية العضوية</h3>
+                            </div>
+                            <span class="font-handwritten text-lg text-[#3b82f6] font-bold">الوحدة الثانية</span>
+                        </div>
+
+                        <p class="text-sm sm:text-base text-[#2b1a07] leading-relaxed">
+                            تُعرف <span class="marker-underline font-bold">الكيمياء العضوية</span> بأنها الفرع المختص بدراسة مركبات الكربون والهيدروجين. وتُقسم الهيدروكربونات إلى قسمين رئيسيين:
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <div class="border-1.5 border-[#171717] bg-white rounded-lg p-3 shadow-sm">
+                                <div class="font-bold text-xs text-[#22c55e] border-b border-[#171717]/10 pb-1 mb-1.5 flex items-center gap-1">
+                                    <i class="fa-solid fa-leaf"></i> 1. الألكانات (المشبعة)
+                                </div>
+                                <ul class="text-xs space-y-1 text-[#2b1a07]/80">
+                                    <li>• الصيغة: <code class="bg-[#f7efe9] px-1 rounded font-mono font-bold">CnH2n+2</code></li>
+                                    <li>• مثال: الميثان والإيثان</li>
+                                    <li>• الروابط: سيجما الأحادي القوية</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-1.5 border-[#171717] bg-white rounded-lg p-3 shadow-sm">
+                                <div class="font-bold text-xs text-[#ff6f1e] border-b border-[#171717]/10 pb-1 mb-1.5 flex items-center gap-1">
+                                    <i class="fa-solid fa-bolt"></i> 2. الألكينات (غير المشبعة)
+                                </div>
+                                <ul class="text-xs space-y-1 text-[#2b1a07]/80">
+                                    <li>• الصيغة: <code class="bg-[#f7efe9] px-1 rounded font-mono font-bold">CnH2n</code></li>
+                                    <li>• مثال: الإيثيلين</li>
+                                    <li>• الروابط: باي المزدوجة (نشطة)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#ff6f1e]/10 border-r-4 border-[#ff6f1e] p-3 rounded-l-lg flex items-start gap-2 text-xs text-[#2b1a07]">
+                            <i class="fa-solid fa-star text-[#ff6f1e] text-base mt-0.5"></i>
+                            <div>
+                                <strong class="font-bold text-[#ff6f1e]">تنبيه الاختبار:</strong> يجب حفظ الصيغ العامة وتمييز نوع الروابط قبل دخول الاختبار النهائي!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase -->
+        <section id="showcase" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-t-2 border-[#171717]">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">أعمال تحكي عن نفسها</span>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07]">معرض نماذج المذكرات</h2>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2" id="portfolioTabs">
+                        <button onclick="filterPortfolio('all')" class="port-tab active btn-pill px-4 py-1.5 text-xs font-bold bg-[#ff6f1e] text-white">الكل</button>
+                        <button onclick="filterPortfolio('sec')" class="port-tab btn-pill px-4 py-1.5 text-xs font-bold bg-[#fdfbf9] text-[#2b1a07]">مرحلة ثانوية</button>
+                        <button onclick="filterPortfolio('univ')" class="port-tab btn-pill px-4 py-1.5 text-xs font-bold bg-[#fdfbf9] text-[#2b1a07]">جامعات ومعاهد</button>
+                        <button onclick="filterPortfolio('summary')" class="port-tab btn-pill px-4 py-1.5 text-xs font-bold bg-[#fdfbf9] text-[#2b1a07]">ملخصات مركزة</button>
                     </div>
                 </div>
 
-                <!-- TAB 3: THEME & COLOR CUSTOMIZATION -->
-                <div id="adminTabContent-theme" class="admin-tab-pane hidden space-y-6">
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717] max-w-2xl">
-                        <h2 class="font-display font-extrabold text-xl text-[#2b1a07] mb-4">تعديل ألوان الهوية البصرية والنصوص</h2>
-                        
-                        <form onsubmit="saveThemeSettings(event)" class="space-y-4 text-xs font-bold">
-                            <div>
-                                <label class="block mb-1">اللون الرئيسي للثيم (البرتقالي):</label>
-                                <input type="color" id="themePrimaryColor" value="#ff6f1e" class="w-full h-10 rounded border border-[#171717] cursor-pointer">
-                            </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolioGrid">
+                    <div class="port-item sec bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-[6px_6px_0px_#171717] tilt-left-sm transition-all hover:rotate-0">
+                        <div class="bg-[#3b82f6]/10 border border-[#171717]/20 rounded-lg p-4 mb-4 relative overflow-hidden">
+                            <span class="absolute top-2 left-2 bg-[#3b82f6] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">فيزياء</span>
+                            <div class="font-handwritten text-xl text-[#2b1a07] font-bold mb-2">مذكرة الكهربية المغناطيسية</div>
+                            <p class="text-xs text-[#2b1a07]/70 line-clamp-2">تنسيق شامل مع رسومات هندسية توضيحية وقوانين مؤطرة للأستاذ أحمد.</p>
+                        </div>
+                        <div class="flex items-center justify-between text-xs font-bold text-[#2b1a07]">
+                            <span>3 ثانوي • 45 صفحة</span>
+                            <span class="text-[#ff6f1e]">مع غلاف تفاعلي</span>
+                        </div>
+                    </div>
 
-                            <div>
-                                <label class="block mb-1">عنوان الهيدر الرئيسي:</label>
-                                <input type="text" id="siteTitleInput" value="تصميمي" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2.5">
-                            </div>
+                    <div class="port-item univ bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-[6px_6px_0px_#171717] tilt-right-sm transition-all hover:rotate-0">
+                        <div class="bg-[#ff66cf]/10 border border-[#171717]/20 rounded-lg p-4 mb-4 relative overflow-hidden">
+                            <span class="absolute top-2 left-2 bg-[#ff66cf] text-[#171717] text-[10px] font-bold px-2 py-0.5 rounded-full">كلية الطب</span>
+                            <div class="font-handwritten text-xl text-[#2b1a07] font-bold mb-2">ملخص علم الأدوية Pharmacology</div>
+                            <p class="text-xs text-[#2b1a07]/70 line-clamp-2">جداول مقارنة أدوية مع تقسيم ألوان واستخدامات وحساب الجرعات.</p>
+                        </div>
+                        <div class="flex items-center justify-between text-xs font-bold text-[#2b1a07]">
+                            <span>جامعي • 80 صفحة</span>
+                            <span class="text-[#22c55e]">تنسيق جداول VIP</span>
+                        </div>
+                    </div>
 
-                            <div>
-                                <label class="block mb-1">العنوان الفرعي للعلامة التجاريّة:</label>
-                                <input type="text" id="siteSubTitleInput" value="لتنسيق المذكرات والكتب" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2.5">
-                            </div>
+                    <div class="port-item summary bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-[6px_6px_0px_#171717] tilt-left-sm transition-all hover:rotate-0">
+                        <div class="bg-[#22c55e]/10 border border-[#171717]/20 rounded-lg p-4 mb-4 relative overflow-hidden">
+                            <span class="absolute top-2 left-2 bg-[#22c55e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">لغة عربية</span>
+                            <div class="font-handwritten text-xl text-[#2b1a07] font-bold mb-2">كتيب خرائط النحو الذهبية</div>
+                            <p class="text-xs text-[#2b1a07]/70 line-clamp-2">تشجير قواعد النحو والعراب في خرائط ذهنية ميسرة مع تمارين محلولة.</p>
+                        </div>
+                        <div class="flex items-center justify-between text-xs font-bold text-[#2b1a07]">
+                            <span>مراجعة ليلة الامتحان • 20 صفحة</span>
+                            <span class="text-[#3b82f6]">طباعة عالي الجودة</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                            <button type="submit" class="btn-pill w-full py-3 bg-[#ff6f1e] text-white font-bold text-sm">حفظ التغييرات الهيكلية</button>
-                        </form>
+        <!-- Live Preview Tool -->
+        <section id="preview-tool" class="py-16 px-4 sm:px-8 max-w-[1200px] mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">أداة حية ومباشرة</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-2">جرب تنسيق نصك الآن!</h2>
+                <p class="text-base text-[#2b1a07]/70">اكتب أو الصق فقرة من مذكرتك وشاهد كيف تصممها تصميمي في الحين</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717] flex flex-col justify-between">
+                    <div>
+                        <label class="font-bold text-sm text-[#2b1a07] block mb-2">عنوان الدرس أو الفصل:</label>
+                        <input type="text" id="userTitle" value="مقدمة في الذكاء الاصطناعي" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg px-3 py-2 text-sm font-bold text-[#2b1a07] mb-4 focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]" oninput="renderLivePreview()">
+
+                        <label class="font-bold text-sm text-[#2b1a07] block mb-2">محتوى النص أو الشرح:</label>
+                        <textarea id="userText" rows="6" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm text-[#2b1a07] leading-relaxed mb-4 focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]" oninput="renderLivePreview()">الذكاء الاصطناعي هو فرع من علوم الحاسوب يهدف إلى إنشاء أنظمة قادرة على أداء مهام تتطلب عادةً ذكاءً بشرياً مثل التعلم والاستنتاج وحل المشكلات.
+ملاحظة مهمة: تُعتبر الشبكات العصبية العميقة هي المحرك الأساسي لطفرة الذكاء الاصطناعي الحديثة.</textarea>
+
+                        <div class="mb-4">
+                            <label class="font-bold text-sm text-[#2b1a07] block mb-2">اختر لون الثيم الرئيسي للمذكرة:</label>
+                            <div class="flex gap-3">
+                                <button onclick="setPreviewColor('#ff6f1e')" class="w-8 h-8 rounded-full bg-[#ff6f1e] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
+                                <button onclick="setPreviewColor('#3b82f6')" class="w-8 h-8 rounded-full bg-[#3b82f6] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
+                                <button onclick="setPreviewColor('#22c55e')" class="w-8 h-8 rounded-full bg-[#22c55e] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
+                                <button onclick="setPreviewColor('#ff66cf')" class="w-8 h-8 rounded-full bg-[#ff66cf] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-[#2b1a07]/60 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-[#ff6f1e]"></i>
+                        <span>المعاينة التفاعلية فورية وتعتمد نظام التظليل الذكي!</span>
                     </div>
                 </div>
 
-                <!-- TAB 4: SOCIAL LINKS -->
-                <div id="adminTabContent-social" class="admin-tab-pane hidden space-y-6">
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717] max-w-2xl">
-                        <h2 class="font-display font-extrabold text-xl text-[#2b1a07] mb-4">إدارة أرقام وروابط التواصل الاجتماعي</h2>
-                        
-                        <form onsubmit="saveSocialSettings(event)" class="space-y-4 text-xs font-bold">
-                            <div>
-                                <label class="block mb-1">رقم الواتساب (بالصيغة الدولية بدون +):</label>
-                                <input type="text" id="socialWhatsappInput" value="201000000000" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2.5">
-                            </div>
+                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717] notebook-lines flex flex-col justify-between">
+                    <div>
+                        <div id="prevHeader" class="border-b-2 pb-2 mb-4 flex items-center justify-between" style="border-color: #ff6f1e;">
+                            <h3 id="outTitle" class="font-display font-extrabold text-xl text-[#2b1a07]">مقدمة في الذكاء الاصطناعي</h3>
+                            <span id="prevBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full text-white" style="background-color: #ff6f1e;">صفحة 01</span>
+                        </div>
 
-                            <div>
-                                <label class="block mb-1">رابط حساب إنستغرام:</label>
-                                <input type="url" id="socialInstagramInput" value="https://instagram.com" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2.5">
-                            </div>
+                        <div id="outBody" class="text-sm sm:text-base text-[#2b1a07] leading-relaxed space-y-3 font-medium"></div>
+                    </div>
 
-                            <div>
-                                <label class="block mb-1">رابط صفحة الفيسبوك:</label>
-                                <input type="url" id="socialFacebookInput" value="https://facebook.com" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2.5">
-                            </div>
+                    <div class="pt-6 mt-4 border-t border-[#171717]/10 flex justify-between items-center text-xs font-bold text-[#2b1a07]/40">
+                        <span>تصميمي — خدمة تنسيق المذكرات</span>
+                        <span>www.tasmeemy.com</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                            <button type="submit" class="btn-pill w-full py-3 bg-[#171717] text-white font-bold text-sm">حفظ الروابط</button>
-                        </form>
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-t-2 border-[#171717]">
+            <div class="max-w-[1200px] mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">باقات تناسب الجميع</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">خطط وباقات التنسيق</h2>
+                    <p class="text-base text-[#2b1a07]/70">اختر الباقة المناسبة لمذكرتك أو كتابك واستلم ملفك جاهز للطباعة مباشرة</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between">
+                        <div>
+                            <div class="font-bold text-lg text-[#2b1a07] mb-1">الباقة الأساسية</div>
+                            <p class="text-xs text-[#2b1a07]/60 mb-4">مثالية للواجبات والملخصات السريعة الصغيرة</p>
+                            <div class="font-display font-black text-3xl text-[#ff6f1e] mb-6">12 ج.م <span class="text-xs text-[#2b1a07] font-normal">/ صفحة</span></div>
+
+                            <ul class="space-y-3 text-xs sm:text-sm text-[#2b1a07] mb-8">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تنسيق النصوص والخطوط</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>ضبط الهوامش والترقيم</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تسليم صيغة PDF عالية الدقة</span></li>
+                                <li class="flex items-center gap-2 text-[#2b1a07]/40 line-through"><i class="fa-solid fa-xmark"></i><span>لا تشمل تصميم غلاف</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="selectPackage('الباقة الأساسية')" class="btn-pill w-full py-3 font-bold text-sm text-[#171717]">اختيار هذه الباقة</button>
+                    </div>
+
+                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[8px_8px_0px_#171717] flex flex-col justify-between relative border-4 border-[#ff6f1e]">
+                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#ff6f1e] text-white text-xs font-bold px-4 py-1 rounded-full border border-[#171717]">
+                            🔥 الباقة الأكثر طلباً
+                        </div>
+                        <div>
+                            <div class="font-bold text-xl text-[#2b1a07] mb-1 mt-2">الباقة الاحترافية</div>
+                            <p class="text-xs text-[#2b1a07]/60 mb-4">للمدرسين والطلاب الراغبين في مذكرات مثالية</p>
+                            <div class="font-display font-black text-4xl text-[#ff6f1e] mb-6">18 ج.م <span class="text-xs text-[#2b1a07] font-normal">/ صفحة</span></div>
+
+                            <ul class="space-y-3 text-xs sm:text-sm text-[#2b1a07] mb-8">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>كل مميزات الباقة الأساسية</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تصميم جداول المقارنة والصناديق</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>إضافة أيقونات توضيحية وتظليلات</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>غلاف مذكرة مميز مجاني</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>ملف Word + PDF للطباعة</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="selectPackage('الباقة الاحترافية')" class="btn-pill w-full py-3.5 font-bold text-sm bg-[#ff6f1e] text-white border-2 border-[#171717]">اطلب الباقة الاحترافية</button>
+                    </div>
+
+                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between">
+                        <div>
+                            <div class="font-bold text-lg text-[#2b1a07] mb-1">باقة الكتب والكورسات</div>
+                            <p class="text-xs text-[#2b1a07]/60 mb-4">للكتب الدراسية والكتيبات التدريبية المتقدمة</p>
+                            <div class="font-display font-black text-3xl text-[#ff6f1e] mb-6">25 ج.م <span class="text-xs text-[#2b1a07] font-normal">/ صفحة</span></div>
+
+                            <ul class="space-y-3 text-xs sm:text-sm text-[#2b1a07] mb-8">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تنسيق إخراج مطبوعات وحسب الهوية</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>رسوم توضيحية وانفوجرافيك مخصص</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تصميم غلافين (أمامي وخلفي)</span></li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تعديلات غير محدودة مجاناً</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="selectPackage('باقة الكتب VIP')" class="btn-pill w-full py-3 font-bold text-sm text-[#171717]">اختيار الباقة VIP</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-16 px-4 sm:px-8 max-w-[900px] mx-auto">
+            <div class="text-center mb-10">
+                <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">اجابات لكل ما يدور ببالك</span>
+                <h2 class="font-display font-extrabold text-3xl text-[#2b1a07]">الأسئلة الشائعة</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full text-right font-bold text-base text-[#2b1a07] flex justify-between items-center">
+                        <span>كم يستغرق وقت تنسيق المذكرة عادةً؟</span>
+                        <i class="fa-solid fa-plus text-[#ff6f1e] transition-transform"></i>
+                    </button>
+                    <div class="faq-ans hidden mt-3 pt-3 border-t border-[#171717]/10 text-sm text-[#2b1a07]/80 leading-relaxed">
+                        تستغرق المذكرات المتوسطة (من 20 إلى 50 صفحة) حوالي 24 إلى 48 ساعة. كما تتوفر لدينا خدمة التسليم العاجل خلال 24 ساعة حسب الطلب.
                     </div>
                 </div>
 
+                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full text-right font-bold text-base text-[#2b1a07] flex justify-between items-center">
+                        <span>بأي صيغة يتم تسليم المذكرة؟</span>
+                        <i class="fa-solid fa-plus text-[#ff6f1e] transition-transform"></i>
+                    </button>
+                    <div class="faq-ans hidden mt-3 pt-3 border-t border-[#171717]/10 text-sm text-[#2b1a07]/80 leading-relaxed">
+                        نسلّمك ملف PDF جاهز فوراً للطباعة بدقة عالية عالية جداً (300 DPI) بجانب ملف Word أو PowerPoint في حال رغبت بتعديل النصوص لاحقاً بنفسك.
+                    </div>
+                </div>
+
+                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-sm">
+                    <button onclick="toggleFaq(this)" class="w-full text-right font-bold text-base text-[#2b1a07] flex justify-between items-center">
+                        <span>هل أستطيع طلب تعديلات بعد الاستلام؟</span>
+                        <i class="fa-solid fa-plus text-[#ff6f1e] transition-transform"></i>
+                    </button>
+                    <div class="faq-ans hidden mt-3 pt-3 border-t border-[#171717]/10 text-sm text-[#2b1a07]/80 leading-relaxed">
+                        بالتأكيد! نوفر جولتي تعديلات مجانية بالكامل لضمان رضاك التام عن شكل الخطوط، الألوان، والتنظيم النهائي للمذكرة.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 bg-[#ff6f1e] text-[#2b1a07] border-t-2 border-[#171717] rounded-t-footer-cap pt-12 pb-8 px-6 sm:px-12 relative">
+        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 border-b border-[#171717]/20 pb-8">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-[#fdfbf9] border-2 border-[#171717] flex items-center justify-center text-[#ff6f1e] text-2xl font-black shadow-sticker">
+                    ت
+                </div>
+                <div>
+                    <h3 class="font-display font-extrabold text-2xl text-[#171717]">تصميمي</h3>
+                    <p class="font-handwritten text-lg text-[#2b1a07]/90 font-bold">كل صفحة تلهمك للنجاح والاستذكار</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 text-sm font-bold">
+                <a href="#calculator" class="hover:underline">الحاسبة</a>
+                <span>•</span>
+                <a href="#showcase" class="hover:underline">النماذج</a>
+                <span>•</span>
+                <a href="#pricing" class="hover:underline">الباقات</a>
+                <span>•</span>
+                <button onclick="openOrderModal()" class="bg-[#fdfbf9] border-2 border-[#171717] px-4 py-1.5 rounded-full text-xs font-extrabold hover:bg-white">اطلب الآن</button>
             </div>
         </div>
-    </div>
 
-    <!-- ORDER SUBMISSION MODAL -->
+        <div class="max-w-[1200px] mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-[#2b1a07]/80 gap-2">
+            <div>جميع الحقوق محفوظة © 2026 لموقع تصميمي (Tasmeemy)</div>
+            <div class="flex items-center gap-1">
+                <span>تم التصميم بكل حب وإتقان</span>
+                <i class="fa-solid fa-heart text-[#171717]"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Customer Order Modal -->
     <div id="orderModal" class="fixed inset-0 z-50 bg-[#171717]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card max-w-lg w-full p-6 sm:p-8 shadow-[10px_10px_0px_#171717] relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeOrderModal()" class="absolute top-4 left-4 w-8 h-8 bg-[#f7efe9] border border-[#171717] rounded-full flex items-center justify-center text-sm font-bold hover:bg-[#ff6f1e] hover:text-white">✕</button>
+        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card max-w-lg w-full p-6 sm:p-8 shadow-[10px_10px_0px_#171717] relative animate-fade-in max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeOrderModal()" class="absolute top-4 left-4 w-8 h-8 bg-[#f7efe9] border border-[#171717] rounded-full flex items-center justify-center text-sm font-bold hover:bg-[#ff6f1e] hover:text-white">
+                ✕
+            </button>
 
             <div class="mb-6">
-                <span class="font-handwritten text-xl dynamic-theme-text font-bold block mb-1">أهلاً بك معنا!</span>
+                <span class="font-handwritten text-xl text-[#ff6f1e] font-bold block mb-1">أهلاً بك معنا!</span>
                 <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">طلب تنسيق مذكرة جديدة</h3>
             </div>
 
@@ -599,23 +763,25 @@
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-bold text-[#2b1a07] mb-1">عدد الصفحات:</label>
+                        <label class="block text-xs font-bold text-[#2b1a07] mb-1">عدد الصفحات التقريبي:</label>
                         <input type="number" id="orderPageCount" value="30" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-[#2b1a07] mb-1">الباقة المختارة:</label>
                         <select id="orderPackageSelect" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-bold text-[#2b1a07] focus:outline-none">
-                            <!-- Dynamic select options -->
+                            <option value="الباقة الأساسية">الباقة الأساسية (12 ج.م)</option>
+                            <option value="الباقة الاحترافية" selected>الباقة الاحترافية (18 ج.م)</option>
+                            <option value="باقة الكتب VIP">باقة الكتب VIP (25 ج.م)</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-[#2b1a07] mb-1">ملاحظات العميل:</label>
+                    <label class="block text-xs font-bold text-[#2b1a07] mb-1">ملاحظات أو رابط الملف (اختياري):</label>
                     <textarea id="orderNotes" rows="3" placeholder="أرفق رابط Google Drive أو اذكر أي ملاحظات خاصة بالخطوط والألوان..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]"></textarea>
                 </div>
 
-                <button type="submit" class="btn-pill w-full py-3.5 dynamic-theme-bg text-white font-bold text-base border-2 border-[#171717] flex items-center justify-center gap-2">
+                <button type="submit" class="btn-pill w-full py-3.5 bg-[#ff6f1e] text-white font-bold text-base border-2 border-[#171717] flex items-center justify-center gap-2">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
                     <span>إرسال الطلب فوراً عبر الواتساب</span>
                 </button>
@@ -623,239 +789,90 @@
         </div>
     </div>
 
-    <!-- PACKAGE EDIT/ADD MODAL -->
-    <div id="packageModal" class="fixed inset-0 z-50 bg-[#171717]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card max-w-md w-full p-6 shadow-[10px_10px_0px_#171717] relative">
-            <button onclick="closePackageModal()" class="absolute top-4 left-4 w-8 h-8 bg-[#f7efe9] border border-[#171717] rounded-full flex items-center justify-center text-sm font-bold">✕</button>
+    <!-- ADMIN DASHBOARD MODAL -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card max-w-5xl w-full p-6 sm:p-8 shadow-[12px_12px_0px_#171717] relative animate-fade-in max-h-[92vh] overflow-y-auto">
+            
+            <!-- Close Admin Panel -->
+            <button onclick="closeAdminModal()" class="absolute top-4 left-4 w-9 h-9 bg-[#f7efe9] border border-[#171717] rounded-full flex items-center justify-center text-sm font-bold hover:bg-[#ff6f1e] hover:text-white">
+                ✕
+            </button>
 
-            <h3 class="font-display font-extrabold text-xl text-[#2b1a07] mb-4" id="pkgModalTitle">إضافة باقة جديدة</h3>
-
-            <form onsubmit="handleSavePackage(event)" class="space-y-3 text-xs font-bold">
-                <input type="hidden" id="pkgEditId">
+            <!-- Admin Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-[#171717] pb-4 mb-6 gap-2">
                 <div>
-                    <label class="block mb-1">اسم الباقة:</label>
-                    <input type="text" id="pkgNameInput" required placeholder="مثال: الباقة الاحترافية" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-[#ff6f1e] text-white text-xs font-bold px-2.5 py-0.5 rounded-md">ADMIN CONTROL</span>
+                        <h2 class="font-display font-extrabold text-2xl text-[#2b1a07]">لوحة إدارة الطلبات</h2>
+                    </div>
+                    <p class="text-xs text-[#2b1a07]/60 mt-1">متابعة طلبات العملاء وإرسال تحديث الحالات عبر الواتساب</p>
                 </div>
 
-                <div>
-                    <label class="block mb-1">الوصف الفرعي:</label>
-                    <input type="text" id="pkgSubInput" required placeholder="وصف قصير للباقة" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2">
-                </div>
+                <button onclick="logoutAdmin()" class="self-start sm:self-auto text-xs font-bold bg-[#f7efe9] text-red-600 border border-[#171717] px-3 py-1.5 rounded-lg hover:bg-red-500 hover:text-white transition-colors">
+                    <i class="fa-solid fa-right-from-bracket ml-1"></i> تسجيل الخروج
+                </button>
+            </div>
 
-                <div>
-                    <label class="block mb-1">السعر لكل صفحة (ج.م):</label>
-                    <input type="number" id="pkgPriceInput" required min="1" value="18" class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2">
+            <!-- Dashboard Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-[#f7efe9] border-1.5 border-[#171717] rounded-xl p-4 text-center">
+                    <div class="text-xs font-bold text-[#2b1a07]/60 mb-1">إجمالي الطلبات</div>
+                    <div class="font-display font-black text-2xl text-[#2b1a07]" id="statTotalOrders">0</div>
                 </div>
-
-                <div>
-                    <label class="block mb-1">المميزات (ميزة واحدة في كل سطر):</label>
-                    <textarea id="pkgFeaturesInput" rows="4" required class="w-full bg-[#f7efe9] border border-[#171717] rounded p-2" placeholder="تنسيق النصوص والخطوط&#10;تصميم جداول المقارنة&#10;غلاف مذكرة مجاني"></textarea>
+                <div class="bg-[#3b82f6]/10 border-1.5 border-[#171717] rounded-xl p-4 text-center">
+                    <div class="text-xs font-bold text-[#3b82f6] mb-1">قيد التنسيق</div>
+                    <div class="font-display font-black text-2xl text-[#3b82f6]" id="statPendingOrders">0</div>
                 </div>
-
-                <div class="flex items-center gap-2 pt-1">
-                    <input type="checkbox" id="pkgIsPopularInput" class="w-4 h-4 accent-[#ff6f1e]">
-                    <label for="pkgIsPopularInput">تمييز هذه الباقة كـ "الأكثر طلباً"</label>
+                <div class="bg-[#22c55e]/10 border-1.5 border-[#171717] rounded-xl p-4 text-center">
+                    <div class="text-xs font-bold text-[#22c55e] mb-1">المكتملة والمُسلمة</div>
+                    <div class="font-display font-black text-2xl text-[#22c55e]" id="statDoneOrders">0</div>
                 </div>
+                <div class="bg-[#ff6f1e]/10 border-1.5 border-[#171717] rounded-xl p-4 text-center">
+                    <div class="text-xs font-bold text-[#ff6f1e] mb-1">الأرباح التقديرية</div>
+                    <div class="font-display font-black text-2xl text-[#ff6f1e]" id="statTotalRevenue">0 ج.م</div>
+                </div>
+            </div>
 
-                <button type="submit" class="btn-pill w-full py-3 bg-[#171717] text-white font-bold text-sm mt-2">حفظ الباقة</button>
-            </form>
+            <!-- Orders Management Table -->
+            <div class="overflow-x-auto border-2 border-[#171717] rounded-xl bg-white shadow-sm">
+                <table class="w-full text-right text-xs sm:text-sm">
+                    <thead class="bg-[#f7efe9] border-b-2 border-[#171717] text-[#2b1a07] font-bold">
+                        <tr>
+                            <th class="p-3">#</th>
+                            <th class="p-3">اسم العميل</th>
+                            <th class="p-3">الواتساب</th>
+                            <th class="p-3">المادة / الصفحات</th>
+                            <th class="p-3">الباقة</th>
+                            <th class="p-3">التكلفة</th>
+                            <th class="p-3">حالة الطلب</th>
+                            <th class="p-3 text-center">إشعار الواتساب</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminOrdersTableBody" class="divide-y divide-[#171717]/10 font-medium text-[#2b1a07]">
+                        <!-- Populated Dynamically via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 text-xs text-[#2b1a07]/50 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-[#ff6f1e]"></i>
+                <span>تحديث حالة الطلب يجهز رسالة الواتساب تلقائياً للعميل لإشعاره بالمستجدات.</span>
+            </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT APP STATE & ROUTING -->
     <script>
-        // DEFAULT INITIAL DATA STORE
-        const DEFAULT_PACKAGES = [
-            {
-                id: 'pkg-1',
-                title: 'الباقة الأساسية',
-                subtitle: 'مثالية للواجبات والملخصات السريعة الصغيرة',
-                price: 12,
-                isPopular: false,
-                features: ['تنسيق النصوص والخطوط', 'ضبط الهوامش والترقيم', 'تسليم صيغة PDF عالية الدقة']
-            },
-            {
-                id: 'pkg-2',
-                title: 'الباقة الاحترافية',
-                subtitle: 'للمدرسين والطلاب الراغبين في مذكرات مثالية',
-                price: 18,
-                isPopular: true,
-                features: ['كل مميزات الباقة الأساسية', 'تصميم جداول المقارنة والصناديق', 'إضافة أيقونات توضيحية وتظليلات', 'غلاف مذكرة مميز مجاني', 'ملف Word + PDF للطباعة']
-            },
-            {
-                id: 'pkg-3',
-                title: 'باقة الكتب VIP',
-                subtitle: 'للكتب الدراسية والكتيبات التدريبية المتقدمة',
-                price: 25,
-                isPopular: false,
-                features: ['تنسيق إخراج مطبوعات وحسب الهوية', 'رسوم توضيحية وانفوجرافيك مخصص', 'تصميم غلافين (أمامي وخلفي)', 'تعديلات غير محدودة مجاناً']
-            }
+        // Store and Retrieve Orders from LocalStorage
+        let systemOrders = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [
+            { id: 101, name: "د. أحمد علي", phone: "01012345678", subject: "الأحياء العشبي", pages: 30, package: "الباقة الاحترافية", price: 540, status: "جديد", notes: "التركيز على رسومات الخلايا" },
+            { id: 102, name: "أ. سارة محمود", phone: "01122334455", subject: "الكيمياء العضوية", pages: 50, package: "باقة الكتب VIP", price: 1062, status: "قيد التنسيق", notes: "مستعجل ليلة الامتحان" }
         ];
-
-        // LOAD FROM LOCAL STORAGE OR INITIALIZE
-        let appPackages = JSON.parse(localStorage.getItem('tasmeemy_packages')) || DEFAULT_PACKAGES;
-        let appOrders = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [
-            {
-                id: 'ORD-101',
-                name: 'د. أحـمد السعيد',
-                phone: '01012345678',
-                subject: 'الأحياء العشبي',
-                pages: 45,
-                package: 'الباقة الاحترافية',
-                notes: 'أرجو اختيار الألوان الهادئة والأيقونات الطبية',
-                status: 'جاري التنسيق ⏳',
-                date: '2026-10-02'
-            }
-        ];
-
-        let appSocial = JSON.parse(localStorage.getItem('tasmeemy_social')) || {
-            whatsapp: '201000000000',
-            instagram: 'https://instagram.com',
-            facebook: 'https://facebook.com'
-        };
-
-        let appTheme = JSON.parse(localStorage.getItem('tasmeemy_theme')) || {
-            primaryColor: '#ff6f1e',
-            title: 'تصميمي',
-            subtitle: 'لتنسيق المذكرات والكتب'
-        };
-
-        // ADMIN AUTH STATE
-        let isAdminLoggedIn = sessionStorage.getItem('tasmeemy_admin_auth') === 'true';
-
-        // PERSISTENCE SAVERS
-        function savePackages() {
-            localStorage.setItem('tasmeemy_packages', JSON.stringify(appPackages));
-            renderPackages();
-            updateCalculator();
-        }
 
         function saveOrders() {
-            localStorage.setItem('tasmeemy_orders', JSON.stringify(appOrders));
-            renderOrdersTable();
+            localStorage.setItem('tasmeemy_orders', JSON.stringify(systemOrders));
         }
 
-        function saveSocial() {
-            localStorage.setItem('tasmeemy_social', JSON.stringify(appSocial));
-            applySocialLinks();
-        }
-
-        function saveTheme() {
-            localStorage.setItem('tasmeemy_theme', JSON.stringify(appTheme));
-            applyThemeSettings();
-        }
-
-        // SPA ROUTING ENGINE
-        function handleRouting() {
-            const path = window.location.pathname;
-            const hash = window.location.hash;
-
-            if (path.includes('/admin') || hash === '#admin') {
-                document.getElementById('clientWebsiteView').classList.add('hidden');
-                document.getElementById('adminPanelPage').classList.remove('hidden');
-
-                if (isAdminLoggedIn) {
-                    document.getElementById('adminAuthScreen').classList.add('hidden');
-                    document.getElementById('adminDashboardView').classList.remove('hidden');
-                    renderOrdersTable();
-                    renderAdminPackages();
-                } else {
-                    document.getElementById('adminAuthScreen').classList.remove('hidden');
-                    document.getElementById('adminDashboardView').classList.add('hidden');
-                }
-            } else {
-                document.getElementById('clientWebsiteView').classList.remove('hidden');
-                document.getElementById('adminPanelPage').classList.add('hidden');
-            }
-        }
-
-        function navigateToAdmin() {
-            window.location.hash = 'admin';
-            handleRouting();
-        }
-
-        function navigateToClient() {
-            window.location.hash = '';
-            handleRouting();
-        }
-
-        // AUTH HANDLERS
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            const pass = document.getElementById('adminPassInput').value;
-            if (pass === 'admin123') {
-                isAdminLoggedIn = true;
-                sessionStorage.setItem('tasmeemy_admin_auth', 'true');
-                document.getElementById('loginErrorMsg').classList.add('hidden');
-                handleRouting();
-            } else {
-                document.getElementById('loginErrorMsg').classList.remove('hidden');
-            }
-        }
-
-        function adminLogout() {
-            isAdminLoggedIn = false;
-            sessionStorage.removeItem('tasmeemy_admin_auth');
-            handleRouting();
-        }
-
-        // RENDER CLIENT PACKAGES GRID & SELECTS
-        function renderPackages() {
-            const container = document.getElementById('clientPackagesGrid');
-            const calcContainer = document.getElementById('calcPackagesContainer');
-            const modalSelect = document.getElementById('orderPackageSelect');
-
-            if (container) container.innerHTML = '';
-            if (calcContainer) calcContainer.innerHTML = '';
-            if (modalSelect) modalSelect.innerHTML = '';
-
-            appPackages.forEach((pkg, idx) => {
-                // Main Grid Card
-                if (container) {
-                    const card = document.createElement('div');
-                    card.className = `bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between relative ${pkg.isPopular ? 'border-4 border-[#ff6f1e]' : ''}`;
-                    
-                    let popularBadge = pkg.isPopular ? `<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 dynamic-theme-bg text-white text-xs font-bold px-4 py-1 rounded-full border border-[#171717]">🔥 الأكثر طلباً</div>` : '';
-
-                    let featureList = pkg.features.map(f => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>${f}</span></li>`).join('');
-
-                    card.innerHTML = `
-                        ${popularBadge}
-                        <div>
-                            <div class="font-bold text-xl text-[#2b1a07] mb-1 ${pkg.isPopular ? 'mt-2' : ''}">${pkg.title}</div>
-                            <p class="text-xs text-[#2b1a07]/60 mb-4">${pkg.subtitle}</p>
-                            <div class="font-display font-black text-3xl sm:text-4xl dynamic-theme-text mb-6">${pkg.price} ج.م <span class="text-xs text-[#2b1a07] font-normal">/ صفحة</span></div>
-                            <ul class="space-y-3 text-xs sm:text-sm text-[#2b1a07] mb-8">${featureList}</ul>
-                        </div>
-                        <button onclick="selectPackage('${pkg.title}')" class="btn-pill w-full py-3.5 font-bold text-sm ${pkg.isPopular ? 'dynamic-theme-bg text-white border-2 border-[#171717]' : 'text-[#171717]'}">اختيار هذه الباقة</button>
-                    `;
-                    container.appendChild(card);
-                }
-
-                // Calc Radio Option
-                if (calcContainer) {
-                    const label = document.createElement('label');
-                    label.className = "border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] transition-all has-[:checked]:bg-[#ff6f1e]/10 has-[:checked]:border-[#ff6f1e]";
-                    label.innerHTML = `
-                        <input type="radio" name="serviceTier" value="${pkg.id}" data-price="${pkg.price}" ${idx === 0 ? 'checked' : ''} class="sr-only" onchange="updateCalculator()">
-                        <div class="font-bold text-sm text-[#2b1a07]">${pkg.title}</div>
-                        <div class="text-xs text-[#2b1a07]/60 mt-1">${pkg.subtitle}</div>
-                        <div class="text-xs font-extrabold dynamic-theme-text mt-2">${pkg.price} ج.م / صفحة</div>
-                    `;
-                    calcContainer.appendChild(label);
-                }
-
-                // Modal Select Option
-                if (modalSelect) {
-                    const opt = document.createElement('option');
-                    opt.value = pkg.title;
-                    opt.textContent = `${pkg.title} (${pkg.price} ج.م/صفحة)`;
-                    modalSelect.appendChild(opt);
-                }
-            });
-        }
-
-        // CALCULATOR ENGINE
+        // Calculator logic
         function syncPageInput(val) {
             document.getElementById('pageInput').value = val;
             updateCalculator();
@@ -863,29 +880,122 @@
 
         function updateCalculator() {
             const pages = parseInt(document.getElementById('pageInput').value) || 0;
-            const selectedRadio = document.querySelector('input[name="serviceTier"]:checked');
-            const ratePerPage = selectedRadio ? parseFloat(selectedRadio.getAttribute('data-price')) : 18;
-
+            const selectedTierEl = document.querySelector('input[name="serviceTier"]:checked');
+            const tier = selectedTierEl ? selectedTierEl.value : 'pro';
             const addCover = document.getElementById('addCover').checked;
             const addUrgent = document.getElementById('addUrgent').checked;
 
+            let ratePerPage = 18;
+            if (tier === 'basic') ratePerPage = 12;
+            if (tier === 'vip') ratePerPage = 25;
+
             let baseCost = pages * ratePerPage;
             let coverCost = addCover ? 100 : 0;
-            let subtotal = baseCost + coverCost;
+            
+            let discountRate = 0;
+            if (pages >= 50) discountRate = 0.15;
+            else if (pages >= 20) discountRate = 0.10;
 
-            let urgentCost = addUrgent ? (subtotal * 0.25) : 0;
-            let grandTotal = Math.round(subtotal + urgentCost);
+            let subtotal = baseCost + coverCost;
+            let discountAmount = subtotal * discountRate;
+            let discountedTotal = subtotal - discountAmount;
+
+            let urgentCost = addUrgent ? (discountedTotal * 0.25) : 0;
+            let grandTotal = Math.round(discountedTotal + urgentCost);
 
             document.getElementById('baseCostText').innerText = baseCost + ' ج.م';
             document.getElementById('coverCostText').innerText = coverCost + ' ج.م';
             document.getElementById('urgentCostText').innerText = Math.round(urgentCost) + ' ج.م';
+            document.getElementById('discountText').innerText = (discountRate * 100) + '% مخصوم';
             document.getElementById('totalPriceVal').innerHTML = grandTotal + ' <span class="text-lg font-bold text-[#2b1a07]">ج.م</span>';
 
-            let days = addUrgent ? "خلال 24 ساعة 🔥" : (pages > 100 ? "4 إلى 5 أيام" : "2 إلى 3 أيام");
+            let days = "2 إلى 3 أيام";
+            if (addUrgent) days = "خلال 24 ساعة 🔥";
+            else if (pages > 100) days = "4 إلى 5 أيام";
             document.getElementById('deliveryDaysText').innerText = days;
         }
 
-        // CLIENT ORDER SUBMISSION
+        function setCompareMode(mode) {
+            const vBefore = document.getElementById('viewBefore');
+            const vAfter = document.getElementById('viewAfter');
+            const btnBefore = document.getElementById('btnShowBefore');
+            const btnAfter = document.getElementById('btnShowAfter');
+
+            if (mode === 'before') {
+                vBefore.classList.remove('hidden');
+                vAfter.classList.add('hidden');
+                btnBefore.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#ff6f1e] text-white";
+                btnAfter.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#f7efe9] text-[#2b1a07]";
+            } else {
+                vAfter.classList.remove('hidden');
+                vBefore.classList.add('hidden');
+                btnAfter.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#ff6f1e] text-white";
+                btnBefore.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#f7efe9] text-[#2b1a07]";
+            }
+        }
+
+        function filterPortfolio(cat) {
+            const items = document.querySelectorAll('.port-item');
+            const tabs = document.querySelectorAll('.port-tab');
+
+            tabs.forEach(t => {
+                t.classList.remove('bg-[#ff6f1e]', 'text-white');
+                t.classList.add('bg-[#fdfbf9]', 'text-[#2b1a07]');
+            });
+            event.target.classList.add('bg-[#ff6f1e]', 'text-white');
+
+            items.forEach(item => {
+                if (cat === 'all' || item.classList.contains(cat)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        let currentThemeColor = '#ff6f1e';
+
+        function setPreviewColor(color) {
+            currentThemeColor = color;
+            document.getElementById('prevHeader').style.borderColor = color;
+            document.getElementById('prevBadge').style.backgroundColor = color;
+            renderLivePreview();
+        }
+
+        function renderLivePreview() {
+            const titleVal = document.getElementById('userTitle').value || 'عنوان الدرس';
+            const textVal = document.getElementById('userText').value || '';
+            
+            document.getElementById('outTitle').innerText = titleVal;
+
+            const bodyContainer = document.getElementById('outBody');
+            bodyContainer.innerHTML = '';
+
+            const lines = textVal.split('\n');
+            lines.forEach(line => {
+                if (!line.trim()) return;
+
+                const p = document.createElement('p');
+                p.className = "leading-relaxed";
+
+                if (line.includes('ملاحظة') || line.includes('تنبيه')) {
+                    const callout = document.createElement('div');
+                    callout.className = "p-3 rounded-lg border-r-4 text-xs font-bold my-2 bg-[#f7efe9]";
+                    callout.style.borderColor = currentThemeColor;
+                    callout.style.color = '#2b1a07';
+                    callout.innerHTML = `<i class="fa-solid fa-lightbulb text-sm ml-1" style="color: ${currentThemeColor}"></i> ${line}`;
+                    bodyContainer.appendChild(callout);
+                } else {
+                    let formattedLine = line.replace(/(الذكاء الاصطناعي|التعلم|الشبكات العصبية)/g, 
+                        `<span class="px-1 rounded font-bold" style="background-color: ${currentThemeColor}25;">$1</span>`
+                    );
+                    p.innerHTML = formattedLine;
+                    bodyContainer.appendChild(p);
+                }
+            });
+        }
+
+        // Modal Controls
         function openOrderModal() {
             document.getElementById('orderModal').classList.remove('hidden');
         }
@@ -894,269 +1004,180 @@
             document.getElementById('orderModal').classList.add('hidden');
         }
 
-        function selectPackage(pkgTitle) {
-            document.getElementById('orderPackageSelect').value = pkgTitle;
+        function selectPackage(pkgName) {
+            document.getElementById('orderPackageSelect').value = pkgName;
             openOrderModal();
         }
 
         function applyFromCalc() {
-            document.getElementById('orderPageCount').value = document.getElementById('pageInput').value;
+            const pages = document.getElementById('pageInput').value;
+            document.getElementById('orderPageCount').value = pages;
             openOrderModal();
         }
 
         function handleOrderSubmit(e) {
             e.preventDefault();
-            const newOrder = {
-                id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
-                name: document.getElementById('orderName').value,
-                phone: document.getElementById('orderPhone').value,
-                subject: document.getElementById('orderSubject').value,
-                pages: parseInt(document.getElementById('orderPageCount').value) || 0,
-                package: document.getElementById('orderPackageSelect').value,
-                notes: document.getElementById('orderNotes').value || 'لا يوجد',
-                status: 'جديد 🆕',
-                date: new Date().toISOString().split('T')[0]
-            };
+            const name = document.getElementById('orderName').value;
+            const phone = document.getElementById('orderPhone').value;
+            const subject = document.getElementById('orderSubject').value;
+            const pages = parseInt(document.getElementById('orderPageCount').value) || 10;
+            const pkg = document.getElementById('orderPackageSelect').value;
+            const notes = document.getElementById('orderNotes').value;
 
-            appOrders.unshift(newOrder);
+            // Price calculation for new order
+            let rate = pkg.includes('VIP') ? 25 : (pkg.includes('احترافية') ? 18 : 12);
+            let estPrice = pages * rate;
+
+            // Add to Local system order list
+            const newOrder = {
+                id: Math.floor(100 + Math.random() * 900),
+                name: name,
+                phone: phone,
+                subject: subject,
+                pages: pages,
+                package: pkg,
+                price: estPrice,
+                status: "جديد",
+                notes: notes
+            };
+            systemOrders.unshift(newOrder);
             saveOrders();
 
-            const msg = `مرحباً ${appTheme.title}! أود طلب تنسيق مذكرة جديد:%0A- الاسم: ${newOrder.name}%0A- الهاتف: ${newOrder.phone}%0A- المادة: ${newOrder.subject}%0A- عدد الصفحات: ${newOrder.pages}%0A- الباقة: ${newOrder.package}%0A- ملاحظات: ${newOrder.notes}`;
+            const msg = `مرحباً تصميمي! أود طلب تنسيق مذكرة:%0A- الاسم: ${name}%0A- الهاتف: ${phone}%0A- المادة: ${subject}%0A- عدد الصفحات: ${pages}%0A- الباقة: ${pkg}%0A- ملاحظات: ${notes}`;
             
-            window.open(`https://wa.me/${appSocial.whatsapp}?text=${msg}`, '_blank');
+            window.open(`https://wa.me/?text=${msg}`, '_blank');
             closeOrderModal();
         }
 
-        // ADMIN ORDERS TABLE RENDER & STATUS WHATSAPP TRIGGER
-        function renderOrdersTable() {
-            const tbody = document.getElementById('ordersTableBody');
-            const badge = document.getElementById('orderCountBadge');
-            if (!tbody) return;
+        // --- ADMIN DASHBOARD & PASSWORD LOGIC ---
+        function promptAdminLogin() {
+            const pwd = prompt("يرجى إدخال كلمة المرور للوحة التحكم:");
+            if (pwd === "admin123") { // Password protection
+                openAdminModal();
+            } else if (pwd !== null) {
+                alert("كلمة المرور غير صحيحة!");
+            }
+        }
 
+        function openAdminModal() {
+            renderAdminDashboard();
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function logoutAdmin() {
+            closeAdminModal();
+            alert("تم تسجيل الخروج بنجاح.");
+        }
+
+        function renderAdminDashboard() {
+            const tbody = document.getElementById('adminOrdersTableBody');
             tbody.innerHTML = '';
-            badge.innerText = appOrders.length + ' طلب مسجل';
 
-            appOrders.forEach((ord, index) => {
+            let totalRev = 0;
+            let doneCount = 0;
+            let pendingCount = 0;
+
+            systemOrders.forEach((ord, idx) => {
+                totalRev += ord.price;
+                if (ord.status === "تم التسليم") doneCount++;
+                else pendingCount++;
+
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-[#f7efe9]/50 font-medium";
+                tr.className = "hover:bg-[#f7efe9]/50 transition-colors";
 
                 tr.innerHTML = `
-                    <td class="p-3 font-bold text-[#2b1a07]">${ord.name}</td>
-                    <td class="p-3 font-mono">${ord.phone}</td>
-                    <td class="p-3">${ord.subject}</td>
-                    <td class="p-3 font-bold">${ord.pages} ص</td>
-                    <td class="p-3"><span class="bg-[#f7efe9] px-2 py-0.5 rounded border border-[#171717]">${ord.package}</span></td>
-                    <td class="p-3 max-w-xs truncate" title="${ord.notes}">${ord.notes}</td>
+                    <td class="p-3 font-bold text-xs text-[#2b1a07]/50">#${ord.id}</td>
+                    <td class="p-3 font-bold">${ord.name}</td>
+                    <td class="p-3 font-mono text-xs">${ord.phone}</td>
+                    <td class="p-3">${ord.subject} (${ord.pages} ص)</td>
+                    <td class="p-3 text-xs"><span class="bg-[#f7efe9] border border-[#171717]/20 px-2 py-0.5 rounded">${ord.package}</span></td>
+                    <td class="p-3 font-bold text-[#ff6f1e]">${ord.price} ج.م</td>
                     <td class="p-3">
-                        <select onchange="updateOrderStatus(${index}, this.value)" class="bg-white border border-[#171717] rounded p-1 font-bold text-xs">
-                            <option value="جديد 🆕" ${ord.status === 'جديد 🆕' ? 'selected' : ''}>جديد 🆕</option>
-                            <option value="جاري التنسيق ⏳" ${ord.status === 'جاري التنسيق ⏳' ? 'selected' : ''}>جاري التنسيق ⏳</option>
-                            <option value="تم التجهيز 🚀" ${ord.status === 'تم التجهيز 🚀' ? 'selected' : ''}>تم التجهيز 🚀</option>
-                            <option value="مكتمل ✅" ${ord.status === 'مكتمل ✅' ? 'selected' : ''}>مكتمل ✅</option>
+                        <select onchange="changeOrderStatus(${ord.id}, this.value)" class="bg-[#f7efe9] border border-[#171717] rounded text-xs p-1 font-bold focus:outline-none">
+                            <option value="جديد" ${ord.status === 'جديد' ? 'selected' : ''}>جديد 🆕</option>
+                            <option value="قيد التنسيق" ${ord.status === 'قيد التنسيق' ? 'selected' : ''}>قيد التنسيق 🎨</option>
+                            <option value="بانتظار المراجعة" ${ord.status === 'بانتظار المراجعة' ? 'selected' : ''}>بانتظار المراجعة 📋</option>
+                            <option value="تم التسليم" ${ord.status === 'تم التسليم' ? 'selected' : ''}>تم التسليم ✅</option>
                         </select>
                     </td>
-                    <td class="p-3 flex items-center gap-1">
-                        <button onclick="sendWhatsappToClient(${index})" class="p-1.5 bg-[#25D366] text-white rounded hover:scale-105" title="إرسال إشعار الواتساب">
-                            <i class="fa-brands fa-whatsapp text-sm"></i>
-                        </button>
-                        <button onclick="deleteOrder(${index})" class="p-1.5 bg-red-600 text-white rounded hover:scale-105" title="حذف الطلب">
-                            <i class="fa-solid fa-trash-can text-sm"></i>
+                    <td class="p-3 text-center">
+                        <button onclick="sendWhatsAppStatusUpdate(${ord.id})" class="bg-[#22c55e] text-white px-2.5 py-1 rounded-lg text-xs font-bold border border-[#171717] shadow-sm hover:bg-[#16a34a] flex items-center gap-1 mx-auto">
+                            <i class="fa-brands fa-whatsapp"></i> إشعار
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
+
+            // Update stats
+            document.getElementById('statTotalOrders').innerText = systemOrders.length;
+            document.getElementById('statPendingOrders').innerText = pendingCount;
+            document.getElementById('statDoneOrders').innerText = doneCount;
+            document.getElementById('statTotalRevenue').innerText = totalRev + ' ج.م';
         }
 
-        function updateOrderStatus(index, newStatus) {
-            appOrders[index].status = newStatus;
-            saveOrders();
-            sendWhatsappToClient(index);
-        }
-
-        function sendWhatsappToClient(index) {
-            const ord = appOrders[index];
-            const msg = `مرحباً ${ord.name} 👋🏼%0Aتحديث من موقع ${appTheme.title} بخصوص طلب تنسيق مذكرة (${ord.subject}):%0Aحالة الطلب الحالية هي: *${ord.status}*.%0Aشكراً لتواصلك معنا!`;
-            
-            let phoneNum = ord.phone.replace(/[^0-9]/g, '');
-            if (phoneNum.startsWith('01')) phoneNum = '2' + phoneNum;
-
-            window.open(`https://wa.me/${phoneNum}?text=${msg}`, '_blank');
-        }
-
-        function deleteOrder(index) {
-            if (confirm('هل أنت تأكد من حذف هذا الطلب؟')) {
-                appOrders.splice(index, 1);
+        function changeOrderStatus(orderId, newStatus) {
+            const order = systemOrders.find(o => o.id === orderId);
+            if (order) {
+                order.status = newStatus;
                 saveOrders();
-            }
-        }
-
-        // ADMIN PACKAGES MANAGEMENT (CRUD)
-        function renderAdminPackages() {
-            const container = document.getElementById('adminPackagesList');
-            if (!container) return;
-
-            container.innerHTML = '';
-            appPackages.forEach((pkg) => {
-                const card = document.createElement('div');
-                card.className = "bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-[4px_4px_0px_#171717] flex flex-col justify-between";
+                renderAdminDashboard();
                 
-                card.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-lg text-[#2b1a07]">${pkg.title}</h3>
-                            <span class="text-xs font-black bg-[#ff6f1e]/10 text-[#ff6f1e] px-2 py-0.5 rounded border border-[#171717]">${pkg.price} ج.م/صفحة</span>
-                        </div>
-                        <p class="text-xs text-[#2b1a07]/60 mb-3">${pkg.subtitle}</p>
-                        <ul class="text-xs space-y-1 mb-4 text-[#2b1a07]">
-                            ${pkg.features.map(f => `<li>• ${f}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <div class="flex gap-2 pt-3 border-t border-[#171717]/10">
-                        <button onclick="openEditPackageModal('${pkg.id}')" class="btn-pill flex-1 py-1.5 text-xs font-bold bg-[#f7efe9]">تعديل</button>
-                        <button onclick="deletePackage('${pkg.id}')" class="btn-pill px-3 py-1.5 text-xs font-bold bg-red-500 text-white">حذف</button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function openAddPackageModal() {
-            document.getElementById('pkgModalTitle').innerText = 'إضافة باقة جديدة';
-            document.getElementById('pkgEditId').value = '';
-            document.getElementById('pkgNameInput').value = '';
-            document.getElementById('pkgSubInput').value = '';
-            document.getElementById('pkgPriceInput').value = '18';
-            document.getElementById('pkgFeaturesInput').value = '';
-            document.getElementById('pkgIsPopularInput').checked = false;
-            document.getElementById('packageModal').classList.remove('hidden');
-        }
-
-        function openEditPackageModal(id) {
-            const pkg = appPackages.find(p => p.id === id);
-            if (!pkg) return;
-
-            document.getElementById('pkgModalTitle').innerText = 'تعديل الباقة';
-            document.getElementById('pkgEditId').value = pkg.id;
-            document.getElementById('pkgNameInput').value = pkg.title;
-            document.getElementById('pkgSubInput').value = pkg.subtitle;
-            document.getElementById('pkgPriceInput').value = pkg.price;
-            document.getElementById('pkgFeaturesInput').value = pkg.features.join('\n');
-            document.getElementById('pkgIsPopularInput').checked = pkg.isPopular;
-            document.getElementById('packageModal').classList.remove('hidden');
-        }
-
-        function closePackageModal() {
-            document.getElementById('packageModal').classList.add('hidden');
-        }
-
-        function handleSavePackage(e) {
-            e.preventDefault();
-            const id = document.getElementById('pkgEditId').value;
-            const title = document.getElementById('pkgNameInput').value;
-            const subtitle = document.getElementById('pkgSubInput').value;
-            const price = parseFloat(document.getElementById('pkgPriceInput').value) || 0;
-            const features = document.getElementById('pkgFeaturesInput').value.split('\n').filter(f => f.trim() !== '');
-            const isPopular = document.getElementById('pkgIsPopularInput').checked;
-
-            if (id) {
-                const idx = appPackages.findIndex(p => p.id === id);
-                if (idx !== -1) {
-                    appPackages[idx] = { id, title, subtitle, price, features, isPopular };
+                if (confirm(`تم تحديث حالة طلب ${order.name} إلى (${newStatus}). هل تريد إرسال إشعار للعميل عبر الواتساب الآن؟`)) {
+                    sendWhatsAppStatusUpdate(orderId);
                 }
+            }
+        }
+
+        function sendWhatsAppStatusUpdate(orderId) {
+            const order = systemOrders.find(o => o.id === orderId);
+            if (!order) return;
+
+            let formattedPhone = order.phone.replace(/[^0-9]/g, '');
+            if (formattedPhone.startsWith('01')) {
+                formattedPhone = '2' + formattedPhone; // Add Egypt country code if applicable
+            }
+
+            let statusMsg = "";
+            switch (order.status) {
+                case "قيد التنسيق":
+                    statusMsg = `بدأنا الآن في تنسيق وتصميم مذكرتك (${order.subject}) بكل شغف! وسنخطرك فور تجهيز المسودة.🎨`;
+                    break;
+                case "بانتظار المراجعة":
+                    statusMsg = `مذكرتك (${order.subject}) جاهزة للمراجعة الأولية! يرجى التواصل معنا للاطلاع عليها.📋`;
+                    break;
+                case "تم التسليم":
+                    statusMsg = `تم بفضل الله الانتهاء من تنسيق مذكرتك (${order.subject}) بالكامل وإرسال الملفات النهائية جاهزة للطباعة! نتمنى لك ولطلابك التوفيق والنجاح.✅🎉`;
+                    break;
+                default:
+                    statusMsg = `تم استلام طلبك لتنسيق مذكرة (${order.subject}) بنجاح ونحن قيد معالجته الآن.✨`;
+            }
+
+            const fullText = `أهلاً بك د/ ${order.name} 🌸%0Aتحديث من منصة *تصميمي* لتنسيق المذكرات:%0A%0A${statusMsg}%0A%0Aشاكرين لثقتك بنا!`;
+            window.open(`https://wa.me/${formattedPhone}?text=${fullText}`, '_blank');
+        }
+
+        function toggleFaq(btn) {
+            const ans = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.classList.replace('fa-plus', 'fa-minus');
             } else {
-                appPackages.push({
-                    id: 'pkg-' + Date.now(),
-                    title, subtitle, price, features, isPopular
-                });
-            }
-
-            savePackages();
-            renderAdminPackages();
-            closePackageModal();
-        }
-
-        function deletePackage(id) {
-            if (confirm('هل أنت تأكد من حذف هذه الباقة؟')) {
-                appPackages = appPackages.filter(p => p.id !== id);
-                savePackages();
-                renderAdminPackages();
+                ans.classList.add('hidden');
+                icon.classList.replace('fa-minus', 'fa-plus');
             }
         }
 
-        // ADMIN TAB SWITCHER
-        function switchAdminTab(tabName) {
-            document.querySelectorAll('.admin-tab-pane').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.admin-tab-btn').forEach(el => {
-                el.classList.remove('bg-[#171717]', 'text-white');
-                el.classList.add('bg-[#fdfbf9]', 'text-[#2b1a07]');
-            });
-
-            document.getElementById(`adminTabContent-${tabName}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`tabBtn-${tabName}`);
-            activeBtn.classList.remove('bg-[#fdfbf9]', 'text-[#2b1a07]');
-            activeBtn.classList.add('bg-[#171717]', 'text-white');
-        }
-
-        // SETTINGS APPLYERS
-        function applySocialLinks() {
-            const wa = `https://wa.me/${appSocial.whatsapp}`;
-            document.getElementById('floatWhatsapp').href = wa;
-            document.getElementById('navWhatsapp').href = wa;
-            document.getElementById('footerWhatsapp').href = wa;
-
-            document.getElementById('floatInstagram').href = appSocial.instagram;
-            document.getElementById('navInstagram').href = appSocial.instagram;
-            document.getElementById('footerInstagram').href = appSocial.instagram;
-
-            document.getElementById('floatFacebook').href = appSocial.facebook;
-            document.getElementById('navFacebook').href = appSocial.facebook;
-            document.getElementById('footerFacebook').href = appSocial.facebook;
-
-            document.getElementById('socialWhatsappInput').value = appSocial.whatsapp;
-            document.getElementById('socialInstagramInput').value = appSocial.instagram;
-            document.getElementById('socialFacebookInput').value = appSocial.facebook;
-        }
-
-        function saveSocialSettings(e) {
-            e.preventDefault();
-            appSocial.whatsapp = document.getElementById('socialWhatsappInput').value;
-            appSocial.instagram = document.getElementById('socialInstagramInput').value;
-            appSocial.facebook = document.getElementById('socialFacebookInput').value;
-            saveSocial();
-            alert('تم حفظ روابط التواصل الاجتماعي بنجاح!');
-        }
-
-        function applyThemeSettings() {
-            document.documentElement.style.setProperty('--color-marker-orange', appTheme.primaryColor);
-            document.getElementById('siteLogoTitle').innerText = appTheme.title;
-            document.getElementById('siteLogoSub').innerText = appTheme.subtitle;
-
-            document.getElementById('themePrimaryColor').value = appTheme.primaryColor;
-            document.getElementById('siteTitleInput').value = appTheme.title;
-            document.getElementById('siteSubTitleInput').value = appTheme.subtitle;
-        }
-
-        function saveThemeSettings(e) {
-            e.preventDefault();
-            appTheme.primaryColor = document.getElementById('themePrimaryColor').value;
-            appTheme.title = document.getElementById('siteTitleInput').value;
-            appTheme.subtitle = document.getElementById('siteSubTitleInput').value;
-            saveTheme();
-            alert('تم حفظ الهوية البصرية والمسميات بنجاح!');
-        }
-
-        // INITIALIZATION ON LOAD
-        window.addEventListener('DOMContentLoaded', () => {
-            renderPackages();
-            applySocialLinks();
-            applyThemeSettings();
+        window.onload = function() {
             updateCalculator();
-            handleRouting();
-        });
-
-        window.addEventListener('popstate', handleRouting);
-        window.addEventListener('hashchange', handleRouting);
+            renderLivePreview();
+        };
     </script>
 </body>
 </html>
