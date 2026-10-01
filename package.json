@@ -1,0 +1,12 @@
+{
+  "name": "tasmeemy-app",
+  "version": "1.0.0",
+  "description": "منصة تصميمي لتنسيق المذكرات والملفات التعليمية",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
