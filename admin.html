@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم | تصميمي</title>
+    <title>لوحة التحكم الشاملة | تصميمي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,12 +52,6 @@
             background-image: radial-gradient(#2b1a07 0.4px, transparent 0.4px);
             background-size: 24px 24px;
         }
-
-        .notebook-lines {
-            background-image: repeating-linear-gradient(transparent, transparent 31px, #e5dfd8 31px, #e5dfd8 32px);
-            line-height: 32px;
-        }
-
         .btn-pill {
             background-color: #fdfbf9;
             border: 1.5px solid #171717;
@@ -69,8 +63,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #f7efe9; }
         ::-webkit-scrollbar-thumb { background: #ff6f1e; border-radius: 10px; }
@@ -78,7 +70,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- 1. شاشة تسجيل الدخول للحماية -->
+    <!-- شاشة تسجيل الدخول -->
     <div id="loginOverlay" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 max-w-md w-full shadow-hard-lg text-right relative">
             <div class="flex items-center gap-3 mb-6">
@@ -87,14 +79,13 @@
                 </div>
                 <div>
                     <h2 class="font-display font-extrabold text-2xl text-[#2b1a07]">لوحة إدارة تصميمي</h2>
-                    <span class="font-handwritten text-sm text-[#ff6f1e] font-bold">تسجيل دخول المسؤولين</span>
+                    <span class="font-handwritten text-sm text-[#ff6f1e] font-bold">تسجيل دخول المسؤول</span>
                 </div>
             </div>
-
             <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold mb-1 text-[#2b1a07]">كلمة المرور:</label>
-                    <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
+                    <input type="password" id="adminPassword" required placeholder="أدخل كلمة المرور (الافتراضية: 123456)..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
                     <p id="loginError" class="text-xs font-bold text-red-600 mt-1 hidden">كلمة المرور غير صحيحة!</p>
                 </div>
                 <button type="submit" class="btn-pill w-full py-3 bg-[#ff6f1e] text-white font-bold border-2 border-[#171717] flex items-center justify-center gap-2">
@@ -108,22 +99,21 @@
         </div>
     </div>
 
-    <!-- 2. الهيدر الرئيسي للوحة التحكم -->
+    <!-- الهيدر -->
     <header class="sticky top-0 z-40 bg-[#fdfbf9]/95 backdrop-blur-md border-b-2 border-[#171717] py-3 px-4 sm:px-8">
         <div class="max-w-[1300px] mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-2xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center text-white shadow-sticker">
-                    <i class="fa-solid fa-[#2b1a07] fa-sliders text-lg text-white"></i>
+                    <i class="fa-solid fa-sliders text-lg"></i>
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="font-display font-extrabold text-xl text-[#2b1a07]">تصميمي</span>
-                        <span class="bg-[#22c55e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#171717]">Admin v2.0</span>
+                        <span class="bg-[#22c55e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#171717]">Pro Admin</span>
                     </div>
-                    <span class="font-handwritten text-xs text-[#ff6f1e] font-bold">إدارة الطلبات والأسعار والنصوص</span>
+                    <span class="font-handwritten text-xs text-[#ff6f1e] font-bold">إدارة الطلبات، الباقات، والمعرض</span>
                 </div>
             </div>
-
             <div class="flex items-center gap-3">
                 <a href="index.html" target="_blank" class="btn-pill px-4 py-2 text-xs sm:text-sm font-bold text-[#2b1a07] flex items-center gap-2">
                     <i class="fa-solid fa-arrow-up-right-from-square text-[#ff6f1e]"></i>
@@ -136,228 +126,245 @@
         </div>
     </header>
 
-    <!-- 3. المحتوى الرئيسي للوحة الإدارة -->
-    <main class="flex-grow max-w-[1300px] w-full mx-auto p-4 sm:p-8 space-y-8">
+    <!-- المحتوى الرئيسي -->
+    <main class="flex-grow max-w-[1300px] w-full mx-auto p-4 sm:p-8 space-y-10">
 
-        <!-- أحصائيات سريعة (كروت الملاحظات) -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
+        <!-- الإحصائيات السريعة -->
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-hard flex items-center justify-between">
                 <div>
-                    <span class="text-xs font-bold text-[#2b1a07]/60">إجمالي الطلبات</span>
-                    <div class="font-display font-black text-3xl text-[#2b1a07]" id="statTotalOrders">12</div>
+                    <span class="text-xs font-bold text-[#2b1a07]/60">إجمالي الطلبات الواردة</span>
+                    <div class="font-display font-black text-3xl text-[#2b1a07]" id="statTotalOrders">0</div>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-[#3b82f6]/10 border border-[#171717] flex items-center justify-center text-[#3b82f6] text-xl font-bold">
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
             </div>
-
-            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-hard flex items-center justify-between">
                 <div>
-                    <span class="text-xs font-bold text-[#2b1a07]/60">طلبات جديدة اليوم</span>
-                    <div class="font-display font-black text-3xl text-[#ff6f1e]" id="statNewOrders">3</div>
+                    <span class="text-xs font-bold text-[#2b1a07]/60">الباقات المفعلة</span>
+                    <div class="font-display font-black text-3xl text-[#ff6f1e]" id="statTotalPackages">0</div>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-[#ff6f1e]/10 border border-[#171717] flex items-center justify-center text-[#ff6f1e] text-xl font-bold">
-                    <i class="fa-solid fa-bell animate-bounce"></i>
+                    <i class="fa-solid fa-tags"></i>
                 </div>
             </div>
-
-            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
+            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-hard flex items-center justify-between">
                 <div>
-                    <span class="text-xs font-bold text-[#2b1a07]/60">سعر الباقة الأكثر طلباً</span>
-                    <div class="font-display font-black text-3xl text-[#22c55e]" id="statProPrice">18 ج.م</div>
+                    <span class="text-xs font-bold text-[#2b1a07]/60">عناصر معرض الأعمال</span>
+                    <div class="font-display font-black text-3xl text-[#22c55e]" id="statTotalPortfolio">0</div>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-[#22c55e]/10 border border-[#171717] flex items-center justify-center text-[#22c55e] text-xl font-bold">
-                    <i class="fa-solid fa-hand-holding-dollar"></i>
-                </div>
-            </div>
-
-            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex items-center justify-between">
-                <div>
-                    <span class="text-xs font-bold text-[#2b1a07]/60">حالة استقبال الطلبات</span>
-                    <div class="font-display font-bold text-base text-[#22c55e] flex items-center gap-1.5 mt-1">
-                        <span class="w-2.5 h-2.5 rounded-full bg-[#22c55e] animate-ping"></span>
-                        متاح الآن
-                    </div>
-                </div>
-                <div class="w-12 h-12 rounded-xl bg-[#f7efe9] border border-[#171717] flex items-center justify-center text-[#2b1a07] text-xl font-bold">
-                    <i class="fa-solid fa-toggle-on text-[#22c55e]"></i>
+                    <i class="fa-solid fa-images"></i>
                 </div>
             </div>
         </section>
 
-        <!-- القسم الرئيسي: إدارة الطلبات والجدول -->
+        <!-- 1. إدارة طلبات العملاء -->
         <section class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-[#171717] gap-4 mb-6">
                 <div>
-                    <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">📋 جدول الطلبات الواردة</h3>
-                    <p class="text-xs text-[#2b1a07]/70 font-medium">متابعة ومعالجة الطلبات المرسلة من نموذج التواصل بالموقع</p>
+                    <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">📋 بيانات طلبات العملاء</h3>
+                    <p class="text-xs text-[#2b1a07]/70 font-medium">متابعة تفاصيل الطلبات وإرسال التحديثات الفورية للعملاء عبر الواتساب</p>
                 </div>
                 <div class="flex gap-2">
                     <button onclick="addNewOrderMock()" class="btn-pill px-4 py-2 bg-[#22c55e] text-white font-bold text-xs border-2 border-[#171717]">
                         + إضافة طلب تجريبي
                     </button>
-                    <button onclick="clearAllOrders()" class="btn-pill px-4 py-2 bg-red-100 text-red-700 font-bold text-xs border border-red-300 hover:bg-red-200">
-                        مسح الكل
+                    <button onclick="clearAllOrders()" class="btn-pill px-3 py-2 bg-red-100 text-red-700 font-bold text-xs border border-red-300">
+                        حذف الكل
                     </button>
                 </div>
             </div>
 
-            <!-- جدول الطلبات -->
             <div class="overflow-x-auto">
                 <table class="w-full text-right border-collapse text-sm">
                     <thead>
                         <tr class="bg-[#f7efe9] border-b-2 border-[#171717] text-[#2b1a07]">
                             <th class="p-3 font-bold">#</th>
                             <th class="p-3 font-bold">اسم العميل</th>
-                            <th class="p-3 font-bold">الواتساب</th>
-                            <th class="p-3 font-bold">المادة / الكتاب</th>
+                            <th class="p-3 font-bold">رقم الواتساب</th>
+                            <th class="p-3 font-bold">المادة / المذكرة</th>
                             <th class="p-3 font-bold">الصفحات</th>
-                            <th class="p-3 font-bold">الباقة</th>
-                            <th class="p-3 font-bold">الحالة</th>
-                            <th class="p-3 font-bold text-center">إجراءات</th>
+                            <th class="p-3 font-bold">الباقة والتكلفة</th>
+                            <th class="p-3 font-bold">الحالة الحالية</th>
+                            <th class="p-3 font-bold text-center">إجراءات المراسلة والتحديث</th>
                         </tr>
                     </thead>
-                    <tbody id="ordersTableBody" class="divide-y divide-[#171717]/10">
-                        <!-- يتم تحميلة ديناميكياً بواسطة JavaScript -->
-                    </tbody>
+                    <tbody id="ordersTableBody" class="divide-y divide-[#171717]/10"></tbody>
                 </table>
             </div>
         </section>
 
-        <!-- قسم التعديل على أسعار الباقات وحاسبة الموقع -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- تعديل أسعار الباقات -->
-            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
-                <div class="mb-6 border-b-2 border-[#171717] pb-3">
-                    <h3 class="font-display font-extrabold text-xl text-[#2b1a07]">💰 تحكم بأسعار الباقات (ج.م / صفحة)</h3>
-                    <p class="text-xs text-[#2b1a07]/60">تعديل التسعير الفوري ليظهر في حاسبة الموقع</p>
+        <!-- 2. إدارة الباقات والأسعار (إضافة، تعديل، حذف) -->
+        <section class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-[#171717] gap-4 mb-6">
+                <div>
+                    <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">🏷️ إدارة وتعديل الباقات</h3>
+                    <p class="text-xs text-[#2b1a07]/70 font-medium">إضافة باقات جديدة، تعديل الأسعار، أو حذف الباقات القديمة لتظهر فوراً في موقعك</p>
                 </div>
-
-                <form onsubmit="savePricingSettings(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold mb-1">الباقة الأساسية:</label>
-                            <input type="number" id="priceBasic" value="12" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-bold text-center">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold mb-1">الباقة الاحترافية:</label>
-                            <input type="number" id="pricePro" value="18" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-bold text-center text-[#ff6f1e]">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold mb-1">باقة الكتب VIP:</label>
-                            <input type="number" id="priceVip" value="25" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-bold text-center">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 pt-2">
-                        <div>
-                            <label class="block text-xs font-bold mb-1">سعر غلاف إضافي (ج.م):</label>
-                            <input type="number" id="priceCover" value="100" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-semibold">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold mb-1">نسبة التسليم العاجل (%):</label>
-                            <input type="number" id="rateUrgent" value="25" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-semibold">
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn-pill w-full py-3 bg-[#ff6f1e] text-white font-bold border-2 border-[#171717] flex items-center justify-center gap-2 mt-4">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                        <span>حفظ التعديلات على الأسعار</span>
-                    </button>
-                </form>
+                <button onclick="openPackageModal()" class="btn-pill px-4 py-2 bg-[#ff6f1e] text-white font-bold text-xs border-2 border-[#171717]">
+                    + إضافة باقة جديدة
+                </button>
             </div>
 
-            <!-- التحكم برقم الواتساب ونصوص الترحيب -->
-            <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
-                <div class="mb-6 border-b-2 border-[#171717] pb-3">
-                    <h3 class="font-display font-extrabold text-xl text-[#2b1a07]">📱 إعدادات التواصل والواتساب</h3>
-                    <p class="text-xs text-[#2b1a07]/60">ربط رقم الهاتف لتلقي الرسائل المباشرة</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="packagesAdminGrid">
+                <!-- يتم توليدها ديناميكياً -->
+            </div>
+        </section>
+
+        <!-- 3. إدارة معرض الأعمال (إضافة صور، عناوين، وحذف) -->
+        <section class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b-2 border-[#171717] gap-4 mb-6">
+                <div>
+                    <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">🖼️ معرض الأعمال (أحدث المذكرات المصممة)</h3>
+                    <p class="text-xs text-[#2b1a07]/70 font-medium">أضف روابط صور أعمالك ووسمها لتظهر في قسم "أعمالي" بالواجهة الرئيسية</p>
                 </div>
+                <button onclick="openPortfolioModal()" class="btn-pill px-4 py-2 bg-[#3b82f6] text-white font-bold text-xs border-2 border-[#171717]">
+                    + إضافة عمل جديد
+                </button>
+            </div>
 
-                <form onsubmit="saveContactSettings(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold mb-1">رقم الواتساب المستلم للطلبات (مع كود الدولة):</label>
-                        <input type="text" id="whatsappNumber" value="201000000000" placeholder="مثال: 201012345678" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 font-mono text-sm font-bold text-[#22c55e]">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold mb-1">نص الترحيب بالعميل المباشر:</label>
-                        <textarea id="whatsappWelcome" rows="3" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-xs text-[#2b1a07]">مرحباً تصميمي! أود الاستفسار عن تنسيق مذكرة جديدة...</textarea>
-                    </div>
-
-                    <button type="submit" class="btn-pill w-full py-3 bg-[#2b1a07] text-white font-bold border-2 border-[#171717] flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-check"></i>
-                        <span>تحديث بيانات الواتساب</span>
-                    </button>
-                </form>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolioAdminGrid">
+                <!-- يتم توليدها ديناميكياً -->
             </div>
         </section>
 
     </main>
 
-    <!-- الفوتر الخاص باللوحة -->
-    <footer class="mt-8 bg-[#f7efe9] border-t-2 border-[#171717] py-4 px-6 text-center text-xs font-bold text-[#2b1a07]/60">
-        لوحة تحكم منصة تصميمي الخاصة © 2026 — محميّة بنظام تشفير محلي
+    <!-- مودال إضافة/تعديل باقة -->
+    <div id="packageModal" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 max-w-lg w-full shadow-hard-lg text-right">
+            <h3 class="font-display font-extrabold text-xl text-[#2b1a07] mb-4" id="pkgModalTitle">إضافة باقة جديدة</h3>
+            <form onsubmit="savePackageForm(event)" class="space-y-4">
+                <input type="hidden" id="pkgIndex" value="-1">
+                <div>
+                    <label class="block text-xs font-bold mb-1">اسم الباقة:</label>
+                    <input type="text" id="pkgName" required placeholder="مثال: الباقة الفاخرة" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-bold">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold mb-1">السعر (ج.م / صفحة):</label>
+                        <input type="number" id="pkgPrice" required placeholder="15" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1">شعار مميز (Badge):</label>
+                        <input type="text" id="pkgBadge" placeholder="الأكثر طلباً" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold mb-1">المميزات (مفصولة بفاصلة ,):</label>
+                    <textarea id="pkgFeatures" rows="3" placeholder="تنسيق احترافي, غلاف هدية, ألوان مخصصة" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-xs"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closePackageModal()" class="btn-pill px-4 py-2 bg-gray-200 text-[#2b1a07] font-bold text-xs">إلغاء</button>
+                    <button type="submit" class="btn-pill px-5 py-2 bg-[#ff6f1e] text-white font-bold text-xs border border-[#171717]">حفظ الباقة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- مودال إضافة عمل للمعرض -->
+    <div id="portfolioModal" class="fixed inset-0 z-50 bg-[#171717]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 max-w-lg w-full shadow-hard-lg text-right">
+            <h3 class="font-display font-extrabold text-xl text-[#2b1a07] mb-4">إضافة صورة أعمال جديدة</h3>
+            <form onsubmit="savePortfolioForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold mb-1">عنوان العمل / المادة:</label>
+                    <input type="text" id="portTitle" required placeholder="مثال: مذكرة الفيزياء الثانوية العامة" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-bold">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold mb-1">رابط الصورة (URL):</label>
+                    <input type="url" id="portImage" required placeholder="https://example.com/image.jpg" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-mono text-left" dir="ltr">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold mb-1">التصنيف أو التغليف:</label>
+                    <input type="text" id="portTag" placeholder="الصف الثالث الثانوي - غلاف ملون" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closePortfolioModal()" class="btn-pill px-4 py-2 bg-gray-200 text-[#2b1a07] font-bold text-xs">إلغاء</button>
+                    <button type="submit" class="btn-pill px-5 py-2 bg-[#3b82f6] text-white font-bold text-xs border border-[#171717]">إضافة للمعرض</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="mt-10 bg-[#f7efe9] border-t-2 border-[#171717] py-4 px-6 text-center text-xs font-bold text-[#2b1a07]/60">
+        لوحة تحكم منصة تصميمي المتقدمة © 2026 — مزامنة تلقائية مع الموقع الرئيسي
     </footer>
 
-    <!-- Scripts Scripting Layer -->
+    <!-- سكربت التشغيل والإدارة -->
     <script>
-        // 1. Password Protection Logic (Simple Key Storage)
-        const DEFAULT_PASS = "123456"; // يمكنك تغيير كلمة المرور من هنا
-
+        // التحقق من كلمة المرور
+        const DEFAULT_PASS = "123456";
         function checkAuth() {
-            const isAuth = sessionStorage.getItem('admin_authenticated');
-            if (isAuth === 'true') {
+            if (sessionStorage.getItem('admin_authenticated') === 'true') {
                 document.getElementById('loginOverlay').classList.add('hidden');
             } else {
                 document.getElementById('loginOverlay').classList.remove('hidden');
             }
         }
-
         function handleAdminLogin(e) {
             e.preventDefault();
-            const inputPass = document.getElementById('adminPassword').value;
-            if (inputPass === DEFAULT_PASS) {
+            if (document.getElementById('adminPassword').value === DEFAULT_PASS) {
                 sessionStorage.setItem('admin_authenticated', 'true');
                 document.getElementById('loginOverlay').classList.add('hidden');
             } else {
                 document.getElementById('loginError').classList.remove('hidden');
             }
         }
-
         function logoutAdmin() {
             sessionStorage.removeItem('admin_authenticated');
             checkAuth();
         }
 
-        // 2. Orders Management LocalStorage DB
+        // قاعدة البيانات المحلية (Local Databases)
         let ordersDB = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [
-            { id: 101, name: "أحمد محمود", phone: "01012345678", subject: "فيزياء ثانوية", pages: 40, pkg: "الباقة الاحترافية", status: "جديد" },
-            { id: 102, name: "د. سارة علي", phone: "01122334455", subject: "ملخص الفارما", pages: 75, pkg: "باقة الكتب VIP", status: "قيد التنسيق" },
-            { id: 103, name: "أ. محمد عبد الله", phone: "01500001122", subject: "نحو وسؤال وجواب", pages: 20, pkg: "الباقة الأساسية", status: "تم التسليم" }
+            { id: 101, name: "أحمد محمود", phone: "201012345678", subject: "فيزياء ثانوية", pages: 40, pkg: "الباقة الاحترافية (18 ج.م)", status: "جديد" },
+            { id: 102, name: "د. سارة علي", phone: "201122334455", subject: "ملخص الفارما", pages: 75, pkg: "باقة الكتب VIP (25 ج.م)", status: "قيد التنسيق" }
         ];
 
+        let packagesDB = JSON.parse(localStorage.getItem('tasmeemy_packages')) || [
+            { name: "الباقة الأساسية", price: 12, badge: "اقتصادية", features: ["تنسيق وورد احترافي", "خطوط واضحة", "فهارس أساسية"] },
+            { name: "الباقة الاحترافية", price: 18, badge: "الأكثر طلباً", features: ["رسومات توضيحية", "تنسيق مخصص لليوتيوب", "ألوان متناسقة"] },
+            { name: "باقة الكتب VIP", price: 25, badge: "شامل كامل", features: ["غلاف احترافي مجاني", "موكب ثلاثي الأبعاد", "دعم ومراجعة مفتوحة"] }
+        ];
+
+        let portfolioDB = JSON.parse(localStorage.getItem('tasmeemy_portfolio')) || [
+            { title: "مذكرة الفيزياء الحديثة", image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=500&auto=format&fit=crop&q=60", tag: "ثانوية عامة" },
+            { title: "ملخص الأحياء والتشريح", image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=500&auto=format&fit=crop&q=60", tag: "مراجعة نهائية" }
+        ];
+
+        // 1. إدارة الطلبات وعرضها مع رسائل الواتساب الفورية
         function renderOrders() {
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = '';
-
             document.getElementById('statTotalOrders').innerText = ordersDB.length;
-            const newCount = ordersDB.filter(o => o.status === 'جديد').length;
-            document.getElementById('statNewOrders').innerText = newCount;
 
             ordersDB.forEach((order, index) => {
                 let statusBadge = "bg-[#ff6f1e]/10 text-[#ff6f1e]";
                 if (order.status === 'قيد التنسيق') statusBadge = "bg-[#3b82f6]/10 text-[#3b82f6]";
                 if (order.status === 'تم التسليم') statusBadge = "bg-[#22c55e]/10 text-[#22c55e]";
 
+                // تجهيز رسالة الواتساب التلقائية بناءً على الحالة الحالية
+                let waMessage = `مرحباً ${order.name}، بخصوص طلبك لتنسيق مذكرة (${order.subject}) - حالته الآن: [${order.status}].`;
+                if(order.status === 'قيد التنسيق') {
+                    waMessage = `مرحباً ${order.name}، نحيطك علماً بأننا بدأنا العمل وتنسيق مذكرة (${order.subject}) الآن! 🚀`;
+                } else if(order.status === 'تم التسليم') {
+                    waMessage = `مرحباً ${order.name}، لقد تم بحمد الله الانتهاء من تنسيق مذكرة (${order.subject}) وجاهزة للاستلام! 🎉`;
+                }
+                const encodedMsg = encodeURIComponent(waMessage);
+                const cleanPhone = order.phone.replace(/[^0-9]/g, '');
+
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-[#f7efe9]/50 transition-colors";
                 tr.innerHTML = `
                     <td class="p-3 font-bold text-xs">#${order.id}</td>
                     <td class="p-3 font-bold text-[#2b1a07]">${order.name}</td>
-                    <td class="p-3 font-mono text-xs">${order.phone}</td>
+                    <td class="p-3 font-mono text-xs" dir="ltr">+${cleanPhone}</td>
                     <td class="p-3 text-xs font-semibold">${order.subject}</td>
-                    <td class="p-3 text-xs font-bold text-center">${order.pages}</td>
+                    <td class="p-3 text-xs font-bold text-center">${order.pages} صفحة</td>
                     <td class="p-3 text-xs font-bold text-[#ff6f1e]">${order.pkg}</td>
                     <td class="p-3">
                         <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold border border-[#171717]/20 ${statusBadge}">
@@ -365,39 +372,40 @@
                         </span>
                     </td>
                     <td class="p-3 text-center space-x-1 space-x-reverse">
-                        <button onclick="changeStatus(${index})" class="px-2 py-1 bg-[#f7efe9] border border-[#171717] rounded text-xs font-bold hover:bg-[#ff6f1e] hover:text-white" title="تغيير الحالة">
-                            🔄
+                        <button onclick="changeOrderStatus(${index})" class="px-2 py-1.5 bg-[#f7efe9] border border-[#171717] rounded text-xs font-bold hover:bg-[#ff6f1e] hover:text-white" title="تغيير الحالة">
+                            🔄 الحالة
                         </button>
-                        <a href="https://wa.me/${order.phone}?text=مرحباً%20${encodeURIComponent(order.name)}%20بخصوص%20طلب%20تنسيق%20مذكرة%20${encodeURIComponent(order.subject)}" target="_blank" class="px-2 py-1 bg-[#22c55e] text-white border border-[#171717] rounded text-xs font-bold" title="مراسلة واتساب">
-                            💬
+                        <a href="https://wa.me/${cleanPhone}?text=${encodedMsg}" target="_blank" class="px-3 py-1.5 bg-[#22c55e] text-white border border-[#171717] rounded text-xs font-bold inline-flex items-center gap-1 shadow-sm" title="إرسال رسالة واتساب للعميل">
+                            <i class="fa-brands fa-whatsapp"></i> مراسلة وتحديث
                         </a>
-                        <button onclick="deleteOrder(${index})" class="px-2 py-1 bg-red-100 text-red-600 border border-red-300 rounded text-xs font-bold hover:bg-red-200" title="حذف">
+                        <button onclick="deleteOrder(${index})" class="px-2 py-1.5 bg-red-100 text-red-600 border border-red-300 rounded text-xs font-bold hover:bg-red-200" title="حذف الطلب">
                             🗑️
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
+            localStorage.setItem('tasmeemy_orders', JSON.stringify(ordersDB));
         }
 
-        function changeStatus(index) {
+        function changeOrderStatus(index) {
             const statuses = ["جديد", "قيد التنسيق", "تم التسليم"];
             let curr = statuses.indexOf(ordersDB[index].status);
             ordersDB[index].status = statuses[(curr + 1) % statuses.length];
-            saveOrders();
+            renderOrders();
         }
 
         function deleteOrder(index) {
-            if (confirm("هل أنت تأكد من حذف هذا الطلب؟")) {
+            if (confirm("هل أنت متأكد من حذف هذا الطلب؟")) {
                 ordersDB.splice(index, 1);
-                saveOrders();
+                renderOrders();
             }
         }
 
         function clearAllOrders() {
-            if (confirm("هل تريد مسح جميع الطلبات بشكل دائم؟")) {
+            if (confirm("هل تريد مسح كل الطلبات؟")) {
                 ordersDB = [];
-                saveOrders();
+                renderOrders();
             }
         }
 
@@ -406,64 +414,147 @@
             ordersDB.unshift({
                 id: newId,
                 name: "عميل جديد " + newId,
-                phone: "01000000000",
-                subject: "مذكرة كيمياء تجريبية",
-                pages: 35,
-                pkg: "الباقة الاحترافية",
+                phone: "201000000000",
+                subject: "مذكرة كيمياء ثانوية",
+                pages: 50,
+                pkg: "الباقة الاحترافية (18 ج.م)",
                 status: "جديد"
             });
-            saveOrders();
-        }
-
-        function saveOrders() {
-            localStorage.setItem('tasmeemy_orders', JSON.stringify(ordersDB));
             renderOrders();
         }
 
-        // 3. Pricing and Settings Storage
-        function savePricingSettings(e) {
+        // 2. إدارة وتعديل الباقات
+        function renderPackagesAdmin() {
+            const grid = document.getElementById('packagesAdminGrid');
+            grid.innerHTML = '';
+            document.getElementById('statTotalPackages').innerText = packagesDB.length;
+
+            packagesDB.forEach((pkg, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-[#f7efe9] border-2 border-[#171717] rounded-card p-4 shadow-hard flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-display font-bold text-lg text-[#2b1a07]">${pkg.name}</span>
+                            <span class="bg-[#ff6f1e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#171717]">${pkg.badge || 'باقة'}</span>
+                        </div>
+                        <div class="text-2xl font-black text-[#ff6f1e] mb-3">${pkg.price} <span class="text-xs text-[#2b1a07]/70 font-bold">ج.م / صفحة</span></div>
+                        <ul class="text-xs space-y-1 mb-4 text-[#2b1a07]/80">
+                            ${pkg.features.map(f => `<li>• ${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="flex gap-2 pt-3 border-t border-[#171717]/20">
+                        <button onclick="editPackage(${index})" class="flex-1 py-1.5 bg-[#fdfbf9] border border-[#171717] rounded-lg font-bold text-xs hover:bg-[#ff6f1e] hover:text-white">تعديل</button>
+                        <button onclick="deletePackage(${index})" class="px-3 py-1.5 bg-red-100 text-red-600 border border-red-300 rounded-lg font-bold text-xs hover:bg-red-200">حذف</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            localStorage.setItem('tasmeemy_packages', JSON.stringify(packagesDB));
+        }
+
+        function openPackageModal(index = -1) {
+            document.getElementById('packageModal').classList.remove('hidden');
+            if (index > -1) {
+                document.getElementById('pkgModalTitle').innerText = "تعديل الباقة";
+                document.getElementById('pkgIndex').value = index;
+                document.getElementById('pkgName').value = packagesDB[index].name;
+                document.getElementById('pkgPrice').value = packagesDB[index].price;
+                document.getElementById('pkgBadge').value = packagesDB[index].badge;
+                document.getElementById('pkgFeatures').value = packagesDB[index].features.join(', ');
+            } else {
+                document.getElementById('pkgModalTitle').innerText = "إضافة باقة جديدة";
+                document.getElementById('pkgIndex').value = -1;
+                document.getElementById('pkgName').value = '';
+                document.getElementById('pkgPrice').value = '';
+                document.getElementById('pkgBadge').value = '';
+                document.getElementById('pkgFeatures').value = '';
+            }
+        }
+        function closePackageModal() {
+            document.getElementById('packageModal').classList.add('hidden');
+        }
+        function savePackageForm(e) {
             e.preventDefault();
-            const config = {
-                basic: document.getElementById('priceBasic').value,
-                pro: document.getElementById('pricePro').value,
-                vip: document.getElementById('priceVip').value,
-                cover: document.getElementById('priceCover').value,
-                urgent: document.getElementById('rateUrgent').value,
+            const index = parseInt(document.getElementById('pkgIndex').value);
+            const data = {
+                name: document.getElementById('pkgName').value,
+                price: parseFloat(document.getElementById('pkgPrice').value),
+                badge: document.getElementById('pkgBadge').value,
+                features: document.getElementById('pkgFeatures').value.split(',').map(s => s.trim()).filter(Boolean)
             };
-            localStorage.setItem('tasmeemy_pricing', JSON.stringify(config));
-            document.getElementById('statProPrice').innerText = config.pro + ' ج.م';
-            alert("تم حفظ الأسعار بنجاح! وستنعكس فوراً عند العميل.");
+            if (index > -1) {
+                packagesDB[index] = data;
+            } else {
+                packagesDB.push(data);
+            }
+            closePackageModal();
+            renderPackagesAdmin();
+        }
+        function editPackage(index) { openPackageModal(index); }
+        function deletePackage(index) {
+            if (confirm("هل تريد حذف هذه الباقة؟")) {
+                packagesDB.splice(index, 1);
+                renderPackagesAdmin();
+            }
         }
 
-        function saveContactSettings(e) {
+        // 3. إدارة معرض الأعمال (أعمالي)
+        function renderPortfolioAdmin() {
+            const grid = document.getElementById('portfolioAdminGrid');
+            grid.innerHTML = '';
+            document.getElementById('statTotalPortfolio').innerText = portfolioDB.length;
+
+            portfolioDB.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-[#f7efe9] border-2 border-[#171717] rounded-card p-3 shadow-hard flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="h-36 rounded-lg overflow-hidden border border-[#171717] mb-2 bg-white">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-[10px] font-bold text-[#ff6f1e]">${item.tag || 'عمل مميز'}</span>
+                        <h4 class="font-display font-bold text-sm text-[#2b1a07] truncate">${item.title}</h4>
+                    </div>
+                    <div class="pt-3 mt-2 border-t border-[#171717]/20 flex justify-end">
+                        <button onclick="deletePortfolio(${index})" class="w-full py-1.5 bg-red-100 text-red-600 border border-red-300 rounded-lg font-bold text-xs hover:bg-red-200">حذف من المعرض</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            localStorage.setItem('tasmeemy_portfolio', JSON.stringify(portfolioDB));
+        }
+
+        function openPortfolioModal() {
+            document.getElementById('portfolioModal').classList.remove('hidden');
+        }
+        function closePortfolioModal() {
+            document.getElementById('portfolioModal').classList.add('hidden');
+        }
+        function savePortfolioForm(e) {
             e.preventDefault();
-            const phone = document.getElementById('whatsappNumber').value;
-            const welcome = document.getElementById('whatsappWelcome').value;
-            localStorage.setItem('tasmeemy_contact', JSON.stringify({ phone, welcome }));
-            alert("تم حفظ بيانات الواتساب بنجاح!");
+            const newItem = {
+                title: document.getElementById('portTitle').value,
+                image: document.getElementById('portImage').value,
+                tag: document.getElementById('portTag').value
+            };
+            portfolioDB.push(newItem);
+            closePortfolioModal();
+            renderPortfolioAdmin();
+        }
+        function deletePortfolio(index) {
+            if (confirm("هل تريد حذف هذا العمل من المعرض؟")) {
+                portfolioDB.splice(index, 1);
+                renderPortfolioAdmin();
+            }
         }
 
-        // Load Initial State
+        // تهيئة الصفحة عند التحميل
         window.onload = function() {
             checkAuth();
             renderOrders();
-
-            // Load saved settings if any
-            const savedPricing = JSON.parse(localStorage.getItem('tasmeemy_pricing'));
-            if (savedPricing) {
-                document.getElementById('priceBasic').value = savedPricing.basic || 12;
-                document.getElementById('pricePro').value = savedPricing.pro || 18;
-                document.getElementById('priceVip').value = savedPricing.vip || 25;
-                document.getElementById('priceCover').value = savedPricing.cover || 100;
-                document.getElementById('rateUrgent').value = savedPricing.urgent || 25;
-                document.getElementById('statProPrice').innerText = (savedPricing.pro || 18) + ' ج.م';
-            }
-
-            const savedContact = JSON.parse(localStorage.getItem('tasmeemy_contact'));
-            if (savedContact) {
-                document.getElementById('whatsappNumber').value = savedContact.phone || "201000000000";
-                document.getElementById('whatsappWelcome').value = savedContact.welcome || "";
-            }
+            renderPackagesAdmin();
+            renderPortfolioAdmin();
         };
     </script>
 </body>
