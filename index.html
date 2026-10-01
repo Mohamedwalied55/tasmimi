@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تصميمي | خدمة تنسيق المذكرات والكتب الدراسية</title>
+    <title>تصميمي | منصة تنسيق وتصميم المذكرات والكتب التعليمية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Aref+Ruqaa:wght@400;700&family=Caveat:wght@600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
 
     <script>
@@ -24,23 +24,20 @@
                         'sky-sticker': '#3b82f6',
                         'bubblegum-sticker': '#ff66cf',
                         'sprout-sticker': '#22c55e',
-                        'shadow-mist': '#bebcbb',
                     },
                     fontFamily: {
                         'display': ['Alexandria', 'Tajawal', 'sans-serif'],
                         'body': ['Tajawal', 'sans-serif'],
-                        'handwritten': ['Aref Ruqaa', 'Caveat', 'cursive'],
+                        'handwritten': ['Aref Ruqaa', 'cursive'],
                     },
                     borderRadius: {
                         'pill': '20px',
                         'card': '12px',
-                        'footer-cap': '56px',
                     },
                     boxShadow: {
-                        'paper': 'rgba(0, 0, 0, 0.06) 0px 2px 20px 0px',
-                        'button-lift': 'rgba(0, 0, 0, 0.25) 0px 1px 2px 0px',
                         'sticker': '2px 3px 0px rgba(23, 23, 23, 0.9)',
-                        'floating': '0 10px 25px -5px rgba(43, 26, 7, 0.1)',
+                        'hard': '4px 4px 0px #171717',
+                        'hard-lg': '6px 6px 0px #171717',
                     }
                 }
             }
@@ -48,981 +45,283 @@
     </script>
 
     <style>
-        :root {
-            --color-cream-paper: #fdfbf9;
-            --color-charcoal: #171717;
-            --color-cocoa-ink: #2b1a07;
-            --color-dew-drop: #f7efe9;
-            --color-marker-orange: #ff6f1e;
-        }
-
         body {
-            background-color: var(--color-cream-paper);
-            color: var(--color-cocoa-ink);
+            background-color: #fdfbf9;
+            color: #2b1a07;
             font-family: 'Tajawal', sans-serif;
-            overflow-x: hidden;
             background-image: radial-gradient(#2b1a07 0.4px, transparent 0.4px);
             background-size: 24px 24px;
-            background-color: #fdfbf9;
         }
-
-        /* Paper lines background for interactive elements */
-        .notebook-lines {
-            background-image: repeating-linear-gradient(transparent, transparent 31px, #e5dfd8 31px, #e5dfd8 32px);
-            line-height: 32px;
-        }
-
-        /* Hand-drawn marker underline effect */
-        .marker-underline {
-            position: relative;
-            display: inline-block;
-            color: #ff6f1e;
-        }
-        .marker-underline::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: #ff6f1e;
-            border-radius: 4px;
-            transform: rotate(-0.5deg);
-            opacity: 0.85;
-        }
-
-        /* Tactile Pill Buttons */
         .btn-pill {
             background-color: #fdfbf9;
             border: 1.5px solid #171717;
             border-radius: 20px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0px;
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+            transition: all 0.15s ease;
         }
         .btn-pill:hover {
             transform: translateY(-2px);
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 8px 0px;
-            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-        .btn-pill:active {
-            transform: translateY(0);
-            box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 1px 0px;
-        }
-
-        /* Sticker hover physics */
-        .sticker-badge {
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #171717;
-            box-shadow: 2px 2px 0px #171717;
-        }
-        .sticker-badge:hover {
-            transform: scale(1.1) rotate(0deg) !important;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f7efe9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff6f1e;
-            border-radius: 10px;
-            border: 2px solid #f7efe9;
-        }
-
-        /* Tilted Card Rotations */
-        .tilt-left { transform: rotate(-2deg); }
-        .tilt-right { transform: rotate(2deg); }
-        .tilt-left-sm { transform: rotate(-1deg); }
-        .tilt-right-sm { transform: rotate(1deg); }
-
-        .tilt-left:hover, .tilt-right:hover {
-            transform: rotate(0deg) scale(1.01);
-            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        /* Custom Toggle Switch */
-        .toggle-checkbox:checked {
-            right: 24px;
-            border-color: #171717;
-        }
-        .toggle-checkbox:checked + .toggle-label {
-            background-color: #ff6f1e;
-        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f7efe9; }
+        ::-webkit-scrollbar-thumb { background: #ff6f1e; border-radius: 10px; }
     </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between antialiased">
 
-    <header class="sticky top-0 z-40 bg-[#fdfbf9]/90 backdrop-blur-md border-b border-[#171717]/10 py-3 px-4 sm:px-8">
-        <div class="max-w-[1200px] mx-auto flex items-center justify-between">
-            <!-- Brand Logo Mark -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-2xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center text-white shadow-[2px_2px_0px_#171717] group-hover:rotate-6 transition-transform">
-                    <i class="fa-solid fa-pen-nib text-lg text-[#fdfbf9]"></i>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-display font-extrabold text-2xl tracking-tight text-[#2b1a07] leading-none">تصميمي</span>
-                    <span class="font-handwritten text-xs text-[#ff6f1e] -mt-1 font-bold">لتنسيق المذكرات والكتب</span>
-                </div>
-            </a>
-
-            <!-- Nav Actions & Mobile CTA -->
+    <!-- الهيدر الرئيسي -->
+    <header class="sticky top-0 z-40 bg-[#fdfbf9]/95 backdrop-blur-md border-b-2 border-[#171717] py-3 px-4 sm:px-8">
+        <div class="max-w-[1300px] mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <nav class="hidden md:flex items-center gap-6 text-base font-medium text-[#2b1a07]">
-                    <a href="#calculator" class="hover:text-[#ff6f1e] transition-colors">الحاسبة</a>
-                    <a href="#showcase" class="hover:text-[#ff6f1e] transition-colors">نماذج المذكرات</a>
-                    <a href="#preview-tool" class="hover:text-[#ff6f1e] transition-colors">جرب بنفسك</a>
-                    <a href="#pricing" class="hover:text-[#ff6f1e] transition-colors">الباقات</a>
-                    <a href="#faq" class="hover:text-[#ff6f1e] transition-colors">الأسئلة</a>
-                </nav>
+                <div class="w-10 h-10 rounded-2xl bg-[#ff6f1e] border-2 border-[#171717] flex items-center justify-center text-white shadow-sticker font-display font-bold">
+                    ط
+                </div>
+                <div>
+                    <span class="font-display font-extrabold text-xl text-[#2b1a07]">تصميمي</span>
+                    <span class="block font-handwritten text-xs text-[#ff6f1e] font-bold">لتنسيق المذكرات والكتب</span>
+                </div>
+            </div>
 
-                <button onclick="openOrderModal()" class="btn-pill px-5 py-2 text-sm md:text-base font-semibold text-[#171717] flex items-center gap-2">
-                    <i class="fa-solid fa-file-arrow-up text-[#ff6f1e]"></i>
-                    <span>اطلب تنسيق مذكرتك</span>
-                </button>
+            <nav class="hidden md:flex items-center gap-6 font-bold text-sm text-[#2b1a07]">
+                <a href="#packages" class="hover:text-[#ff6f1e]">الباقات والأسعار</a>
+                <a href="#portfolio" class="hover:text-[#ff6f1e]">معرض الأعمال</a>
+                <a href="#calculator" class="hover:text-[#ff6f1e]">احسب تكلفتك</a>
+                <a href="#contact" class="hover:text-[#ff6f1e]">اطلب الآن</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <a href="admin.html" class="btn-pill px-3 py-1.5 text-xs font-bold bg-[#f7efe9] text-[#2b1a07] flex items-center gap-1.5">
+                    <i class="fa-solid fa-lock text-[#ff6f1e]"></i>
+                    <span>الأدمن</span>
+                </a>
+                <a href="#contact" class="btn-pill px-4 py-2 text-xs sm:text-sm font-bold bg-[#ff6f1e] text-white border-2 border-[#171717] shadow-sticker">
+                    ابدأ مشروعك
+                </a>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow">
-        <section class="relative pt-8 pb-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto overflow-hidden">
-            <!-- Decorative Scattered Stickers -->
-            <div class="absolute top-6 left-12 bg-[#3b82f6] text-white px-3 py-1 rounded-full text-xs font-bold rotate-[-12deg] sticker-badge shadow-sticker hidden lg:flex items-center gap-1">
-                <span>⚡ ملخصات متكتكة</span>
+    <!-- قسم الهيرو (Hero Section) -->
+    <section class="max-w-[1300px] mx-auto px-4 sm:px-8 py-12 sm:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6 text-right">
+            <div class="inline-flex items-center gap-2 bg-[#ff6f1e]/10 border border-[#171717] px-3 py-1 rounded-full text-xs font-bold text-[#ff6f1e]">
+                <span class="w-2 h-2 rounded-full bg-[#ff6f1e] animate-ping"></span>
+                احترافية عالية وتنسيق متميز للمذكرات التعليمية
             </div>
-            <div class="absolute bottom-10 right-8 bg-[#ff66cf] text-[#171717] px-3 py-1 rounded-full text-xs font-bold rotate-[8deg] sticker-badge shadow-sticker hidden lg:flex items-center gap-1">
-                <span>🐻 يفتح النفس للدراسة</span>
+            <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-[#2b1a07] leading-tight">
+                حوّل ملخصاتك وكتبك إلى <span class="text-[#ff6f1e] underline decoration-wavy">أيقونات بصرية</span> مبهرة!
+            </h1>
+            <p class="text-base sm:text-lg text-[#2b1a07]/80 font-medium">
+                نحن نصمم وننسق مذكرات الثانوية العامة والكتب التعليمية بأعلى معايير الإبداع، رسومات توضيحية، فهارس مرتبة، وأغلفة تفاعلية تجذب الطلاب وتسهل الفهم.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-2">
+                <a href="#contact" class="btn-pill px-6 py-3.5 bg-[#ff6f1e] text-white font-bold text-sm sm:text-base border-2 border-[#171717] shadow-hard flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>اطلب تنسيق مذكرتك الآن</span>
+                </a>
+                <a href="#portfolio" class="btn-pill px-6 py-3.5 bg-[#f7efe9] text-[#2b1a07] font-bold text-sm sm:text-base border-2 border-[#171717]">
+                    تصفح الأعمال السابقة
+                </a>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <!-- Hero Left Column: Copy & CTAs -->
-                <div class="lg:col-span-7 flex flex-col items-start text-right">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f7efe9] border border-[#171717]/20 text-xs sm:text-sm font-semibold mb-4">
-                        <span class="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse"></span>
-                        <span>متاح استقبال طلبات هذا الأسبوع</span>
-                    </div>
-
-                    <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl text-[#2b1a07] leading-[1.15] mb-6 tracking-tight">
-                        مذكراتك الدراسية.. <br/>
-                        بكل <span class="marker-underline">إتقان ولطافة</span> تفتح النفس
-                    </h1>
-
-                    <p class="text-lg sm:text-xl text-[#2b1a07]/80 leading-relaxed mb-8 max-w-2xl font-normal">
-                        نحوّل نصوصك ومذكراتك الجافة إلى تحف فنية مريحة للعين! تنسيق احترافي، جداول مقارنة، هوامش واسعة للملاحظات، أغلفة جذابة، وأيقونات توضيحية تجعل الاستذكار رحلة ممتعة وسهلة.
-                    </p>
-
-                    <!-- Hero Handwritten Annotation with SVG Arrow -->
-                    <div class="relative mb-8 w-full max-w-md">
-                        <div class="flex items-center gap-3">
-                            <span class="font-handwritten text-xl sm:text-2xl text-[#ff6f1e] font-bold rotate-[-2deg]">
-                                شاهد الفرق بنفسك واحسب التكلفة فاعلياً!
-                            </span>
-                            <svg class="w-16 h-10 text-[#ff6f1e]" viewBox="0 0 100 50" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                                <path d="M 10 10 Q 50 40 85 20 L 75 15 M 85 20 L 80 32" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons Stack -->
-                    <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-                        <a href="#calculator" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#fdfbf9] flex items-center justify-center gap-2 w-full sm:w-auto text-center">
-                            <i class="fa-solid fa-calculator text-[#ff6f1e]"></i>
-                            <span>احسب تكلفة مذكرتك</span>
-                        </a>
-                        <a href="#showcase" class="btn-pill px-7 py-3.5 text-base font-bold text-[#171717] bg-[#f7efe9] flex items-center justify-center gap-2 w-full sm:w-auto text-center border-dashed">
-                            <i class="fa-regular fa-folder-open text-[#22c55e]"></i>
-                            <span>استعراض المذكرات</span>
-                        </a>
-                    </div>
-
-                    <div class="mt-4 text-xs sm:text-sm text-[#2b1a07]/60 font-medium flex items-center gap-2">
-                        <i class="fa-solid fa-circle-check text-[#22c55e]"></i>
-                        <span>تسليم بصيغة PDF جاهزة للطباعة عالي الجودة + ملف Word قابل للتعديل</span>
-                    </div>
-                </div>
-
-                <!-- Hero Right Column: Tactile Notebook Card Mockup -->
-                <div class="lg:col-span-5 relative flex justify-center">
-                    <!-- Photographed Notebook Card Surface -->
-                    <div class="w-full max-w-sm sm:max-w-md bg-[#ffffff] border-2 border-[#171717] rounded-card p-6 shadow-[8px_12px_0px_#171717] tilt-right relative">
-                        <!-- Notebook Binder Ring Decoration -->
-                        <div class="absolute -top-3 left-6 right-6 flex justify-between z-10">
-                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                            <div class="w-4 h-6 bg-[#171717] rounded-full border-2 border-white"></div>
-                        </div>
-
-                        <!-- Name Label Sticker on Notebook -->
-                        <div class="mt-3 mb-6 bg-[#f7efe9] border-1.5 border-[#171717] rounded-lg p-3 shadow-sm relative">
-                            <div class="text-[10px] uppercase font-bold tracking-widest text-[#2b1a07]/50 mb-1">DESIGNED BY TASMEEMY</div>
-                            <div class="grid grid-cols-3 gap-2 text-xs font-bold text-[#2b1a07]">
-                                <div class="col-span-2 border-b border-[#171717]/30 pb-0.5">المادة: <span class="font-handwritten text-base text-[#ff6f1e]">الاحياء العشبي</span></div>
-                                <div class="border-b border-[#171717]/30 pb-0.5">الصف: <span class="font-handwritten text-base text-[#3b82f6]">3 ثانوي</span></div>
-                            </div>
-                        </div>
-
-                        <!-- Sample Page Content -->
-                        <div class="space-y-4 text-right notebook-lines px-2 py-1 rounded bg-[#fdfbf9] border border-[#171717]/10">
-                            <div class="flex items-center justify-between border-b-2 border-[#ff6f1e] pb-1">
-                                <span class="font-bold text-sm text-[#ff6f1e]">الوحدة الأولى: البناء الضوئي</span>
-                                <span class="text-xs bg-[#ff6f1e]/10 text-[#ff6f1e] px-2 py-0.5 rounded-full font-bold">درس 01</span>
-                            </div>
-
-                            <p class="text-xs sm:text-sm text-[#2b1a07] font-medium leading-relaxed">
-                                عملية حيوية تقوم بها <span class="bg-[#ff6f1e]/20 px-1 rounded font-bold">النباتات الخضراء</span> لتحويل الطاقة الضوئية إلى طاقة كيميائية مخزنة.
-                            </p>
-
-                            <div class="bg-[#f7efe9] border-r-4 border-[#3b82f6] p-2.5 rounded text-xs space-y-1">
-                                <div class="font-bold text-[#3b82f6] flex items-center gap-1">
-                                    <i class="fa-solid fa-lightbulb"></i>
-                                    <span>ملاحظة مهمة للاختبار:</span>
-                                </div>
-                                <p class="text-[#2b1a07]/80">يحدث التفاعل الضوئي داخل الثايلاكويد بينما التفاعل المظلم في الستروما.</p>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
-                                <div class="border border-[#171717]/20 p-1.5 rounded text-center bg-white font-semibold">
-                                    ☀️ التفاعلات الضوئية
-                                </div>
-                                <div class="border border-[#171717]/20 p-1.5 rounded text-center bg-white font-semibold">
-                                    🌙 التفاعلات المظلمة
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Decorative Floating Sticker on corner -->
-                        <div class="absolute -bottom-5 -left-5 bg-[#22c55e] text-white font-black text-xs px-3 py-1.5 rounded-full border-2 border-[#171717] shadow-sticker rotate-[-10deg]">
-                            ★ مراجعة ممتازة!
-                        </div>
-                    </div>
-                </div>
+        <!-- كارت ترحيلي إبداعي -->
+        <div class="bg-[#f7efe9] border-2 border-[#171717] rounded-card p-6 shadow-hard-lg relative">
+            <div class="absolute -top-4 -right-4 bg-[#bubblegum-sticker] text-[#171717] font-bold text-xs px-3 py-1 rounded-full border border-[#171717] shadow-sticker rotate-6">
+                ✨ جودة طباعة ونشر ديجيتال
             </div>
-        </section>
-
-        <section id="calculator" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-y-2 border-[#171717] relative">
-            <div class="max-w-[1200px] mx-auto">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">احسب وتأكد بنفسك</span>
-                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">حاسبة تنسيق المذكرات التفاعلية</h2>
-                    <p class="text-base text-[#2b1a07]/70">حدد عدد الصفحات ونوع الخدمة المطلوبة لمعرفة التكلفة التقديرية فوراً</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <!-- Calculator Inputs -->
-                    <div class="lg:col-span-7 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717]">
-                        
-                        <!-- 1. Page Count Slider -->
-                        <div class="mb-8">
-                            <div class="flex justify-between items-center mb-3">
-                                <label class="font-bold text-lg text-[#2b1a07] flex items-center gap-2">
-                                    <i class="fa-solid fa-copy text-[#ff6f1e]"></i>
-                                    <span>عدد صفحات المذكرة:</span>
-                                </label>
-                                <div class="flex items-center gap-1 bg-[#f7efe9] border border-[#171717] px-3 py-1 rounded-lg">
-                                    <input type="number" id="pageInput" value="30" min="5" max="500" class="w-16 bg-transparent font-extrabold text-lg text-[#ff6f1e] text-center focus:outline-none" oninput="updateCalculator()">
-                                    <span class="text-xs font-bold text-[#2b1a07]">صفحة</span>
-                                </div>
-                            </div>
-                            <input type="range" id="pageSlider" min="5" max="300" value="30" step="5" class="w-full h-3 bg-[#e5dfd8] rounded-lg appearance-none cursor-pointer accent-[#ff6f1e]" oninput="syncPageInput(this.value)">
-                            <div class="flex justify-between text-xs font-medium text-[#2b1a07]/50 mt-1">
-                                <span>5 صفحات</span>
-                                <span>150 صفحة</span>
-                                <span>300+ صفحة</span>
-                            </div>
-                        </div>
-
-                        <!-- 2. Service Package Tier -->
-                        <div class="mb-8">
-                            <label class="font-bold text-lg text-[#2b1a07] block mb-3">مستوى التنسيق والتصميم:</label>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] transition-all has-[:checked]:bg-[#ff6f1e]/10 has-[:checked]:border-[#ff6f1e]">
-                                    <input type="radio" name="serviceTier" value="basic" class="sr-only" onchange="updateCalculator()">
-                                    <div class="font-bold text-sm text-[#2b1a07]">تنسيق أساسي</div>
-                                    <div class="text-xs text-[#2b1a07]/60 mt-1">خطوط واضحة، تنظيم فقرات وعناوين.</div>
-                                    <div class="text-xs font-extrabold text-[#ff6f1e] mt-2">12 ج.م / صفحة</div>
-                                </label>
-
-                                <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] transition-all has-[:checked]:bg-[#ff6f1e]/10 has-[:checked]:border-[#ff6f1e] relative">
-                                    <div class="absolute -top-2.5 -right-2 bg-[#ff66cf] text-[#171717] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#171717]">الأكثر طلباً</div>
-                                    <input type="radio" name="serviceTier" value="pro" checked class="sr-only" onchange="updateCalculator()">
-                                    <div class="font-bold text-sm text-[#2b1a07]">احترافي شامل</div>
-                                    <div class="text-xs text-[#2b1a07]/60 mt-1">جداول، أيقونات، صناديق تنبيهات وألوان.</div>
-                                    <div class="text-xs font-extrabold text-[#ff6f1e] mt-2">18 ج.م / صفحة</div>
-                                </label>
-
-                                <label class="border-2 border-[#171717] rounded-xl p-3.5 cursor-pointer bg-[#fdfbf9] hover:bg-[#f7efe9] transition-all has-[:checked]:bg-[#ff6f1e]/10 has-[:checked]:border-[#ff6f1e]">
-                                    <input type="radio" name="serviceTier" value="vip" class="sr-only" onchange="updateCalculator()">
-                                    <div class="font-bold text-sm text-[#2b1a07]">كتاب / كورسات VIP</div>
-                                    <div class="text-xs text-[#2b1a07]/60 mt-1">غلاف خاص، رسوم تفاعلية، هويّة كاملة.</div>
-                                    <div class="text-xs font-extrabold text-[#ff6f1e] mt-2">25 ج.م / صفحة</div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- 3. Add-ons & Fast Delivery -->
-                        <div class="space-y-3">
-                            <label class="font-bold text-base text-[#2b1a07] block">إضافات اختيارية:</label>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <label class="flex items-center gap-3 p-3 border border-[#171717]/30 rounded-lg cursor-pointer hover:bg-[#f7efe9]">
-                                    <input type="checkbox" id="addCover" checked class="w-4 h-4 accent-[#ff6f1e]" onchange="updateCalculator()">
-                                    <span class="text-sm font-semibold text-[#2b1a07]">تصميم غلاف احترافي جديد (+100 ج.م)</span>
-                                </label>
-                                <label class="flex items-center gap-3 p-3 border border-[#171717]/30 rounded-lg cursor-pointer hover:bg-[#f7efe9]">
-                                    <input type="checkbox" id="addUrgent" class="w-4 h-4 accent-[#ff6f1e]" onchange="updateCalculator()">
-                                    <span class="text-sm font-semibold text-[#2b1a07]">تسليم عاجل خلال 24 ساعة (+25%)</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Price Output Card -->
-                    <div class="lg:col-span-5 bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between h-full">
-                        <div>
-                            <div class="flex items-center justify-between border-b border-[#171717]/20 pb-4 mb-4">
-                                <span class="font-bold text-xl text-[#2b1a07]">ملخص التكلفة المقدرة</span>
-                                <span class="bg-[#3b82f6] text-white text-xs font-bold px-2.5 py-1 rounded-full border border-[#171717]">حساب فوري</span>
-                            </div>
-
-                            <div class="space-y-3 text-sm text-[#2b1a07]/80 mb-6">
-                                <div class="flex justify-between">
-                                    <span>تكلفة التنسيق الأساسية:</span>
-                                    <span id="baseCostText" class="font-bold text-[#2b1a07]">540 ج.م</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>تصميم الغلاف:</span>
-                                    <span id="coverCostText" class="font-bold text-[#2b1a07]">100 ج.م</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>رسوم العاجل:</span>
-                                    <span id="urgentCostText" class="font-bold text-[#2b1a07]">0 ج.م</span>
-                                </div>
-                                <div class="flex justify-between text-xs text-[#22c55e] font-bold pt-2 border-t border-dashed border-[#171717]/20">
-                                    <span>خصم الكميات (أكثر من 20 صفحة):</span>
-                                    <span id="discountText">-10% مخصوم</span>
-                                </div>
-                            </div>
-
-                            <div class="bg-[#f7efe9] border-2 border-[#171717] rounded-xl p-5 text-center mb-6">
-                                <span class="text-xs font-bold text-[#2b1a07]/60 block mb-1">الإجمالي الكلي المتوقع</span>
-                                <div class="font-display font-black text-4xl sm:text-5xl text-[#ff6f1e] leading-none mb-1" id="totalPriceVal">
-                                    576 <span class="text-lg font-bold text-[#2b1a07]">ج.م</span>
-                                </div>
-                                <span class="text-[11px] text-[#2b1a07]/50">الوقت المتوقع للتسليم: <strong id="deliveryDaysText" class="text-[#2b1a07]">2 إلى 3 أيام</strong></span>
-                            </div>
-                        </div>
-
-                        <button onclick="applyFromCalc()" class="btn-pill w-full py-4 bg-[#ff6f1e] text-[#171717] text-lg font-bold flex items-center justify-center gap-2 border-2 border-[#171717]">
-                            <i class="fa-brands fa-whatsapp text-xl"></i>
-                            <span>تأكيد الطلب بهذا السعر عبر الواتساب</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 px-4 sm:px-8 max-w-[1200px] mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">فرق السماء والأرض</span>
-                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">مذكرتك قبل وبعد لمسات تصميمي</h2>
-                <p class="text-base text-[#2b1a07]/70">حرك الشريط في المنتصف لتكتشف كيف تتحول الصفحة العادية إلى مذكرات جذابة وسهلة القراءة</p>
-            </div>
-
-            <!-- Comparison Interactive Card Container -->
-            <div class="max-w-4xl mx-auto bg-white border-2 border-[#171717] rounded-card p-4 sm:p-6 shadow-[8px_8px_0px_#171717]">
-                <!-- Mode Toggle Header -->
-                <div class="flex items-center justify-between mb-6 border-b border-[#171717]/10 pb-4">
-                    <div class="flex items-center gap-2">
-                        <button id="btnShowBefore" onclick="setCompareMode('before')" class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#f7efe9] text-[#2b1a07]">
-                            الملف الخام (قبل)
-                        </button>
-                        <button id="btnShowAfter" onclick="setCompareMode('after')" class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#ff6f1e] text-white">
-                            تنسيق تصميمي (بعد) ★
-                        </button>
-                    </div>
-                    <span class="text-xs font-bold text-[#ff6f1e] hidden sm:inline-block">انقر للتنقل بين العرضين</span>
-                </div>
-
-                <!-- Comparison View Viewport -->
-                <div class="min-h-[320px] rounded-lg border border-[#171717]/20 p-6 relative bg-[#fdfbf9]">
-                    
-                    <!-- BEFORE VIEW (RAW UNFORMATTED) -->
-                    <div id="viewBefore" class="hidden space-y-3 font-serif text-gray-800 text-sm leading-normal">
-                        <div class="text-red-600 font-bold underline">درس الكيمياء العضوية المركبات الهيدروكربونية</div>
-                        <p>
-                            تعتبر الكيمياء العضوية فرع من فروع الكيمياء يدرس المركبات التي تحتوي كربون وهيدروجين وتصنف الهيدروكربونات الى مشبعة وغير مشبعة الالكانات هي مشبعة صيغتها العامة CnH2n+2 ومثالها الميثان والإيثان وتتميز بأن جميع روابطها أحادية سيجما قوية صعبة الكسر ولذلك هي خاملة نسبياً كيميائياً.
-                        </p>
-                        <p>
-                            ملاحظة هام جدا: الالكينات تحتوي رابطة مزدوجة وصيغتها CnH2n مثل الايثيلين والالكينات انشط من الالكانات بسبب وجود رابطة باي سهلة الكسر.
-                        </p>
-                        <div class="text-xs text-gray-500 italic">[ملاحظة المعلم: يجب حفظ الصيغ العامة قبل الامتحان]</div>
-                    </div>
-
-                    <!-- AFTER VIEW (TASMEEMY DESIGNED) -->
-                    <div id="viewAfter" class="space-y-4 font-body notebook-lines">
-                        <!-- Custom Header Bar -->
-                        <div class="flex items-center justify-between bg-[#f7efe9] border-2 border-[#171717] p-3 rounded-lg">
-                            <div class="flex items-center gap-2">
-                                <span class="bg-[#ff6f1e] text-white font-bold text-xs px-2 py-0.5 rounded">كيمياء 03</span>
-                                <h3 class="font-display font-extrabold text-lg text-[#2b1a07]">المركبات الهيدروكربونية العضوية</h3>
-                            </div>
-                            <span class="font-handwritten text-lg text-[#3b82f6] font-bold">الوحدة الثانية</span>
-                        </div>
-
-                        <!-- Content Block with Marker Underlines & Clean Badges -->
-                        <p class="text-sm sm:text-base text-[#2b1a07] leading-relaxed">
-                            تُعرف <span class="marker-underline font-bold">الكيمياء العضوية</span> بأنها الفرع المختص بدراسة مركبات الكربون والهيدروجين. وتُقسم الهيدروكربونات إلى قسمين رئيسيين:
-                        </p>
-
-                        <!-- Styled Comparison Table -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <div class="border-1.5 border-[#171717] bg-white rounded-lg p-3 shadow-sm">
-                                <div class="font-bold text-xs text-[#22c55e] border-b border-[#171717]/10 pb-1 mb-1.5 flex items-center gap-1">
-                                    <i class="fa-solid fa-leaf"></i> 1. الألكانات (المشبعة)
-                                </div>
-                                <ul class="text-xs space-y-1 text-[#2b1a07]/80">
-                                    <li>• الصيغة: <code class="bg-[#f7efe9] px-1 rounded font-mono font-bold">CnH2n+2</code></li>
-                                    <li>• مثال: الميثان والإيثان</li>
-                                    <li>• الروابط: سيجما الأحادي القوية</li>
-                                </ul>
-                            </div>
-
-                            <div class="border-1.5 border-[#171717] bg-white rounded-lg p-3 shadow-sm">
-                                <div class="font-bold text-xs text-[#ff6f1e] border-b border-[#171717]/10 pb-1 mb-1.5 flex items-center gap-1">
-                                    <i class="fa-solid fa-bolt"></i> 2. الألكينات (غير المشبعة)
-                                </div>
-                                <ul class="text-xs space-y-1 text-[#2b1a07]/80">
-                                    <li>• الصيغة: <code class="bg-[#f7efe9] px-1 rounded font-mono font-bold">CnH2n</code></li>
-                                    <li>• مثال: الإيثيلين</li>
-                                    <li>• الروابط: باي المزدوجة (نشطة)</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Important Callout Box -->
-                        <div class="bg-[#ff6f1e]/10 border-r-4 border-[#ff6f1e] p-3 rounded-l-lg flex items-start gap-2 text-xs text-[#2b1a07]">
-                            <i class="fa-solid fa-star text-[#ff6f1e] text-base mt-0.5"></i>
-                            <div>
-                                <strong class="font-bold text-[#ff6f1e]">تنبيه الاختبار:</strong> يجب حفظ الصيغ العامة وتمييز نوع الروابط قبل دخول الاختبار النهائي!
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="showcase" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-t-2 border-[#171717]">
-            <div class="max-w-[1200px] mx-auto">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-                    <div>
-                        <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">أعمال تحكي عن نفسها</span>
-                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07]">معرض نماذج المذكرات</h2>
-                    </div>
-
-                    <!-- Category Tabs -->
-                    <div class="flex flex-wrap gap-2" id="portfolioTabs">
-                        <button onclick="filterPortfolio('all')" class="port-tab active btn-pill px-4 py-1.5 text-xs font-bold bg-[#ff6f1e] text-white">الكل</button>
-                        <button onclick="filterPortfolio('sec')" class="port-tab btn-pill px-4 py-1.5 text-xs font-bold bg-[#fdfbf9] text-[#2b1a07]">مرحلة ثانوية</button>
-                        <button onclick="filterPortfolio('univ')" class="port-tab btn-pill px-4 py-1.5 text-xs font-bold bg-[#fdfbf9] text-[#2b1a07]">جامعات ومعاهد</button>
-                        <button onclick="filterPortfolio('summary')" class="port-tab btn-pill px-4 py-1.5 text-xs font-bold bg-[#fdfbf9] text-[#2b1a07]">ملخصات مركزة</button>
-                    </div>
-                </div>
-
-                <!-- Portfolio Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolioGrid">
-                    
-                    <!-- Item 1 -->
-                    <div class="port-item sec bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-[6px_6px_0px_#171717] tilt-left-sm transition-all hover:rotate-0">
-                        <div class="bg-[#3b82f6]/10 border border-[#171717]/20 rounded-lg p-4 mb-4 relative overflow-hidden">
-                            <span class="absolute top-2 left-2 bg-[#3b82f6] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">فيزياء</span>
-                            <div class="font-handwritten text-xl text-[#2b1a07] font-bold mb-2">مذكرة الكهربية المغناطيسية</div>
-                            <p class="text-xs text-[#2b1a07]/70 line-clamp-2">تنسيق شامل مع رسومات هندسية توضيحية وقوانين مؤطرة للأستاذ أحمد.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-bold text-[#2b1a07]">
-                            <span>3 ثانوي • 45 صفحة</span>
-                            <span class="text-[#ff6f1e]">مع غلاف تفاعلي</span>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 -->
-                    <div class="port-item univ bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-[6px_6px_0px_#171717] tilt-right-sm transition-all hover:rotate-0">
-                        <div class="bg-[#ff66cf]/10 border border-[#171717]/20 rounded-lg p-4 mb-4 relative overflow-hidden">
-                            <span class="absolute top-2 left-2 bg-[#ff66cf] text-[#171717] text-[10px] font-bold px-2 py-0.5 rounded-full">كلية الطب</span>
-                            <div class="font-handwritten text-xl text-[#2b1a07] font-bold mb-2">ملخص علم الأدوية Pharmacology</div>
-                            <p class="text-xs text-[#2b1a07]/70 line-clamp-2">جداول مقارنة أدوية مع تقسيم ألوان واستخدامات وحساب الجرعات.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-bold text-[#2b1a07]">
-                            <span>جامعي • 80 صفحة</span>
-                            <span class="text-[#22c55e]">تنسيق جداول VIP</span>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 -->
-                    <div class="port-item summary bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-5 shadow-[6px_6px_0px_#171717] tilt-left-sm transition-all hover:rotate-0">
-                        <div class="bg-[#22c55e]/10 border border-[#171717]/20 rounded-lg p-4 mb-4 relative overflow-hidden">
-                            <span class="absolute top-2 left-2 bg-[#22c55e] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">لغة عربية</span>
-                            <div class="font-handwritten text-xl text-[#2b1a07] font-bold mb-2">كتيب خرائط النحو الذهبية</div>
-                            <p class="text-xs text-[#2b1a07]/70 line-clamp-2">تشجير قواعد النحو والعراب في خرائط ذهنية ميسرة مع تمارين محلولة.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-bold text-[#2b1a07]">
-                            <span>مراجعة ليلة الامتحان • 20 صفحة</span>
-                            <span class="text-[#3b82f6]">طباعة عالي الجودة</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="preview-tool" class="py-16 px-4 sm:px-8 max-w-[1200px] mx-auto">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">أداة حية ومباشرة</span>
-                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-2">جرب تنسيق نصك الآن!</h2>
-                <p class="text-base text-[#2b1a07]/70">اكتب أو الصق فقرة من مذكرتك وشاهد كيف تصممها تصميمي في الحين</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                <!-- Input Controls Box -->
-                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717] flex flex-col justify-between">
-                    <div>
-                        <label class="font-bold text-sm text-[#2b1a07] block mb-2">عنوان الدرس أو الفصل:</label>
-                        <input type="text" id="userTitle" value="مقدمة في الذكاء الاصطناعي" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg px-3 py-2 text-sm font-bold text-[#2b1a07] mb-4 focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]" oninput="renderLivePreview()">
-
-                        <label class="font-bold text-sm text-[#2b1a07] block mb-2">محتوى النص أو الشرح:</label>
-                        <textarea id="userText" rows="6" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm text-[#2b1a07] leading-relaxed mb-4 focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]" oninput="renderLivePreview()">الذكاء الاصطناعي هو فرع من علوم الحاسوب يهدف إلى إنشاء أنظمة قادرة على أداء مهام تتطلب عادةً ذكاءً بشرياً مثل التعلم والاستنتاج وحل المشكلات.
-ملاحظة مهمة: تُعتبر الشبكات العصبية العميقة هي المحرك الأساسي لطفرة الذكاء الاصطناعي الحديثة.</textarea>
-
-                        <div class="mb-4">
-                            <label class="font-bold text-sm text-[#2b1a07] block mb-2">اختر لون الثيم الرئيسي للمذكرة:</label>
-                            <div class="flex gap-3">
-                                <button onclick="setPreviewColor('#ff6f1e')" class="w-8 h-8 rounded-full bg-[#ff6f1e] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
-                                <button onclick="setPreviewColor('#3b82f6')" class="w-8 h-8 rounded-full bg-[#3b82f6] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
-                                <button onclick="setPreviewColor('#22c55e')" class="w-8 h-8 rounded-full bg-[#22c55e] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
-                                <button onclick="setPreviewColor('#ff66cf')" class="w-8 h-8 rounded-full bg-[#ff66cf] border-2 border-[#171717] focus:ring-2 focus:ring-offset-2"></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-xs text-[#2b1a07]/60 flex items-center gap-2">
-                        <i class="fa-solid fa-wand-magic-sparkles text-[#ff6f1e]"></i>
-                        <span>المعاينة التفاعلية فورية وتعتمد نظام التظليل الذكي!</span>
-                    </div>
-                </div>
-
-                <!-- Live Resulting Card -->
-                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-[6px_6px_0px_#171717] notebook-lines flex flex-col justify-between">
-                    <div>
-                        <!-- Header -->
-                        <div id="prevHeader" class="border-b-2 pb-2 mb-4 flex items-center justify-between" style="border-color: #ff6f1e;">
-                            <h3 id="outTitle" class="font-display font-extrabold text-xl text-[#2b1a07]">مقدمة في الذكاء الاصطناعي</h3>
-                            <span id="prevBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full text-white" style="background-color: #ff6f1e;">صفحة 01</span>
-                        </div>
-
-                        <!-- Main Content Rendered -->
-                        <div id="outBody" class="text-sm sm:text-base text-[#2b1a07] leading-relaxed space-y-3 font-medium">
-                            <!-- Populated dynamically via JS -->
-                        </div>
-                    </div>
-
-                    <!-- Watermark Tag -->
-                    <div class="pt-6 mt-4 border-t border-[#171717]/10 flex justify-between items-center text-xs font-bold text-[#2b1a07]/40">
-                        <span>تصميمي — خدمة تنسيق المذكرات</span>
-                        <span>www.tasmeemy.com</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="pricing" class="py-16 px-4 sm:px-8 bg-[#f7efe9] border-t-2 border-[#171717]">
-            <div class="max-w-[1200px] mx-auto">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">باقات تناسب الجميع</span>
-                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">خطط وباقات التنسيق</h2>
-                    <p class="text-base text-[#2b1a07]/70">اختر الباقة المناسبة لمذكرتك أو كتابك واستلم ملفك جاهز للطباعة مباشرة</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Package 1 -->
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between">
-                        <div>
-                            <div class="font-bold text-lg text-[#2b1a07] mb-1">الباقة الأساسية</div>
-                            <p class="text-xs text-[#2b1a07]/60 mb-4">مثالية للواجبات والملخصات السريعة الصغيرة</p>
-                            <div class="font-display font-black text-3xl text-[#ff6f1e] mb-6">12 ج.م <span class="text-xs text-[#2b1a07] font-normal">/ صفحة</span></div>
-
-                            <ul class="space-y-3 text-xs sm:text-sm text-[#2b1a07] mb-8">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تنسيق النصوص والخطوط</span></li>
-                                <li class="flex items-center gap-2"><li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>ضبط الهوامش والترقيم</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تسليم صيغة PDF عالية الدقة</span></li>
-                                <li class="flex items-center gap-2 text-[#2b1a07]/40 line-through"><i class="fa-solid fa-xmark"></i><span>لا تشمل تصميم غلاف</span></li>
-                            </ul>
-                        </div>
-                        <button onclick="selectPackage('الباقة الأساسية')" class="btn-pill w-full py-3 font-bold text-sm text-[#171717]">اختيار هذه الباقة</button>
-                    </div>
-
-                    <!-- Package 2 (Featured) -->
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[8px_8px_0px_#171717] flex flex-col justify-between relative border-4 border-[#ff6f1e]">
-                        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#ff6f1e] text-white text-xs font-bold px-4 py-1 rounded-full border border-[#171717]">
-                            🔥 الباقة الأكثر طلباً
-                        </div>
-                        <div>
-                            <div class="font-bold text-xl text-[#2b1a07] mb-1 mt-2">الباقة الاحترافية</div>
-                            <p class="text-xs text-[#2b1a07]/60 mb-4">للمدرسين والطلاب الراغبين في مذكرات مثالية</p>
-                            <div class="font-display font-black text-4xl text-[#ff6f1e] mb-6">18 ج.م <span class="text-xs text-[#2b1a07] font-normal">/ صفحة</span></div>
-
-                            <ul class="space-y-3 text-xs sm:text-sm text-[#2b1a07] mb-8">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>كل مميزات الباقة الأساسية</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تصميم جداول المقارنة والصناديق</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>إضافة أيقونات توضيحية وتظليلات</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>غلاف مذكرة مميز مجاني</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>ملف Word + PDF للطباعة</span></li>
-                            </ul>
-                        </div>
-                        <button onclick="selectPackage('الباقة الاحترافية')" class="btn-pill w-full py-3.5 font-bold text-sm bg-[#ff6f1e] text-white border-2 border-[#171717]">اطلب الباقة الاحترافية</button>
-                    </div>
-
-                    <!-- Package 3 -->
-                    <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-8 shadow-[6px_6px_0px_#171717] flex flex-col justify-between">
-                        <div>
-                            <div class="font-bold text-lg text-[#2b1a07] mb-1">باقة الكتب والكورسات</div>
-                            <p class="text-xs text-[#2b1a07]/60 mb-4">للكتب الدراسية والكتيبات التدريبية المتقدمة</p>
-                            <div class="font-display font-black text-3xl text-[#ff6f1e] mb-6">25 ج.م <span class="text-xs text-[#2b1a07] font-normal">/ صفحة</span></div>
-
-                            <ul class="space-y-3 text-xs sm:text-sm text-[#2b1a07] mb-8">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تنسيق إخراج مطبوعات وحسب الهوية</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>رسوم توضيحية وانفوجرافيك مخصص</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تصميم غلافين (أمامي وخلفي)</span></li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i><span>تعديلات غير محدودة مجاناً</span></li>
-                            </ul>
-                        </div>
-                        <button onclick="selectPackage('باقة الكتب VIP')" class="btn-pill w-full py-3 font-bold text-sm text-[#171717]">اختيار الباقة VIP</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="py-16 px-4 sm:px-8 max-w-[900px] mx-auto">
-            <div class="text-center mb-10">
-                <span class="font-handwritten text-2xl text-[#ff6f1e] font-bold block mb-1">اجابات لكل ما يدور ببالك</span>
-                <h2 class="font-display font-extrabold text-3xl text-[#2b1a07]">الأسئلة الشائعة</h2>
-            </div>
-
             <div class="space-y-4">
-                <!-- Q1 -->
-                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-sm">
-                    <button onclick="toggleFaq(this)" class="w-full text-right font-bold text-base text-[#2b1a07] flex justify-between items-center">
-                        <span>كم يستغرق وقت تنسيق المذكرة عادةً؟</span>
-                        <i class="fa-solid fa-plus text-[#ff6f1e] transition-transform"></i>
-                    </button>
-                    <div class="faq-ans hidden mt-3 pt-3 border-t border-[#171717]/10 text-sm text-[#2b1a07]/80 leading-relaxed">
-                        تستغرق المذكرات المتوسطة (من 20 إلى 50 صفحة) حوالي 24 إلى 48 ساعة. كما تتوفر لدينا خدمة التسليم العاجل خلال 24 ساعة حسب الطلب.
-                    </div>
+                <div class="h-64 rounded-card overflow-hidden border-2 border-[#171717] bg-white">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&auto=format&fit=crop&q=80" alt="نموذج تنسيق" class="w-full h-full object-cover">
                 </div>
-
-                <!-- Q2 -->
-                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-sm">
-                    <button onclick="toggleFaq(this)" class="w-full text-right font-bold text-base text-[#2b1a07] flex justify-between items-center">
-                        <span>بأي صيغة يتم تسليم المذكرة؟</span>
-                        <i class="fa-solid fa-plus text-[#ff6f1e] transition-transform"></i>
-                    </button>
-                    <div class="faq-ans hidden mt-3 pt-3 border-t border-[#171717]/10 text-sm text-[#2b1a07]/80 leading-relaxed">
-                        نسلّمك ملف PDF جاهز فوراً للطباعة بدقة عالية عالية جداً (300 DPI) بجانب ملف Word أو PowerPoint في حال رغبت بتعديل النصوص لاحقاً بنفسك.
-                    </div>
+                <div class="flex justify-between items-center text-xs font-bold text-[#2b1a07]/70">
+                    <span>📚 تنسيق مذكرات الفيزياء والرياضيات</span>
+                    <span class="text-[#ff6f1e]">تصدير PDF & Word</span>
                 </div>
-
-                <!-- Q3 -->
-                <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-sm">
-                    <button onclick="toggleFaq(this)" class="w-full text-right font-bold text-base text-[#2b1a07] flex justify-between items-center">
-                        <span>هل أستطيع طلب تعديلات بعد الاستلام؟</span>
-                        <i class="fa-solid fa-plus text-[#ff6f1e] transition-transform"></i>
-                    </button>
-                    <div class="faq-ans hidden mt-3 pt-3 border-t border-[#171717]/10 text-sm text-[#2b1a07]/80 leading-relaxed">
-                        بالتأكيد! نوفر جولتي تعديلات مجانية بالكامل لضمان رضاك التام عن شكل الخطوط، الألوان، والتنظيم النهائي للمذكرة.
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="mt-16 bg-[#ff6f1e] text-[#2b1a07] border-t-2 border-[#171717] rounded-t-footer-cap pt-12 pb-8 px-6 sm:px-12 relative">
-        <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 border-b border-[#171717]/20 pb-8">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-[#fdfbf9] border-2 border-[#171717] flex items-center justify-center text-[#ff6f1e] text-2xl font-black shadow-sticker">
-                    ت
-                </div>
-                <div>
-                    <h3 class="font-display font-extrabold text-2xl text-[#171717]">تصميمي</h3>
-                    <p class="font-handwritten text-lg text-[#2b1a07]/90 font-bold">كل صفحة تلهمك للنجاح والاستذكار</p>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap items-center justify-center gap-4 text-sm font-bold">
-                <a href="#calculator" class="hover:underline">الحاسبة</a>
-                <span>•</span>
-                <a href="#showcase" class="hover:underline">النماذج</a>
-                <span>•</span>
-                <a href="#pricing" class="hover:underline">الباقات</a>
-                <span>•</span>
-                <button onclick="openOrderModal()" class="bg-[#fdfbf9] border-2 border-[#171717] px-4 py-1.5 rounded-full text-xs font-extrabold hover:bg-white">اطلب الآن</button>
             </div>
         </div>
+    </section>
 
-        <div class="max-w-[1200px] mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-[#2b1a07]/80 gap-2">
-            <div>جميع الحقوق محفوظة © 2026 لموقع تصميمي (Tasmeemy)</div>
-            <div class="flex items-center gap-1">
-                <span>تم التصميم بكل حب وإتقان</span>
-                <i class="fa-solid fa-heart text-[#171717]"></i>
+    <!-- 1. قسم الباقات والأسعار (ديناميكي من لوحة التحكم) -->
+    <section id="packages" class="max-w-[1300px] mx-auto px-4 sm:px-8 py-16 w-full">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-[#2b1a07] mb-3">باقات التنسيق المتاحة</h2>
+            <p class="text-sm sm:text-base text-[#2b1a07]/70 font-medium">اختر الباقة المناسبة لمشروعك التعليمي (يتم تحديثها مباشرة من لوحة التحكم)</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="packages-container">
+            <!-- يتم تعبئتها ديناميكياً بواسطة JavaScript من الـ localStorage -->
+        </div>
+    </section>
+
+    <!-- 2. قسم معرض الأعمال (ديناميكي من لوحة التحكم) -->
+    <section id="portfolio" class="bg-[#f7efe9]/50 border-y-2 border-[#171717] py-16 my-10">
+        <div class="max-w-[1300px] mx-auto px-4 sm:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-10 gap-4">
+                <div>
+                    <h2 class="font-display font-extrabold text-3xl text-[#2b1a07]">معرض أعمالنا الفخمة</h2>
+                    <p class="text-sm text-[#2b1a07]/70">نماذج حية من المذكرات والكتب التي قمنا بتنسيقها</p>
+                </div>
+                <span class="font-handwritten text-lg text-[#ff6f1e] font-bold">دقة، أناقة، واحترافية</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-container">
+                <!-- يتم تعبئتها ديناميكياً من لوحة التحكم -->
             </div>
         </div>
-    </footer>
+    </section>
 
-    <div id="orderModal" class="fixed inset-0 z-50 bg-[#171717]/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card max-w-lg w-full p-6 sm:p-8 shadow-[10px_10px_0px_#171717] relative animate-fade-in max-h-[90vh] overflow-y-auto">
-            
-            <button onclick="closeOrderModal()" class="absolute top-4 left-4 w-8 h-8 bg-[#f7efe9] border border-[#171717] rounded-full flex items-center justify-center text-sm font-bold hover:bg-[#ff6f1e] hover:text-white">
-                ✕
-            </button>
-
-            <div class="mb-6">
-                <span class="font-handwritten text-xl text-[#ff6f1e] font-bold block mb-1">أهلاً بك معنا!</span>
-                <h3 class="font-display font-extrabold text-2xl text-[#2b1a07]">طلب تنسيق مذكرة جديدة</h3>
+    <!-- 3. نموذج طلب الخدمات والتواصل المباشر -->
+    <section id="contact" class="max-w-[800px] mx-auto px-4 sm:px-8 py-16 w-full">
+        <div class="bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 sm:p-10 shadow-hard-lg">
+            <div class="text-center mb-8">
+                <div class="w-14 h-14 bg-[#ff6f1e] text-white rounded-2xl border-2 border-[#171717] flex items-center justify-center mx-auto mb-3 shadow-sticker text-2xl">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl text-[#2b1a07]">احجز طلب تنسيق مذكرتك</h2>
+                <p class="text-sm text-[#2b1a07]/70 mt-1">املأ البيانات أدناه وسيتم إرسال طلبك مباشرة لقاعدة البيانات وللإدارة عبر الواتساب</p>
             </div>
 
-            <form onsubmit="handleOrderSubmit(event)" class="space-y-4 text-right">
-                <div>
-                    <label class="block text-xs font-bold text-[#2b1a07] mb-1">الاسم الكريم:</label>
-                    <input type="text" id="orderName" required placeholder="مثال: د. أحمد علي" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
+            <form onsubmit="submitClientOrder(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-[#2b1a07] mb-1">رقم الواتساب:</label>
-                        <input type="tel" id="orderPhone" required placeholder="010XXXXXXXX" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
+                        <label class="block text-xs font-bold mb-1">الاسم الكريم:</label>
+                        <input type="text" id="clientName" required placeholder="أدخل اسمك..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm font-semibold">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-[#2b1a07] mb-1">اسم المادة / الكتاب:</label>
-                        <input type="text" id="orderSubject" required placeholder="مثال: الأحياء العشبي" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
+                        <label class="block text-xs font-bold mb-1">رقم الواتساب (مع كود الدولة):</label>
+                        <input type="text" id="clientPhone" required placeholder="201012345678" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm font-mono" dir="ltr">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-[#2b1a07] mb-1">عدد الصفحات التقريبي:</label>
-                        <input type="number" id="orderPageCount" value="30" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]">
+                        <label class="block text-xs font-bold mb-1">عنوان المادة أو الكتاب:</label>
+                        <input type="text" id="clientSubject" required placeholder="مثال: مذكرة الفيزياء للصف الثالث الثانوي" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm font-semibold">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-[#2b1a07] mb-1">الباقة المختارة:</label>
-                        <select id="orderPackageSelect" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm font-bold text-[#2b1a07] focus:outline-none">
-                            <option value="الباقة الأساسية">الباقة الأساسية (12 ج.م)</option>
-                            <option value="الباقة الاحترافية" selected>الباقة الاحترافية (18 ج.م)</option>
-                            <option value="باقة الكتب VIP">باقة الكتب VIP (25 ج.م)</option>
-                        </select>
+                        <label class="block text-xs font-bold mb-1">عدد الصفحات التقديري:</label>
+                        <input type="number" id="clientPages" required placeholder="50" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm font-semibold">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-[#2b1a07] mb-1">ملاحظات أو رابط الملف (اختياري):</label>
-                    <textarea id="orderNotes" rows="3" placeholder="أرفق رابط Google Drive أو اذكر أي ملاحظات خاصة بالخطوط والألوان..." class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#ff6f1e]"></textarea>
+                    <label class="block text-xs font-bold mb-1">اختر الباقة المناسبة:</label>
+                    <select id="clientPackage" class="w-full bg-[#f7efe9] border border-[#171717] rounded-lg p-3 text-sm font-bold">
+                        <option value="الباقة الأساسية">الباقة الأساسية</option>
+                        <option value="الباقة الاحترافية">الباقة الاحترافية</option>
+                        <option value="باقة الكتب VIP">باقة الكتب VIP</option>
+                    </select>
                 </div>
 
-                <button type="submit" class="btn-pill w-full py-3.5 bg-[#ff6f1e] text-white font-bold text-base border-2 border-[#171717] flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>إرسال الطلب فوراً عبر الواتساب</span>
+                <button type="submit" class="btn-pill w-full py-4 bg-[#ff6f1e] text-white font-bold text-base border-2 border-[#171717] shadow-hard flex items-center justify-center gap-2 mt-4">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>إرسال الطلب وإتمام الحجز</span>
                 </button>
             </form>
         </div>
-    </div>
+    </section>
 
+    <!-- الفوتر -->
+    <footer class="bg-[#f7efe9] border-t-2 border-[#171717] py-8 px-6 text-center text-xs font-bold text-[#2b1a07]/80">
+        جميع الحقوق محفوظة منصة تصميمي التعليمية © 2026 — مصممة خصيصاً للمبدعين والمعلمين
+    </footer>
+
+    <!-- سكريبت المزامنة التلقائية مع لوحة التحكم -->
     <script>
-        // Synchronize page slider and number input
-        function syncPageInput(val) {
-            document.getElementById('pageInput').value = val;
-            updateCalculator();
+        // تحميل الباقات الافتراضية في الـ localStorage إن لم تكن موجودة
+        if (!localStorage.getItem('tasmeemy_packages')) {
+            localStorage.setItem('tasmeemy_packages', JSON.stringify([
+                { name: "الباقة الأساسية", price: 12, badge: "اقتصادية", features: ["تنسيق وورد احترافي", "خطوط واضحة ونظيفة", "فهارس أساسية منظمة"] },
+                { name: "الباقة الاحترافية", price: 18, badge: "الأكثر طلباً", features: ["رسومات توضيحية مبسطة", "تنسيق مخصص لليوتيوب والنشر", "ألوان متناسقة للعين"] },
+                { name: "باقة الكتب VIP", price: 25, badge: "شامل كامل", features: ["غلاف احترافي مجاني", "موكب ثلاثي الأبعاد للغلاف", "مراجعة ودعم مفتوح"] }
+            ]));
         }
 
-        // Live Cost Estimator Algorithm
-        function updateCalculator() {
-            const pages = parseInt(document.getElementById('pageInput').value) || 0;
-            const selectedTierEl = document.querySelector('input[name="serviceTier"]:checked');
-            const tier = selectedTierEl ? selectedTierEl.value : 'pro';
-            const addCover = document.getElementById('addCover').checked;
-            const addUrgent = document.getElementById('addUrgent').checked;
-
-            let ratePerPage = 18;
-            if (tier === 'basic') ratePerPage = 12;
-            if (tier === 'vip') ratePerPage = 25;
-
-            let baseCost = pages * ratePerPage;
-            let coverCost = addCover ? 100 : 0;
-            
-            // Bulk discount calculation
-            let discountRate = 0;
-            if (pages >= 50) discountRate = 0.15;
-            else if (pages >= 20) discountRate = 0.10;
-
-            let subtotal = baseCost + coverCost;
-            let discountAmount = subtotal * discountRate;
-            let discountedTotal = subtotal - discountAmount;
-
-            let urgentCost = addUrgent ? (discountedTotal * 0.25) : 0;
-            let grandTotal = Math.round(discountedTotal + urgentCost);
-
-            // Update UI Labels
-            document.getElementById('baseCostText').innerText = baseCost + ' ج.م';
-            document.getElementById('coverCostText').innerText = coverCost + ' ج.م';
-            document.getElementById('urgentCostText').innerText = Math.round(urgentCost) + ' ج.م';
-            document.getElementById('discountText').innerText = (discountRate * 100) + '% مخصوم';
-            document.getElementById('totalPriceVal').innerHTML = grandTotal + ' <span class="text-lg font-bold text-[#2b1a07]">ج.م</span>';
-
-            // Delivery time calculation
-            let days = "2 إلى 3 أيام";
-            if (addUrgent) days = "خلال 24 ساعة 🔥";
-            else if (pages > 100) days = "4 إلى 5 أيام";
-            document.getElementById('deliveryDaysText').innerText = days;
+        // تحميل أعمال افتراضية إن لم تكن موجودة
+        if (!localStorage.getItem('tasmeemy_portfolio')) {
+            localStorage.setItem('tasmeemy_portfolio', JSON.stringify([
+                { title: "مذكرة الفيزياء الحديثة", image: "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=500&auto=format&fit=crop&q=60", tag: "ثانوية عامة" },
+                { title: "ملخص الأحياء والتشريح", image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=500&auto=format&fit=crop&q=60", tag: "مراجعة نهائية" },
+                { title: "سلسلة الإبداع في اللغة العربية", image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&auto=format&fit=crop&q=60", tag: "كتب وقواعد" }
+            ]));
         }
 
-        // Compare Switcher Mode (Before / After)
-        function setCompareMode(mode) {
-            const vBefore = document.getElementById('viewBefore');
-            const vAfter = document.getElementById('viewAfter');
-            const btnBefore = document.getElementById('btnShowBefore');
-            const btnAfter = document.getElementById('btnShowAfter');
+        // عرض الباقات في الموقع الرئيسي
+        function renderMainPackages() {
+            const container = document.getElementById('packages-container');
+            const pkgs = JSON.parse(localStorage.getItem('tasmeemy_packages')) || [];
+            container.innerHTML = '';
 
-            if (mode === 'before') {
-                vBefore.classList.remove('hidden');
-                vAfter.classList.add('hidden');
-                btnBefore.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#ff6f1e] text-white";
-                btnAfter.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#f7efe9] text-[#2b1a07]";
-            } else {
-                vAfter.classList.remove('hidden');
-                vBefore.classList.add('hidden');
-                btnAfter.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#ff6f1e] text-white";
-                btnBefore.className = "px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold border border-[#171717] bg-[#f7efe9] text-[#2b1a07]";
-            }
-        }
-
-        // Portfolio Filtering
-        function filterPortfolio(cat) {
-            const items = document.querySelectorAll('.port-item');
-            const tabs = document.querySelectorAll('.port-tab');
-
-            tabs.forEach(t => {
-                t.classList.remove('bg-[#ff6f1e]', 'text-white');
-                t.classList.add('bg-[#fdfbf9]', 'text-[#2b1a07]');
+            pkgs.forEach(pkg => {
+                const card = document.createElement('div');
+                card.className = "bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-6 shadow-hard flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display font-extrabold text-xl text-[#2b1a07]">${pkg.name}</h3>
+                            <span class="bg-[#ff6f1e] text-white text-xs font-bold px-2.5 py-1 rounded-full border border-[#171717]">${pkg.badge || 'مميز'}</span>
+                        </div>
+                        <div class="text-3xl font-black text-[#ff6f1e] mb-4">${pkg.price} <span class="text-xs text-[#2b1a07]/70 font-bold">ج.م / صفحة</span></div>
+                        <ul class="space-y-2 mb-6 text-sm text-[#2b1a07]/80">
+                            ${pkg.features.map(f => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-[#22c55e]"></i> ${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn-pill w-full py-2.5 bg-[#171717] text-white font-bold text-center border-2 border-[#171717]">اطلب هذه الباقة</a>
+                `;
+                container.appendChild(card);
             });
-            event.target.classList.add('bg-[#ff6f1e]', 'text-white');
+        }
+
+        // عرض المعرض في الموقع الرئيسي
+        function renderMainPortfolio() {
+            const container = document.getElementById('portfolio-container');
+            const items = JSON.parse(localStorage.getItem('tasmeemy_portfolio')) || [];
+            container.innerHTML = '';
 
             items.forEach(item => {
-                if (cat === 'all' || item.classList.contains(cat)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+                const card = document.createElement('div');
+                card.className = "bg-[#fdfbf9] border-2 border-[#171717] rounded-card p-4 shadow-hard";
+                card.innerHTML = `
+                    <div class="h-48 rounded-lg overflow-hidden border border-[#171717] mb-3 bg-white">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                    </div>
+                    <span class="text-xs font-bold text-[#ff6f1e]">${item.tag || 'عمل مميز'}</span>
+                    <h4 class="font-display font-bold text-base text-[#2b1a07] mt-1">${item.title}</h4>
+                `;
+                container.appendChild(card);
             });
         }
 
-        // Live Text Formatting Tool State & Function
-        let currentThemeColor = '#ff6f1e';
-
-        function setPreviewColor(color) {
-            currentThemeColor = color;
-            document.getElementById('prevHeader').style.borderColor = color;
-            document.getElementById('prevBadge').style.backgroundColor = color;
-            renderLivePreview();
-        }
-
-        function renderLivePreview() {
-            const titleVal = document.getElementById('userTitle').value || 'عنوان الدرس';
-            const textVal = document.getElementById('userText').value || '';
-            
-            document.getElementById('outTitle').innerText = titleVal;
-
-            const bodyContainer = document.getElementById('outBody');
-            bodyContainer.innerHTML = '';
-
-            const lines = textVal.split('\n');
-            lines.forEach(line => {
-                if (!line.trim()) return;
-
-                const p = document.createElement('p');
-                p.className = "leading-relaxed";
-
-                if (line.includes('ملاحظة') || line.includes('تنبيه')) {
-                    const callout = document.createElement('div');
-                    callout.className = "p-3 rounded-lg border-r-4 text-xs font-bold my-2 bg-[#f7efe9]";
-                    callout.style.borderColor = currentThemeColor;
-                    callout.style.color = '#2b1a07';
-                    callout.innerHTML = `<i class="fa-solid fa-lightbulb text-sm ml-1" style="color: ${currentThemeColor}"></i> ${line}`;
-                    bodyContainer.appendChild(callout);
-                } else {
-                    let formattedLine = line.replace(/(الذكاء الاصطناعي|التعلم|الشبكات العصبية)/g, 
-                        `<span class="px-1 rounded font-bold" style="background-color: ${currentThemeColor}25;">$1</span>`
-                    );
-                    p.innerHTML = formattedLine;
-                    bodyContainer.appendChild(p);
-                }
-            });
-        }
-
-        // Modal Controls
-        function openOrderModal() {
-            document.getElementById('orderModal').classList.remove('hidden');
-        }
-
-        function closeOrderModal() {
-            document.getElementById('orderModal').classList.add('hidden');
-        }
-
-        function selectPackage(pkgName) {
-            document.getElementById('orderPackageSelect').value = pkgName;
-            openOrderModal();
-        }
-
-        function applyFromCalc() {
-            const pages = document.getElementById('pageInput').value;
-            document.getElementById('orderPageCount').value = pages;
-            openOrderModal();
-        }
-
-        function handleOrderSubmit(e) {
+        // إرسال الطلب وحفظه في لوحة التحكم وتوجيه العميل للواتساب
+        function submitClientOrder(e) {
             e.preventDefault();
-            const name = document.getElementById('orderName').value;
-            const phone = document.getElementById('orderPhone').value;
-            const subject = document.getElementById('orderSubject').value;
-            const pages = document.getElementById('orderPageCount').value;
-            const pkg = document.getElementById('orderPackageSelect').value;
-            const notes = document.getElementById('orderNotes').value;
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const subject = document.getElementById('clientSubject').value;
+            const pages = document.getElementById('clientPages').value;
+            const pkg = document.getElementById('clientPackage').value;
 
-            const msg = `مرحباً تصميمي! أود طلب تنسيق مذكرة:%0A- الاسم: ${name}%0A- الهاتف: ${phone}%0A- المادة: ${subject}%0A- عدد الصفحات: ${pages}%0A- الباقة: ${pkg}%0A- ملاحظات: ${notes}`;
-            
-            window.open(`https://wa.me/?text=${msg}`, '_blank');
-            closeOrderModal();
+            const newOrder = {
+                id: Math.floor(100 + Math.random() * 900),
+                name, phone, subject, pages, pkg,
+                status: "جديد"
+            };
+
+            let orders = JSON.parse(localStorage.getItem('tasmeemy_orders')) || [];
+            orders.unshift(newOrder);
+            localStorage.setItem('tasmeemy_orders', JSON.stringify(orders));
+
+            alert("تم إرسال طلبك بنجاح وسجلناه في النظام! سيتم توجيهك الآن لمراسلة الإدارة عبر الواتساب.");
+
+            const waText = encodeURIComponent(`مرحباً تصميمي، أنا العميل ${name}، أرغب في تنسيق مذكرة (${subject}) عدد الصفحات حوالي ${pages} صفحة باختيار (${pkg}).`);
+            window.open(`https://wa.me/201000000000?text=${waText}`, '_blank');
         }
 
-        // FAQ Toggle Accordion
-        function toggleFaq(btn) {
-            const ans = btn.nextElementSibling;
-            const icon = btn.querySelector('i');
-            
-            if (ans.classList.contains('hidden')) {
-                ans.classList.remove('hidden');
-                icon.classList.replace('fa-plus', 'fa-minus');
-            } else {
-                ans.classList.add('hidden');
-                icon.classList.replace('fa-minus', 'fa-plus');
-            }
-        }
-
-        // Initialize on Load
         window.onload = function() {
-            updateCalculator();
-            renderLivePreview();
+            renderMainPackages();
+            renderMainPortfolio();
         };
     </script>
 </body>
