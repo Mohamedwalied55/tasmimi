@@ -1,0 +1,160 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  NEW
+  FILES_RECEIVED
+  IN_PROGRESS
+  REVIEW
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  INSTAPAY
+  VODAFONE_CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+model User {
+  id            String   @id @default(cuid())
+  firstName     String
+  familyName    String
+  phone         String   @unique
+  alternatePhone String?
+  governorate   String?
+  address       String?
+  email         String?  @unique
+  passwordHash  String
+  role          UserRole @default(CUSTOMER)
+
+  orders        Order[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Order {
+  id             String        @id @default(cuid())
+  orderNumber    String        @unique
+
+  userId         String?
+  user           User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  customerName   String
+  customerPhone  String
+  customerEmail  String?
+
+  serviceName    String
+  details        String
+
+  fileUrl        String?
+
+  status         OrderStatus   @default(NEW)
+
+  paymentMethod  PaymentMethod @default(CASH)
+  paymentStatus  PaymentStatus @default(PENDING)
+
+  price          Float?
+
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       Float?
+  icon        String?
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  description String
+  imageUrl    String?
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  role        String?
+  text        String
+  rating      Int      @default(5)
+  active      Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model FAQ {
+  id          String   @id @default(cuid())
+  question    String
+  answer      String
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model SiteSettings {
+  id               String   @id @default("main")
+
+  siteName         String   @default("تصميمي")
+  siteDescription  String   @default("مذكرتك بشكل أوضح… أجمل… وأسهل في المذاكرة")
+
+  whatsapp         String?
+  whatsappMessage  String?
+
+  instapay         String?
+  vodafoneCash     String?
+
+  phone            String?
+  email            String?
+
+  facebook         String?
+  instagram        String?
+
+  primary          String   @default("#5F6F45")
+  primaryDark      String   @default("#3F4B2F")
+  background       String   @default("#FDFBF7")
+  text             String   @default("#252922")
+  accent           String   @default("#F5F0EB")
+
+  font             String   @default("Arial")
+  fontSize         Int      @default(16)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
